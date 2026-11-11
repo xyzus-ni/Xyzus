@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "id_ID",
-    url: "https://mahesatirtha.dev",
+    url: "https://xyzus.my.id",
     siteName: "Mahesa Tirtha Agung Permana Portfolio & Publications",
     title: "Mahesa Tirtha Agung Permana | Mechatronics & IoT Engineer",
     description:

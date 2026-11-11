@@ -1,15 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/context";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageToggle } from "./LanguageToggle";
-import { Menu, X, Cpu, ShieldCheck } from "lucide-react";
+import { supabase } from "@/lib/supabase";
+import { Menu, X, Cpu } from "lucide-react";
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const pathname = usePathname();
   const { t } = useLanguage();
 
@@ -21,6 +23,17 @@ export function Navbar() {
     { href: "/blog", label: t.nav.blog },
     { href: "/contact", label: t.nav.contact },
   ];
+
+  useEffect(() => {
+    // Cek apakah ada session aktif (hanya tampilkan tombol CMS ke admin)
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setIsAdmin(!!session);
+    });
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsAdmin(!!session);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -73,14 +86,16 @@ export function Navbar() {
         <div className="hidden md:flex items-center gap-2">
           <LanguageToggle />
           <ThemeToggle />
-          <Link
-            href="/admin"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-medium border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 transition-colors"
-            title="Panel Admin & Editor Blog"
-          >
-            <ShieldCheck className="w-3.5 h-3.5 text-cyan-500" />
-            <span>CMS</span>
-          </Link>
+          {/* Tombol CMS hanya muncul jika sudah login */}
+          {isAdmin && (
+            <Link
+              href="/admin"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-medium border border-cyan-500/40 bg-cyan-50 dark:bg-cyan-950/40 text-cyan-600 dark:text-cyan-400 hover:border-cyan-500 transition-colors"
+              title="Panel Admin & Editor"
+            >
+              <span>CMS ✦</span>
+            </Link>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -118,16 +133,18 @@ export function Navbar() {
               </Link>
             );
           })}
-          <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-            <Link
-              href="/admin"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-2 px-3 py-1.5 text-xs font-mono text-cyan-600 dark:text-cyan-400"
-            >
-              <ShieldCheck className="w-4 h-4" />
-              <span>Admin Publication CMS</span>
-            </Link>
-          </div>
+          {/* Tombol CMS di mobile hanya jika sudah login */}
+          {isAdmin && (
+            <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
+              <Link
+                href="/admin"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2 px-3 py-1.5 text-xs font-mono text-cyan-600 dark:text-cyan-400"
+              >
+                <span>✦ Admin CMS</span>
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </header>

@@ -7,7 +7,7 @@ import { ShieldCheck, Lock, Mail, Loader2, AlertCircle } from "lucide-react";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("mtirtha865@gmail.com");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -88,7 +88,7 @@ export default function AdminLoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="mtirtha865@gmail.com"
+                placeholder="Alamat email administrator"
                 className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors"
               />
             </div>
@@ -132,7 +132,7 @@ export default function AdminLoginPage() {
         </form>
 
         <div className="pt-2 text-center text-xs text-slate-500 font-mono">
-          Akun: <code className="text-cyan-500">mtirtha865@gmail.com</code>
+          Hanya untuk pemilik website
         </div>
       </div>
     </div>

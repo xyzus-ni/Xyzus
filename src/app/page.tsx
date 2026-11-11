@@ -76,7 +76,7 @@ export default async function HomePage() {
             {/* Quick Metrics Cards */}
             <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-3 pt-6 border-t border-slate-200/60 dark:border-slate-800/60">
               <div className="p-3.5 rounded-lg border border-slate-200/80 dark:border-slate-800/80 bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm">
-                <div className="text-2xl font-mono font-bold text-cyan-600 dark:text-cyan-400">8+</div>
+                <div className="text-2xl font-mono font-bold text-cyan-600 dark:text-cyan-400">8</div>
                 <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Proyek Rekayasa</div>
               </div>
               <div className="p-3.5 rounded-lg border border-slate-200/80 dark:border-slate-800/80 bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm">
@@ -172,7 +172,7 @@ export default async function HomePage() {
             href="/projects"
             className="text-xs font-mono font-semibold text-cyan-600 dark:text-cyan-400 hover:underline flex items-center gap-1"
           >
-            <span>Jelajahi Seluruh Proyek ({featuredProjects.length}+)</span>
+            <span>Lihat Semua 8 Proyek →</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
