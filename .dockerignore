@@ -1,0 +1,8 @@
+node_modules
+.next
+pb/pb_data
+.git
+.github
+*.md
+.env*.local
+.bin

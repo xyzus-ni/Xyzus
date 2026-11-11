@@ -1,0 +1,2 @@
+#!/bin/bash
+exec /home/mahesa/Dokumen/Project/.bin/node /home/mahesa/Dokumen/Project/.bin/npm-dist/bin/npx-cli.js "$@"

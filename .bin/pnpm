@@ -1,0 +1,2 @@
+#!/bin/bash
+exec /home/mahesa/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node /home/mahesa/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/pnpm/bin/pnpm.mjs "$@"

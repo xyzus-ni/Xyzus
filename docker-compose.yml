@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  pocketbase:
+    image: ghcr.io/muchobien/pocketbase:latest
+    container_name: mahesa_pocketbase
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+    volumes:
+      - pb_data:/pb_data
+      - ./pb/pb_migrations:/pb_migrations:ro
+    environment:
+      - POCKETBASE_ENCRYPTION_KEY=
+    healthcheck:
+      test: ["CMD", "nc", "-z", "127.0.0.1", "8090"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mahesa_portfolio_web
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_POCKETBASE_URL=http://localhost:8090
+      - POCKETBASE_URL=http://pocketbase:8090
+      - NEXT_PUBLIC_SITE_URL=http://localhost:3000
+    depends_on:
+      pocketbase:
+        condition: service_healthy
+
+volumes:
+  pb_data:

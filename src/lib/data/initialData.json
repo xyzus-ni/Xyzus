@@ -1,0 +1,168 @@
+{
+  "profile": {
+    "name": "Mahesa Tirtha Agung Permana",
+    "headline": "Mechatronics & IoT Engineer, membangun sistem cerdas end-to-end (sensor → cloud → dashboard)",
+    "bio": "Mahasiswa D4 Teknik Mekatronika, Robotika & Otomasi di Politeknik Industri ATMI dengan latar belakang Elektronika Industri (SMK AMI Deltamas). Berpengalaman dalam perancangan embedded systems, mikrokontroler, IoT terintegrasi (sensor → cloud → dashboard), PLC Omron, serta pengembangan sistem cerdas berbasis AI dan CAD.",
+    "lokasi": "Bekasi, Jawa Barat, Indonesia",
+    "social_links": {
+      "linkedin": "https://www.linkedin.com/in/mahesa-tirtha-agung-permana",
+      "github": "https://github.com/xyzus-ni",
+      "email": "mtirtha865@gmail.com"
+    },
+    "cv": ""
+  },
+  "categories": [
+    {
+      "name": "Karya Tulis Ilmiah",
+      "slug": "karya-tulis-ilmiah",
+      "description": "Artikel dan karya ilmiah orisinal bidang mekatronika, robotika, dan teknologi industri."
+    },
+    {
+      "name": "Paper & Laporan",
+      "slug": "paper-dan-laporan",
+      "description": "Naskah paper kompetisi, laporan teknis, dan rancang bangun sistem rekayasa."
+    },
+    {
+      "name": "Catatan Teknis",
+      "slug": "catatan-teknis",
+      "description": "Panduan teknis, dokumentasi implementasi perangkat keras, embedded, dan IoT."
+    },
+    {
+      "name": "Proyek & Dokumentasi",
+      "slug": "proyek-dan-dokumentasi",
+      "description": "Dokumentasi detail arsitektur proyek, prototipe, dan hasil pengujian."
+    },
+    {
+      "name": "Opini & Refleksi",
+      "slug": "opini-dan-refleksi",
+      "description": "Pandangan pribadi seputar perkembangan otomasi industri dan masa depan robotika."
+    },
+    {
+      "name": "Lainnya",
+      "slug": "lainnya",
+      "description": "Catatan umum dan eksplorasi topik multidisiplin lainnya."
+    }
+  ],
+  "projects": [
+    {
+      "title": "Asisten Raspberry Pi untuk Penyandang Buta Warna",
+      "slug": "color-blind-assistant-raspberry-pi",
+      "summary": "Sistem cerdas berbasis Raspberry Pi dan kamera yang mendeteksi warna objek secara real-time dan memberikan umpan balik suara bagi penyandang buta warna.",
+      "description": "## Deskripsi Proyek\nProyek ini dirancang sebagai alat bantu komputasi tepi (edge assistive device) portabel bagi individu dengan defisiensi penglihatan warna (color vision deficiency).\n\n### Fitur Utama:\n- **Pengolahan Citra Real-Time**: Menggunakan model segmentasi warna pada ruang warna HSV dan CIELAB.\n- **Sintesis Suara Audio**: Konversi nama warna dalam Bahasa Indonesia secara instan via TTS terkompresi.\n- **Desain Portabel**: Ditenagai oleh Raspberry Pi dengan catu daya baterai Li-ion teregulasi.\n\n### Arsitektur Sistem:\nKamera USB menangkap frame pada 30 FPS, memusatkan titik fokus pada reticle tengah layar, menghitung rata-rata nilai spektral warna, kemudian memancarkan umpan balik suara melalui earphone berkabel/nirkabel.",
+      "tech": ["Raspberry Pi", "Python", "OpenCV", "Computer Vision", "Audio Synthesis"],
+      "status": "selesai",
+      "featured": true,
+      "visible": true,
+      "order": 1,
+      "repo_url": "https://github.com/xyzus-ni"
+    },
+    {
+      "title": "Kalibrasi Multi-Sensor Tanah & Pengujian Lapangan",
+      "slug": "soil-sensor-calibration-field-testing",
+      "summary": "Riset dan pengujian kalibrasi multi-sensor kelembaban dan pH tanah untuk optimasi presisi pemantauan agrikultur modern di lapangan.",
+      "description": "## Deskripsi Proyek\nEksperimen komparasi dan kalibrasi sensor kapasitif kelembaban tanah (*capacitive soil moisture sensor*) dan probe pH tanah analog terhadap sampel tanah standar laboratorium.\n\n### Metodologi:\n1. Pengambilan 15 titik sampel tanah pertanian dengan variasi densitas dan kadar air.\n2. Pengukuran tegangan analog ADC pada mikrokontroler ESP32 dengan oversampling 12-bit.\n3. Formulasi regresi polinomial derajat dua untuk mengoreksi drift akibat temperatur tanah.\n\nHasil kalibrasi meningkatkan akurasi pembacaan kadar air volumetrik (VWC) dari deviasi awal ±8.4% menjadi ±1.8%.",
+      "tech": ["IoT", "ESP32", "Soil Sensors", "Data Calibration", "Field Testing"],
+      "status": "selesai",
+      "featured": true,
+      "visible": true,
+      "order": 2
+    },
+    {
+      "title": "Simulasi Konveyor Otomasi Industri di Factory I/O",
+      "slug": "factory-io-conveyor-automation-simulation",
+      "summary": "Simulasi sistem sortir konveyor industri otomatis menggunakan Factory I/O yang diintegrasikan dengan logic PLC Omron untuk optimasi throughput pabrik.",
+      "description": "## Deskripsi Proyek\nPengembangan arsitektur sortir barang otomatis berkecepatan tinggi dengan mengkoneksikan virtual plant **Factory I/O** ke software kontrol PLC Omron melalui protokol OPC/Modbus TCP.\n\n### Komponen Sistem:\n- **Ladder Logic PLC**: Pengaturan interlock keselamatan, timer konveyor variabel, dan logika divert pusher pneumatik.\n- **Sensor Retroreflektif & Vision**: Deteksi dimensi dan kode barcode palet produk.\n- **Emergency Stop & Reset Logic**: Sesuai dengan standar keselamatan kerja mesin industri ISO 13849.",
+      "tech": ["Factory I/O", "PLC Omron", "Ladder Logic", "Industrial Automation", "Simulation"],
+      "status": "selesai",
+      "featured": true,
+      "visible": true,
+      "order": 3,
+      "video_url": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+      "title": "Desain Rangka Tempat Tidur Modular CAD + Visualisasi AI",
+      "slug": "modular-bed-frame-cad-ai-visualization",
+      "summary": "Perancangan modular rangka tempat tidur ergonomis dengan analisis tegangan struktur dan visualisasi fotorealistis menggunakan generative AI.",
+      "description": "## Deskripsi Proyek\nProyek perancangan produk mekatronika-furniture berbasis SolidWorks untuk struktur modular knockdown. Menggunakan profil baja ringan dan sambungan presisi CNC.\n\n### Alur Kerja Rekayasa:\n- **Pemodelan 3D CAD**: SolidWorks untuk toleransi fabrikasi dan Bill of Materials (BOM).\n- **Analisis Elemen Hingga (FEA)**: Simulasi defleksi beban statis hingga 350 kg dengan faktor keamanan $SF > 2.2$.\n- **Visualisasi AI**: Rendering tekstur material fotorealistis dalam suasana interior kamar menggunakan generative diffusion model.",
+      "tech": ["SolidWorks", "CAD", "Generative AI", "Structural Engineering", "3D Rendering"],
+      "status": "selesai",
+      "featured": false,
+      "visible": true,
+      "order": 4
+    },
+    {
+      "title": "Sistem Deteksi Dini Hama Sawit Presisi (UAV + YOLO + Sensor)",
+      "slug": "uav-yolo-palm-pest-early-detection",
+      "summary": "Platform pemantauan perkebunan sawit terintegrasi memanfaatkan drone otonom, deteksi citra YOLO untuk gejala visual, dan sensor biokimia untuk peringatan dini.",
+      "description": "## Deskripsi Proyek (Dalam Pengembangan)\nRiset integrasi sistem UAV otonom dengan kamera multispektral dan deteksi objek deep learning (YOLOv8) untuk mengidentifikasi gejala dini serangan ulat api dan jamur *Ganoderma boninense* pada kelapa sawit.\n\n### Arsitektur Terintegrasi:\n- **UAV Flight Controller**: Misi terbang waypoint otomatis dengan ArduPilot.\n- **Deteksi Citra AI**: Klasifikasi indeks vegetasi NDVI dan bounding-box nekrosis daun kelapa sawit.\n- **Sensor Biokimia Tepi**: Node sensor gas VOC untuk verifikasi pembusukan pangkal batang.",
+      "tech": ["UAV Drone", "YOLOv8", "Computer Vision", "Biochemical Sensors", "Edge AI"],
+      "status": "pengembangan",
+      "featured": false,
+      "visible": true,
+      "order": 5
+    },
+    {
+      "title": "Kapal Pemanen Eceng Gondok Otonom Waduk Cirata (Katamaran)",
+      "slug": "autonomous-weed-harvester-catamaran-cirata",
+      "summary": "Rancang bangun kapal katamaran bertenaga surya-elektrik dengan konveyor pemanen otomatis dan telemetri IoT untuk revitalisasi perairan Waduk Cirata.",
+      "description": "## Deskripsi Proyek (Kompetisi & Publikasi Paper)\nInovasi wahana permukaan tanpa awak (*Autonomous Surface Vessel* - ASV) berbentuk katamaran ganda yang mengusung mekanisme konveyor penyerok biomassa gulma air eceng gondok.\n\n### Keunggulan Teknologi:\n- **Propulsi Dual-Motor Pod**: Bertenaga motor brushless DC yang disuplai oleh modul fotovoltaik surya dan baterai LiFePO4.\n- **Navigasi Waypoint GPS & IMU**: Menjalankan rute pembersihan perairan secara otomatis.\n- **Telemetri IoT LoRa/4G**: Transmisi metrik berat biomassa tertampung, koordinat GPS, dan kapasitas baterai ke dashboard cloud.",
+      "tech": ["Autonomous Surface Vessel", "Mechatronics", "Katamaran Elektrik", "IoT Telemetry", "GPS/Navigasi"],
+      "status": "kompetisi/paper",
+      "featured": false,
+      "visible": true,
+      "order": 6
+    },
+    {
+      "title": "Sistem OEE (Overall Equipment Effectiveness) Berbasis Web",
+      "slug": "web-based-oee-industrial-system",
+      "summary": "Aplikasi web penghitung Overall Equipment Effectiveness (Availability, Performance, Quality) mesin industri secara real-time dengan visualisasi metrik performa.",
+      "description": "## Deskripsi Proyek (Tugas Kuliah PBO ATMI)\nAplikasi monitoring efektivitas mesin produksi menggunakan paradigma Pemrograman Berorientasi Objek (PBO) dengan framework Python Flask.\n\n### Rumus Perhitungan OEE:\n$$OEE = Availability \\times Performance \\times Quality$$\n- Menghitung breakdown stop, minor stoppage, dan cacat produksi per shift.\n- Dashboard visual interaktif dengan visualisasi diagram Pareto untuk analisis downtime dominan.",
+      "tech": ["Python", "Flask", "OOP", "OEE Metrics", "Tailwind CSS", "SQLite"],
+      "status": "selesai",
+      "featured": false,
+      "visible": true,
+      "order": 7,
+      "repo_url": "https://github.com/xyzus-ni"
+    },
+    {
+      "title": "Asisten AI Multi-Agent via Telegram (CrewAI)",
+      "slug": "crewai-telegram-multi-agent-assistant",
+      "summary": "Ekosistem bot Telegram cerdas berbasis orkestrasi multi-agen AI (CrewAI) untuk otomasi riset data teknis, penjadwalan, dan peringatan sensor otomatis.",
+      "description": "## Deskripsi Proyek (Dalam Pengembangan)\nSistem otomasi produktivitas rekayasa yang mengorkestrasi agen-agen AI spesialis:\n1. **Researcher Agent**: Meringkas datasheet komponen elektronik dan standar IEC.\n2. **Telemetry Monitor Agent**: Memeriksa log MQTT dari broker sensor IoT jika terdeteksi anomali.\n3. **Executive Notifier**: Mengirimkan ringkasan laporan status sistem langsung ke grup chat Telegram pengguna.",
+      "tech": ["CrewAI", "Python", "Telegram Bot API", "Multi-Agent System", "LLM Orchestration"],
+      "status": "pengembangan",
+      "featured": false,
+      "visible": true,
+      "order": 8
+    }
+  ],
+  "posts": [
+    {
+      "title": "Rancang Bangun Kapal Katamaran Elektrik Otonom untuk Pembersihan Gulma Air Waduk Cirata",
+      "slug": "rancang-bangun-kapal-katamaran-waduk-cirata",
+      "excerpt": "Analisis teknis dan evaluasi performa perancangan wahana katamaran otonom bertenaga elektrik ramah lingkungan untuk mitigasi ledakan gulma eceng gondok di perairan waduk PLTA Cirata.",
+      "abstract": "Pertumbuhan eceng gondok (*Eichhornia crassipes*) yang tidak terkendali di perairan Waduk Cirata mengancam kelancaran suplai air PLTA dan ekosistem perairan. Makalah ini membahas desain mekatronika dan evaluasi efisiensi propulsi kapal katamaran elektrik otonom yang dilengkapi mekanisme konveyor pemanen biomassa. Berdasarkan pemodelan hidrodinamika dan pengujian skala prototipe di lapangan, wahana ini menunjukkan efisiensi energi 82% lebih hemat dibandingkan kapal pemanen diesel konvensional serta mampu beroperasi secara mandiri dengan integrasi telemetri IoT LoRa.",
+      "category": "Paper & Laporan",
+      "tags": ["IoT", "Mekatronika", "Otonom", "Waduk Cirata", "Katamaran", "Energi Terbarukan"],
+      "lang": "id",
+      "status": "published",
+      "published_at": "2024-10-15T08:00:00.000Z",
+      "reading_time": 6,
+      "content": "## 1. Pendahuluan\n\nWaduk Cirata yang berlokasi di Jawa Barat memegang peranan krusial sebagai pembangkit listrik tenaga air (PLTA) dengan kapasitas terpasang sebesar 1.008 MW. Kendati demikian, eutrofikasi yang terus berlanjut telah memicu proliferasi massal gulma air eceng gondok (*Eichhornia crassipes*). Penutupan permukaan air tidak hanya meningkatkan laju evapotranspirasi secara drastis, tetapi juga berpotensi menyumbat saringan saluran masuk turbin air (*trash rack*).\n\nMetode penanganan konvensional saat ini masih mengandalkan perahu bermesin tempel diesel yang boros bahan bakar dan menghasilkan emisi gas buang di perairan waduk. Oleh sebab itu, penelitian ini mengusulkan solusi wahana permukaan otonom (**Autonomous Surface Vessel / ASV**) berbasis konstruksi lambung katamaran ganda bertenaga listrik surya.\n\n---\n\n## 2. Model Matematika dan Analisis Hidrodinamika\n\nBentuk lambung ganda (*twin-hull catamaran*) dipilih untuk meminimalisasi hambatan gelombang (*wave-making resistance*) pada kecepatan rendah hingga menengah serta memberikan stabilitas transversal yang tinggi bagi mekanisme penampung konveyor.\n\n### 2.1 Hambatan Total Kapal\nGaya hambat total ($R_T$) yang dialami oleh katamaran ketika membelah air dapat didekati dengan formulasi Froude:\n\n$$R_T = R_F (1 + k) + R_W$$\n\nDi mana:\n- $R_F$: Hambatan gesek viskositas air (*frictional resistance*)\n- $k$: Faktor bentuk lambung katamaran (*form factor*)\n- $R_W$: Hambatan pembentukan gelombang permukaan (*wave resistance*)\n\nGaya dorong efektif ($F_d$) yang dihasilkan oleh motor listrik pod propulsi dirumuskan sebagai:\n\n$$F_d = \\frac{1}{2} \\rho v^2 C_d A$$\n\nDengan parameter densitas air $\\rho = 1000\\text{ kg/m}^3$, kecepatan jelajah operasi $v = 1.2\\text{ m/s}$, koefisien seret $C_d = 0.38$, dan luas proyeksi basah lambung $A = 0.45\\text{ m}^2$.\n\n### 2.2 Efisiensi Propulsi Elektrik\nEfisiensi sistem penggerak motor BLDC terhadap daya keluaran mekanis dinyatakan melalui rasio:\n\n$$\\eta_{prop} = \\frac{T \\cdot v}{P_{elec}} \\times 100\\%$$\n\nDi mana $T$ adalah *thrust* motor (Newton), $v$ adalah kecepatan maju (m/s), dan $P_{elec} = V \\times I$ adalah konsumsi daya baterai LiFePO4.\n\n---\n\n## 3. Spesifikasi Teknis dan Perbandingan Performa\n\nTabel di bawah merangkum perbandingan teknis antara sistem katamaran elektrik otonom yang dikembangkan dengan metode pembersihan mekanik diesel konvensional:\n\n| Parameter Rekayasa | Kapal Diesel Konvensional | Katamaran Elektrik Otonom (Riset) | Satuan |\n| :--- | :--- | :--- | :--- |\n| **Konfigurasi Lambung** | Monohull Kayu / Plat Baja | Katamaran Komposit Fiberglass | - |\n| **Sumber Daya Utama** | Mesin Tempel Bensin/Diesel | Baterai LiFePO4 48V + Panel Surya 400Wp | - |\n| **Konsumsi Energi** | 3.5 liter bensin / jam | 480 Watt / jam (zero emission) | Jam Operasi |\n| **Sistem Kendali** | Pengemudi Manual (2 Orang) | Waypoint GPS Otonom + ArduPilot | - |\n| **Kapasitas Angkut** | 120 kg biomassa | 180 kg biomassa tersaring | kg/trip |\n| **Telemetri Data** | Tidak ada | LoRaWAN 915 MHz + 4G Dashboard | - |\n| **Tingkat Kebisingan** | > 85 dB (bising) | < 45 dB (senyap) | Sound Level |\n\n---\n\n## 4. Implementasi Perangkat Keras dan Firmware Telemetri\n\nSistem akuisisi data onboard dikendalikan oleh mikrokontroler **ESP32** yang bertindak sebagai pemroses sensor lokal. Node ini membaca load cell strain-gauge pada bak penampung untuk menghitung berat akumulasi biomassa, sensor ultrasonik untuk deteksi kepadatan eceng gondok di mulut konveyor, serta daya baterai melalui shunt sensor INA219.\n\nBerikut adalah cuplikan rutin pengiriman data telemetri menggunakan protokol MQTT via jaringan seluler:\n\n```python\nimport time\nimport json\nimport paho.mqtt.client as mqtt\n\n# Konfigurasi MQTT Telemetri Cirata ASV\nBROKER_HOST = \"telemetry.cirata-iot.net\"\nBROKER_PORT = 1883\nTOPIC_TELEMETRY = \"cirata/asv/telemetry\"\n\ndef transmit_telemetry(payload_dict):\n    \"\"\"Mengirim metrik operasional katamaran ke cloud dashboard\"\"\"\n    client = mqtt.Client(client_id=\"cirata_asv_alpha\")\n    try:\n        client.connect(BROKER_HOST, BROKER_PORT, keepalive=60)\n        message = json.dumps(payload_dict)\n        client.publish(TOPIC_TELEMETRY, message, qos=1)\n        print(f\"[TELEMETRY] Transmitted: {message}\")\n    except Exception as err:\n        print(f\"[ERROR] Failed to send telemetry: {err}\")\n    finally:\n        client.disconnect()\n\n# Sampel payload telemetri real-time\nsample_data = {\n    \"vessel_id\": \"ASV-CIRATA-01\",\n    \"timestamp\": int(time.time()),\n    \"gps\": {\"lat\": -6.70241, \"lon\": 107.35128},\n    \"battery_soc_pct\": 87.5,\n    \"payload_weight_kg\": 94.2,\n    \"conveyor_state\": \"ACTIVE_HARVESTING\"\n}\n\ntransmit_telemetry(sample_data)\n```\n\n> *\"Penerapan wahana otonom nir-emisi di reservoir air tawar bukan sekadar peningkatan efisiensi ekonomi, melainkan langkah krusial dalam melindungi keanekaragaman hayati dan memperpanjang usia operasional turbin pembangkit listrik.\"*\n\n---\n\n## 5. Kesimpulan dan Rencana Pengembangan\n\nPrototipe katamaran otonom yang diuji terbukti mampu memotong gulma air secara konsisten dengan radius putar minimum 1.8 meter. Efisiensi energi terbarukan melalui kombinasi fotovoltaik dan baterai LiFePO4 memberikan waktu jelajah hingga 6.5 jam pada kondisi penyinaran matahari rata-rata di perairan Cirata. Tahap berikutnya mencakup penyempurnaan algoritma computer vision dengan kamera kedalaman (*depth camera*) untuk menghindari rintangan jaring apung warga secara presisi.",
+      "references": "1. Froude, W. (1874). *On Experiments with H.M.S. Greyhound*. Transactions of the Institution of Naval Architects, 15, 36-73.\n2. Newman, J. N. (2018). *Marine Hydrodynamics*. MIT Press, Cambridge, MA.\n3. Politeknik Industri ATMI. (2024). *Panduan Perancangan Sistem Otomasi & Mekatronika Terapan*. Surakarta: ATMI Press.\n4. PT PLN Nusantara Power UP Cirata. (2023). *Laporan Pengendalian Sedimentasi dan Gulma Air Waduk Cirata*. Purwakarta, Jawa Barat.\n5. Molland, A. F., Turnock, S. R., & Hudson, D. A. (2017). *Ship Resistance and Propulsion: Practical Estimation of Ship Propulsive Power*. Cambridge University Press."
+    },
+    {
+      "title": "Eksplorasi Edge AI YOLOv8 pada Raspberry Pi 5 untuk Monitoring Pertanian Cerdas",
+      "slug": "eksplorasi-edge-ai-yolov8-raspberry-pi",
+      "excerpt": "Catatan pengujian performa inferensi YOLOv8n pada platform komputasi tepi Raspberry Pi 5 untuk deteksi hama dan anomali tanaman secara mandiri tanpa ketergantungan koneksi internet.",
+      "abstract": "Komputasi tepi (Edge Computing) menawarkan solusi handal untuk area perkebunan terpencil dengan koneksi internet terbatas. Catatan teknis ini mendokumentasikan optimasi runtime model deteksi objek YOLOv8 Nano menggunakan eksekusi NCNN dan ONNX Runtime pada Raspberry Pi 5 dengan pendinginan aktif.",
+      "category": "Catatan Teknis",
+      "tags": ["Edge AI", "YOLOv8", "Raspberry Pi", "IoT", "Pertanian"],
+      "lang": "id",
+      "status": "draft",
+      "reading_time": 4,
+      "content": "## Pendahuluan\nCatatan teknis ini membahas eksperimen awal deploy model computer vision pada edge device mandiri.\n\n### Metodologi Pengujian:\n1. Export bobot YOLOv8n ke format ONNX dan NCNN INT8 quantization.\n2. Pengukuran frame rate (FPS), latensi inferensi, dan konsumsi temperatur chip Broadcom BCM2712.",
+      "references": "1. Jocher, G., Chaurasia, A., & Qiu, J. (2023). *Ultralytics YOLOv8*. Version 8.0.0. GitHub repository.\n2. Raspberry Pi Ltd. (2023). *Raspberry Pi 5 Technical Documentation and Thermal Benchmarks*."
+    }
+  ]
+}
