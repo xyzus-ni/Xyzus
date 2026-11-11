@@ -228,7 +228,7 @@ export default function AdminDashboardPage() {
                           <Edit className="w-4 h-4" />
                         </Link>
                         <button
-                          onClick={() => setShowDeleteModal(post.id)}
+                          onClick={() => setShowDeleteModal(post.id || null)}
                           className="p-2 rounded-lg text-slate-500 hover:text-red-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                           title="Hapus"
                         >
