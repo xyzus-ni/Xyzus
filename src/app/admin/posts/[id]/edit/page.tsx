@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { getPocketBase, getCategories } from "@/lib/pocketbase";
+import { supabase } from "@/lib/supabase";
 import { AdminEditor } from "@/components/AdminEditor";
 import { PostItem, CategoryItem } from "@/lib/types";
 import { Loader2 } from "lucide-react";
@@ -17,26 +17,30 @@ export default function EditPostPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const pb = getPocketBase();
-    if (!pb.authStore.isValid || !pb.authStore.isAdmin) {
-      router.push("/admin/login");
-      return;
-    }
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (!session) {
+        router.push("/admin/login");
+        return;
+      }
 
-    Promise.all([
-      pb.collection("posts").getOne<PostItem>(postId),
-      getCategories(),
-    ])
-      .then(([postData, cats]) => {
-        setPost(postData);
-        setCategories(cats);
-      })
-      .catch((err) => {
+      try {
+        const [postRes, catsRes] = await Promise.all([
+          supabase.from("posts").select("*").eq("id", postId).single(),
+          supabase.from("categories").select("*"),
+        ]);
+
+        if (postRes.data) {
+          setPost(postRes.data as any);
+        }
+        if (catsRes.data) {
+          setCategories(catsRes.data as any);
+        }
+      } catch (err) {
         console.error("Gagal mengambil data post:", err);
-      })
-      .finally(() => {
+      } finally {
         setLoading(false);
-      });
+      }
+    });
   }, [router, postId]);
 
   if (loading) {

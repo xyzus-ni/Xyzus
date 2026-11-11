@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getPocketBase, getCategories } from "@/lib/pocketbase";
+import { supabase } from "@/lib/supabase";
 import { AdminEditor } from "@/components/AdminEditor";
 import { CategoryItem } from "@/lib/types";
 import { Loader2 } from "lucide-react";
@@ -13,15 +13,21 @@ export default function NewPostPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const pb = getPocketBase();
-    if (!pb.authStore.isValid || !pb.authStore.isAdmin) {
-      router.push("/admin/login");
-      return;
-    }
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) {
+        router.push("/admin/login");
+        return;
+      }
 
-    getCategories().then((cats) => {
-      setCategories(cats);
-      setLoading(false);
+      supabase
+        .from("categories")
+        .select("*")
+        .then(({ data, error }) => {
+          if (!error && data) {
+            setCategories(data as any);
+          }
+          setLoading(false);
+        });
     });
   }, [router]);
 
@@ -29,7 +35,7 @@ export default function NewPostPage() {
     return (
       <div className="min-h-[50vh] flex items-center justify-center font-mono text-xs text-slate-500 gap-2">
         <Loader2 className="w-4 h-4 animate-spin text-cyan-500" />
-        <span>Menyiapkan editor...</span>
+        <span>Menyiapkan editor karya tulis...</span>
       </div>
     );
   }

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { getPocketBase } from "@/lib/pocketbase";
+import { supabase } from "@/lib/supabase";
 import { PostItem, CategoryItem } from "@/lib/types";
 import { slugify, calculateReadingTime } from "@/lib/utils";
 import { MarkdownRenderer } from "./MarkdownRenderer";
@@ -191,46 +191,48 @@ export function AdminEditor({
     setErrorMessage("");
 
     try {
-      const pb = getPocketBase();
       const tagsArray = tagsInput
         .split(",")
         .map((t) => t.trim())
         .filter(Boolean);
 
       const readingTime = calculateReadingTime(content);
+      const postSlug = slug.trim() || slugify(title);
 
-      const formData = new FormData();
-      formData.append("title", title.trim());
-      formData.append("slug", slug.trim() || slugify(title));
-      formData.append("excerpt", excerpt.trim());
-      formData.append("abstract", abstract.trim());
-      formData.append("content", content);
-      formData.append("category", category);
-      formData.append("tags", JSON.stringify(tagsArray));
-      formData.append("lang", lang);
-      formData.append("references", references.trim());
-      formData.append("status", status);
-      formData.append("reading_time", readingTime.toString());
+      // Cari category_id jika ada
+      const matchedCategory = categories.find(
+        (c) => c.name === category || c.slug === category
+      );
+      const categoryId = matchedCategory?.id || null;
 
-      if (status === "published") {
-        formData.append(
-          "published_at",
-          new Date(publishedAt).toISOString()
-        );
-      }
-
-      if (coverFile) {
-        formData.append("cover", coverFile);
-      }
-
-      if (attachmentFile) {
-        formData.append("attachments", attachmentFile);
-      }
+      const postData: any = {
+        title: title.trim(),
+        slug: postSlug,
+        excerpt: excerpt.trim(),
+        abstract: abstract.trim(),
+        content: content,
+        category_id: categoryId,
+        tags: tagsArray,
+        lang: lang,
+        references: references.trim(),
+        status: status,
+        reading_time: readingTime,
+        published_at:
+          status === "published"
+            ? new Date(publishedAt).toISOString()
+            : null,
+        updated_at: new Date().toISOString(),
+      };
 
       if (isEdit && initialPost?.id) {
-        await pb.collection("posts").update(initialPost.id, formData);
+        const { error } = await supabase
+          .from("posts")
+          .update(postData)
+          .eq("id", initialPost.id);
+        if (error) throw error;
       } else {
-        await pb.collection("posts").create(formData);
+        const { error } = await supabase.from("posts").insert([postData]);
+        if (error) throw error;
       }
 
       setHasUnsavedChanges(false);
@@ -243,7 +245,7 @@ export function AdminEditor({
       router.push("/admin");
     } catch (err: any) {
       setErrorMessage(
-        err?.message || "Gagal menyimpan karya tulis ke PocketBase database."
+        err?.message || "Gagal menyimpan karya tulis ke Supabase database."
       );
     } finally {
       setIsSubmitting(false);
