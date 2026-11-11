@@ -1,6 +1,9 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { ProjectItem } from "@/lib/types";
+import { useLanguage } from "@/lib/i18n/context";
 import { ExternalLink, Github, Video, ArrowRight } from "lucide-react";
 
 interface ProjectCardProps {
@@ -8,27 +11,29 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const { t, locale } = useLanguage();
+
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "selesai":
         return (
           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/80">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-            Selesai
+            {t.projects.status_completed}
           </span>
         );
       case "pengembangan":
         return (
           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800/80">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-            Pengembangan
+            {t.projects.status_dev}
           </span>
         );
       case "kompetisi/paper":
         return (
           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-400 border border-cyan-200 dark:border-cyan-800/80">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
-            Kompetisi &amp; Paper
+            {t.projects.status_paper}
           </span>
         );
       default:
@@ -49,7 +54,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             {getStatusBadge(project.status)}
             <div className="flex items-center gap-1 text-slate-400">
               {project.video_url && (
-                <span title="Tersedia Video Demonstrasi">
+                <span title={t.projects.video_demo}>
                   <Video className="w-4 h-4 text-cyan-500" />
                 </span>
               )}
@@ -72,12 +77,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
         {/* Tech tags */}
         <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800/80">
           <div className="flex flex-wrap gap-1.5 mb-4">
-            {project.tech?.slice(0, 4).map((t, idx) => (
+            {project.tech?.slice(0, 4).map((techItem, idx) => (
               <span
                 key={idx}
                 className="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 border border-slate-200/60 dark:border-slate-700/60"
               >
-                {t}
+                {techItem}
               </span>
             ))}
             {project.tech?.length > 4 && (
@@ -93,7 +98,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               href={`/projects/${project.slug}`}
               className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-600 dark:text-cyan-400 group-hover:underline"
             >
-              <span>Detail Proyek</span>
+              <span>{t.projects.view_detail}</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </Link>
 
@@ -104,7 +109,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-1.5 rounded-lg text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
-                  title="Lihat Repositori GitHub"
+                  title="GitHub"
                 >
                   <Github className="w-4 h-4" />
                 </a>
@@ -115,7 +120,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-1.5 rounded-lg text-slate-400 hover:text-cyan-500 transition-colors"
-                  title="Buka Demo"
+                  title="Demo"
                 >
                   <ExternalLink className="w-4 h-4" />
                 </a>

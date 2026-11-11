@@ -31,7 +31,7 @@ export function Footer() {
               </div>
             </div>
             <p className="text-sm text-slate-600 dark:text-slate-400 max-w-md leading-relaxed">
-              Mechatronics &amp; IoT Engineer. Politeknik Industri ATMI &amp; SMK AMI Deltamas. Berfokus pada integrasi sistem cerdas dari sensor fisik, komputasi tepi, hingga dashboard monitoring.
+              {t.footer.bio}
             </p>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-400">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -42,7 +42,7 @@ export function Footer() {
           {/* Column 2: Quick Links */}
           <div className="space-y-3">
             <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 dark:text-white">
-              Navigasi Cepat
+              {t.footer.quick_links}
             </h4>
             <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
               <li>
@@ -75,7 +75,7 @@ export function Footer() {
           {/* Column 3: Professional Links */}
           <div className="space-y-3">
             <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 dark:text-white">
-              Koneksi Profesional
+              {t.footer.professional_links}
             </h4>
             <div className="flex flex-col space-y-2.5">
               <a
@@ -115,7 +115,7 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Mahesa Tirtha Agung Permana. {t.footer.rights}
           </p>
           <p className="text-center sm:text-right">
-            Bekasi
+            {t.footer.location}
           </p>
         </div>
       </div>

@@ -3,13 +3,15 @@
 import React, { useState, useMemo } from "react";
 import { ProjectItem } from "@/lib/types";
 import { ProjectCard } from "@/components/ProjectCard";
-import { Filter, Search } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/context";
+import { Search } from "lucide-react";
 
 interface ProjectsClientListProps {
   initialProjects: ProjectItem[];
 }
 
 export function ProjectsClientList({ initialProjects }: ProjectsClientListProps) {
+  const { t } = useLanguage();
   const [selectedStatus, setSelectedStatus] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
@@ -24,7 +26,7 @@ export function ProjectsClientList({ initialProjects }: ProjectsClientListProps)
         const q = searchQuery.toLowerCase();
         const matchesTitle = project.title.toLowerCase().includes(q);
         const matchesSummary = project.summary.toLowerCase().includes(q);
-        const matchesTech = project.tech?.some((t) => t.toLowerCase().includes(q));
+        const matchesTech = project.tech?.some((item) => item.toLowerCase().includes(q));
         if (!matchesTitle && !matchesSummary && !matchesTech) {
           return false;
         }
@@ -48,7 +50,7 @@ export function ProjectsClientList({ initialProjects }: ProjectsClientListProps)
                 : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800"
             }`}
           >
-            Semua ({initialProjects.length})
+            {t.projects.filter_all} ({initialProjects.length})
           </button>
           <button
             onClick={() => setSelectedStatus("selesai")}
@@ -59,7 +61,7 @@ export function ProjectsClientList({ initialProjects }: ProjectsClientListProps)
                 : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800"
             }`}
           >
-            Selesai
+            {t.projects.status_completed}
           </button>
           <button
             onClick={() => setSelectedStatus("pengembangan")}
@@ -70,7 +72,7 @@ export function ProjectsClientList({ initialProjects }: ProjectsClientListProps)
                 : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800"
             }`}
           >
-            Pengembangan
+            {t.projects.status_dev}
           </button>
           <button
             onClick={() => setSelectedStatus("kompetisi/paper")}
@@ -81,7 +83,7 @@ export function ProjectsClientList({ initialProjects }: ProjectsClientListProps)
                 : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800"
             }`}
           >
-            Kompetisi / Paper
+            {t.projects.status_paper}
           </button>
         </div>
 
@@ -92,7 +94,7 @@ export function ProjectsClientList({ initialProjects }: ProjectsClientListProps)
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Cari proyek / teknologi..."
+            placeholder={t.projects.search_placeholder}
             className="w-full pl-9 pr-3.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 text-xs focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
           />
         </div>
@@ -107,7 +109,7 @@ export function ProjectsClientList({ initialProjects }: ProjectsClientListProps)
         </div>
       ) : (
         <div className="p-12 text-center rounded-xl border border-dashed border-slate-300 dark:border-slate-800 text-slate-500 dark:text-slate-400 font-mono text-sm space-y-2">
-          <p>Tidak ada proyek yang sesuai dengan filter atau kata kunci pencarian.</p>
+          <p>{t.projects.empty}</p>
           <button
             onClick={() => {
               setSelectedStatus("all");
@@ -116,7 +118,7 @@ export function ProjectsClientList({ initialProjects }: ProjectsClientListProps)
             type="button"
             className="text-xs text-cyan-600 dark:text-cyan-400 hover:underline"
           >
-            Reset Filter
+            {t.projects.reset_filter}
           </button>
         </div>
       )}

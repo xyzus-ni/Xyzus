@@ -1,7 +1,10 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { PostItem } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
+import { useLanguage } from "@/lib/i18n/context";
 import { Clock, Calendar, ArrowRight, BookOpen } from "lucide-react";
 
 interface PostCardProps {
@@ -9,6 +12,8 @@ interface PostCardProps {
 }
 
 export function PostCard({ post }: PostCardProps) {
+  const { t, locale } = useLanguage();
+
   return (
     <article className="flex flex-col h-full rounded-xl border border-slate-200/90 dark:border-slate-800/90 bg-white dark:bg-[#111827]/80 hover:border-cyan-500/50 dark:hover:border-cyan-500/50 transition-all duration-200 shadow-sm hover:shadow-md hover:shadow-cyan-500/5 group overflow-hidden">
       <div className="p-6 flex-1 flex flex-col justify-between">
@@ -24,13 +29,13 @@ export function PostCard({ post }: PostCardProps) {
                 <span className="flex items-center gap-1">
                   <Calendar className="w-3.5 h-3.5 text-slate-400" />
                   <time dateTime={post.published_at}>
-                    {formatDate(post.published_at)}
+                    {formatDate(post.published_at, locale)}
                   </time>
                 </span>
               )}
               <span className="flex items-center gap-1">
                 <Clock className="w-3.5 h-3.5 text-slate-400" />
-                <span>{post.reading_time || 5} min read</span>
+                <span>{post.reading_time || 5} {t.blog.min_read}</span>
               </span>
             </div>
           </div>
@@ -44,7 +49,7 @@ export function PostCard({ post }: PostCardProps) {
 
           {/* Excerpt */}
           <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
-            {post.excerpt || post.abstract || "Baca naskah lengkap karya tulis ilmiah ini."}
+            {post.excerpt || post.abstract || (locale === "en" ? "Read full scientific paper." : "Baca naskah lengkap karya tulis ilmiah ini.")}
           </p>
         </div>
 
@@ -66,7 +71,7 @@ export function PostCard({ post }: PostCardProps) {
             className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-600 dark:text-cyan-400 group-hover:underline"
           >
             <BookOpen className="w-3.5 h-3.5" />
-            <span>Baca Selengkapnya</span>
+            <span>{t.blog.read_more}</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>

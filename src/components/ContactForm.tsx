@@ -2,9 +2,11 @@
 
 import React, { useState } from "react";
 import { submitContactMessage } from "@/lib/pocketbase";
+import { useLanguage } from "@/lib/i18n/context";
 import { Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 
 export function ContactForm() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -32,14 +34,14 @@ export function ContactForm() {
     // 2. Client-side validation
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       setStatus("error");
-      setErrorMessage("Mohon lengkapi nama, email, dan pesan Anda.");
+      setErrorMessage(t.contact.validation_required);
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       setStatus("error");
-      setErrorMessage("Format email tidak valid.");
+      setErrorMessage(t.contact.validation_email);
       return;
     }
 
@@ -65,11 +67,11 @@ export function ContactForm() {
         });
       } else {
         setStatus("error");
-        setErrorMessage(res.error || "Gagal mengirimkan pesan. Silakan coba lagi.");
+        setErrorMessage(res.error || t.contact.error_message);
       }
     } catch {
       setStatus("error");
-      setErrorMessage("Terjadi gangguan jaringan saat menghubungi server.");
+      setErrorMessage(t.contact.network_error);
     }
   };
 
@@ -95,7 +97,7 @@ export function ContactForm() {
             htmlFor="contact_name"
             className="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300 mb-1"
           >
-            Nama Lengkap *
+            {t.contact.form_name}
           </label>
           <input
             id="contact_name"
@@ -104,7 +106,7 @@ export function ContactForm() {
             required
             value={formData.name}
             onChange={handleChange}
-            placeholder="Ir. Budi Santoso"
+            placeholder={t.contact.form_name_placeholder}
             className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
           />
         </div>
@@ -114,7 +116,7 @@ export function ContactForm() {
             htmlFor="contact_email"
             className="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300 mb-1"
           >
-            Alamat Email *
+            {t.contact.form_email}
           </label>
           <input
             id="contact_email"
@@ -123,7 +125,7 @@ export function ContactForm() {
             required
             value={formData.email}
             onChange={handleChange}
-            placeholder="budi@perusahaan.co.id"
+            placeholder={t.contact.form_email_placeholder}
             className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
           />
         </div>
@@ -134,7 +136,7 @@ export function ContactForm() {
           htmlFor="contact_subject"
           className="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300 mb-1"
         >
-          Subjek / Topik Proyek
+          {t.contact.form_subject}
         </label>
         <input
           id="contact_subject"
@@ -142,7 +144,7 @@ export function ContactForm() {
           type="text"
           value={formData.subject}
           onChange={handleChange}
-          placeholder="e.g. Proyek IoT Monitoring / Otomasi PLC / Dashboard Web"
+          placeholder={t.contact.form_subject_placeholder}
           className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
         />
       </div>
@@ -152,7 +154,7 @@ export function ContactForm() {
           htmlFor="contact_message"
           className="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300 mb-1"
         >
-          Detail Pesan atau Rencana Kolaborasi *
+          {t.contact.form_message}
         </label>
         <textarea
           id="contact_message"
@@ -161,7 +163,7 @@ export function ContactForm() {
           required
           value={formData.message}
           onChange={handleChange}
-          placeholder="Jelaskan kebutuhan teknis, timeline, atau lingkup pekerjaan yang ingin dikerjasamakan..."
+          placeholder={t.contact.form_message_placeholder}
           className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors resize-y"
         />
       </div>
@@ -176,7 +178,7 @@ export function ContactForm() {
       {status === "success" && (
         <div className="flex items-center gap-2 p-3.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 text-xs font-mono">
           <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-500" />
-          <span>Terima kasih! Pesan Anda telah terkirim dan tersimpan di database.</span>
+          <span>{t.contact.success_message}</span>
         </div>
       )}
 
@@ -188,12 +190,12 @@ export function ContactForm() {
         {status === "submitting" ? (
           <>
             <Loader2 className="w-4 h-4 animate-spin" />
-            <span>Mengirimkan Pesan...</span>
+            <span>{t.contact.sending}</span>
           </>
         ) : (
           <>
             <Send className="w-4 h-4" />
-            <span>Kirim Pesan Sekarang</span>
+            <span>{t.contact.send_btn}</span>
           </>
         )}
       </button>

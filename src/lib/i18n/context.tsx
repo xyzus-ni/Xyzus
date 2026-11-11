@@ -6,7 +6,7 @@ import { Locale, dictionaries } from "./dictionaries";
 interface LanguageContextType {
   locale: Locale;
   setLocale: (locale: Locale) => void;
-  t: typeof dictionaries["id"];
+  t: (typeof dictionaries)["id"];
 }
 
 const LanguageContext = createContext<LanguageContextType>({
@@ -23,6 +23,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       const saved = localStorage.getItem("site_locale") as Locale;
       if (saved === "id" || saved === "en") {
         setLocaleState(saved);
+        document.documentElement.lang = saved;
+      } else {
+        document.documentElement.lang = "id";
       }
     } catch {
       // Fallback
@@ -33,7 +36,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     setLocaleState(newLocale);
     try {
       localStorage.setItem("site_locale", newLocale);
-      document.cookie = `site_locale=${newLocale}; path=/; max-age=31536000`;
+      document.cookie = `site_locale=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+      document.documentElement.lang = newLocale;
     } catch {
       // Fallback
     }
