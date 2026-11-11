@@ -2,22 +2,23 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { getPocketBase } from "@/lib/pocketbase";
+import { supabase } from "@/lib/supabase";
 import { ShieldCheck, Lock, Mail, Loader2, AlertCircle } from "lucide-react";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("mtirtha865@gmail.com");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    // Cek apakah sudah login sebagai admin
-    const pb = getPocketBase();
-    if (pb.authStore.isValid && pb.authStore.isAdmin) {
-      router.push("/admin");
-    }
+    // Cek apakah sudah login session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        router.push("/admin");
+      }
+    });
   }, [router]);
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -26,12 +27,23 @@ export default function AdminLoginPage() {
     setError("");
 
     try {
-      const pb = getPocketBase();
-      await pb.admins.authWithPassword(email.trim(), password);
-      router.push("/admin");
+      const { data, error: authError } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password,
+      });
+
+      if (authError) {
+        throw authError;
+      }
+
+      if (data.session) {
+        router.push("/admin");
+      }
     } catch (err: any) {
       setError(
-        err?.message || "Kredensial tidak valid. Pastikan email dan password admin benar."
+        err?.message === "Email not confirmed"
+          ? "Email belum dikonfirmasi. Pastikan sudah menjalankan query konfirmasi di Supabase SQL Editor."
+          : err?.message || "Kredensial tidak valid. Pastikan email dan password admin benar."
       );
     } finally {
       setLoading(false);
@@ -61,36 +73,36 @@ export default function AdminLoginPage() {
         )}
 
         <form onSubmit={handleLogin} className="space-y-4">
-          <div>
+          <div className="space-y-1.5">
             <label
               htmlFor="admin_email"
-              className="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300 mb-1"
+              className="block text-xs font-medium text-slate-700 dark:text-slate-300"
             >
               Email Administrator
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+              <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
                 id="admin_email"
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@mahesa.local"
-                className="w-full pl-10 pr-3.5 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                placeholder="mtirtha865@gmail.com"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors"
               />
             </div>
           </div>
 
-          <div>
+          <div className="space-y-1.5">
             <label
               htmlFor="admin_password"
-              className="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300 mb-1"
+              className="block text-xs font-medium text-slate-700 dark:text-slate-300"
             >
               Kata Sandi
             </label>
             <div className="relative">
-              <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+              <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
                 id="admin_password"
                 type="password"
@@ -98,7 +110,7 @@ export default function AdminLoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••••••"
-                className="w-full pl-10 pr-3.5 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors"
               />
             </div>
           </div>
@@ -106,7 +118,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-medium text-sm transition-all shadow-md shadow-cyan-500/20 disabled:opacity-50 flex items-center justify-center gap-2"
+            className="w-full py-3 px-4 rounded-xl bg-cyan-500 hover:bg-cyan-600 active:scale-[0.99] text-white font-semibold text-sm shadow-md shadow-cyan-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 mt-2"
           >
             {loading ? (
               <>
@@ -119,8 +131,8 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        <div className="pt-2 text-center text-xs font-mono text-slate-400">
-          Akun default: <code className="text-cyan-500">admin@mahesa.local</code>
+        <div className="pt-2 text-center text-xs text-slate-500 font-mono">
+          Akun: <code className="text-cyan-500">mtirtha865@gmail.com</code>
         </div>
       </div>
     </div>
