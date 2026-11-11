@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useLanguage } from "@/lib/i18n/context";
 import { Github, Linkedin, Mail, ExternalLink, ArrowUpRight } from "lucide-react";
 
@@ -14,10 +15,20 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
           {/* Column 1: Identity & Status */}
           <div className="md:col-span-2 space-y-4">
-            <div className="flex items-center gap-2">
-              <span className="font-bold tracking-tight text-slate-900 dark:text-white">
-                Mahesa Tirtha Agung Permana
-              </span>
+            <div className="flex items-center gap-3">
+              <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-cyan-500/30 bg-[#080d1a] shrink-0">
+                <Image
+                  src="/images/xyzus-logo.jpg"
+                  alt="Xyzus Logo"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <span className="font-bold tracking-tight text-slate-900 dark:text-white block text-sm">
+                  XYZUS &bull; Mahesa Tirtha Agung Permana
+                </span>
+              </div>
             </div>
             <p className="text-sm text-slate-600 dark:text-slate-400 max-w-md leading-relaxed">
               Mechatronics &amp; IoT Engineer. Politeknik Industri ATMI &amp; SMK AMI Deltamas. Berfokus pada integrasi sistem cerdas dari sensor fisik, komputasi tepi, hingga dashboard monitoring.

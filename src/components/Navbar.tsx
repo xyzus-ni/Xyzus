@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/context";
 import { ThemeToggle } from "./ThemeToggle";
@@ -46,18 +47,28 @@ export function Navbar() {
         {/* Brand Logo / Monogram */}
         <Link
           href="/"
-          className="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded-lg p-1"
+          className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded-lg p-1"
         >
-          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform">
-            <Cpu className="w-5 h-5" />
+          <div className="relative w-10 h-10 rounded-xl overflow-hidden border border-cyan-500/30 bg-[#080d1a] shadow-md shadow-cyan-500/10 group-hover:border-cyan-400 group-hover:scale-105 transition-all shrink-0">
+            <Image
+              src="/images/xyzus-logo.jpg"
+              alt="Xyzus Logo"
+              fill
+              className="object-cover"
+              priority
+            />
           </div>
           <div className="flex flex-col">
-            <span className="font-bold text-sm tracking-tight text-slate-900 dark:text-white flex items-center gap-1.5">
-              MAHESA T. A.
-              <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" title="System Online" />
+            <span className="font-extrabold text-sm tracking-wider text-slate-900 dark:text-white flex items-center gap-1.5 font-mono">
+              XYZUS
+              <span className="text-slate-400 font-normal">|</span>
+              <span className="font-semibold tracking-normal text-xs text-slate-700 dark:text-slate-300">
+                MAHESA T. A.
+              </span>
+              <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse ml-0.5" title="System Online" />
             </span>
-            <span className="text-[11px] font-mono text-cyan-600 dark:text-cyan-400 font-medium">
-              MECHATRONICS &amp; IOT
+            <span className="text-[10px] font-mono text-cyan-600 dark:text-cyan-400 font-medium tracking-tight">
+              MECHATRONICS &amp; IOT ENGINEER
             </span>
           </div>
         </Link>
