@@ -23,7 +23,7 @@ export const dictionaries = {
       stats_projects: "Proyek Rekayasa",
       stats_focus: "Freelance / Kolaborasi",
       stats_focus_desc: "Open",
-      stats_status: "D4 Mekatronika & Robotika",
+      stats_status: "D4 Teknologi Rekayasa Mekatronika",
       stats_status_desc: "ATMI",
       skills_subtitle: "Kompetensi Teknis",
       skills_title: "Keahlian Rekayasa & Teknologi",
@@ -41,12 +41,12 @@ export const dictionaries = {
       hire_cta: "Ajak Kolaborasi Sekarang",
     },
     home: {
-      eyebrow: "INDEPENDENT ENGINEERING / 2026",
-      headline: "Saya membangun sistem IoT dari sensor sampai dashboard.",
+      eyebrow: "INDEPENDENT ENGINEERING STUDIO / INDONESIA",
+      headline: "Engineering intelligence. Building independence.",
       subheadline:
-        "Embedded, cloud, dan antarmuka web dalam satu alur kerja.",
+        "Saya merancang dan mengintegrasikan sistem cerdas yang menghubungkan dunia fisik dengan infrastruktur digital — dari embedded systems dan AIoT hingga otomasi dan autonomous technology.",
       cta_whatsapp: "Diskusikan proyek",
-      cta_projects: "Lihat proyek",
+      cta_projects: "Jelajahi proyek",
       services_eyebrow: "SEC. 01 — LAYANAN",
       services_title: "Apa yang saya kerjakan",
       services_subtitle:
@@ -71,17 +71,67 @@ export const dictionaries = {
       works_eyebrow: "SEC. 02 — SELECTED WORKS",
       works_title: "Proyek terpilih",
       works_subtitle:
-        "Setiap proyek punya ID, status, dan spesifikasi singkat. Data dari PocketBase dengan fallback statis.",
+        "Proyek yang menunjukkan cara saya membangun sistem dari sensor sampai dashboard.",
       works_view_all: "Semua proyek",
       works_detail: "Detail proyek",
       works_empty: "Proyek belum tersedia.",
-      lab_eyebrow: "SEC. 03 — LAB",
+      philosophy_eyebrow: "SEC. 03 — FILOSOFI ENGINEERING",
+      philosophy_title: "Teknologi harus memberdayakan, bukan mempersulit.",
+      philosophy_principles: [
+        {
+          title: "Pahami",
+          description:
+            "Memahami masalah, lingkungan, dan kebutuhan manusia sebelum membangun solusi.",
+        },
+        {
+          title: "Integrasikan",
+          description:
+            "Menyambung hardware, software, data, komunikasi, dan antarmuka menjadi satu sistem utuh.",
+        },
+        {
+          title: "Otomatisasi",
+          description:
+            "Memakai sistem cerdas untuk mengurangi kerja berulang, meningkatkan konsistensi, dan efisiensi.",
+        },
+        {
+          title: "Berdayakan",
+          description:
+            "Menciptakan teknologi yang bisa dipahami, dioperasikan, dirawat, dan dikembangkan orang.",
+        },
+      ],
+      lab_eyebrow: "SEC. 04 — LAB",
       lab_title: "Nusantara Culinary Alchemist",
       lab_subtitle:
         "Game masak interaktif hasil eksperimen web — playable build, masih dalam pengembangan.",
       lab_status: "STATUS: IN DEVELOPMENT",
       lab_cta: "Mainkan",
-      about_eyebrow: "SEC. 04 — TENTANG",
+      work_eyebrow: "SEC. 05 — CARA KERJA",
+      work_title: "Dari masalah jadi sistem yang jalan",
+      work_subtitle:
+        "Alur kerja saya untuk proyek klien: empat langkah, dari discovery sampai validasi.",
+      work_steps: [
+        {
+          title: "Discovery",
+          description:
+            "Memahami masalah, kebutuhan, dan batasan operasional sebelum menulis satu baris kode.",
+        },
+        {
+          title: "Arsitektur",
+          description:
+            "Merancang hardware, software, sensing, dan alur data sebagai satu sistem utuh.",
+        },
+        {
+          title: "Prototipe & Integrasi",
+          description:
+            "Membangun dan menguji tiap komponen, lalu menyambungkannya menjadi solusi yang bekerja.",
+        },
+        {
+          title: "Validasi",
+          description:
+            "Menguji performa, mendokumentasikan hasil dan keterbatasan, lalu mendefinisikan langkah berikutnya.",
+        },
+      ],
+      about_eyebrow: "SEC. 06 — TENTANG",
       about_title: "Tentang saya",
       about_link: "Selengkapnya",
       cases_eyebrow: "Proyek Unggulan",
@@ -128,7 +178,7 @@ export const dictionaries = {
       higher_education: "PENDIDIKAN TINGGI",
       higher_period: "Agustus 2024 - Sekarang",
       atmi_title: "Politeknik Industri ATMI",
-      atmi_major: "D4 Teknik Mekatronika, Robotika & Otomasi",
+      atmi_major: "D4 Teknologi Rekayasa Mekatronika",
       atmi_desc: "Fokus pada otomasi pabrik, kontrol PLC Omron, pemrograman sistem berorientasi objek (PBO), analisis CAD SolidWorks, dan robotika industri berstandar ATMI.",
       vocational_education: "PENDIDIKAN VOKASI",
       vocational_period: "Lulus 2024",
@@ -162,30 +212,87 @@ export const dictionaries = {
       cta_button: "Lihat Katalog Proyek",
     },
     skills: {
-      badge: "TAKSONOMI KEMAMPUAN TEKNIS",
-      title: "Keahlian & Disiplin Rekayasa",
-      subtitle: "Kombinasi interdisipliner mekatronika yang menghubungkan perangkat keras elektronika dan mekanik dengan rekayasa perangkat lunak modern.",
-      categories: {
-        embedded: "Embedded Systems & IoT",
-        embedded_desc: "Perancangan arsitektur mikrokontroler, akuisisi sensor, dan komunikasi data awan.",
-        software: "Software & Web Engineering",
-        software_desc: "Pemrograman sistem, backend API, dan antarmuka web dashboard interaktif.",
-        automation: "Otomasi & Sistem Industri",
-        automation_desc: "Kontrol logika industri, simulasi virtual plant, dan metrik manufaktur.",
-        design: "Desain CAD & Visualisasi AI",
-        design_desc: "Pemodelan 3D mekanik, analisis tegangan elemen hingga, dan visualisasi produk.",
-      },
-      levels: {
-        advanced: "Lanjutan",
-        specialist: "Spesialis",
-        competent: "Kompeten",
-        exploration: "Eksplorasi",
-        intermediate: "Dasar-Menengah",
-        innovative: "Inovatif",
-        understanding: "Pemahaman",
-      },
+      badge: "KEMAMPUAN STUDIO",
+      title: "Dari sistem fisik ke kecerdasan digital",
+      subtitle:
+        "Kemampuan XYZUS diukur dari hasil engineering yang bisa dipakai — bukan sekadar daftar teknologi.",
+      maturity_core: "Kemampuan inti",
+      maturity_dev: "Berkembang",
+      maturity_collab: "Tersedia untuk kolaborasi",
+      cap_problems: "Masalah yang dijawab",
+      cap_solutions: "Pendekatan solusi",
+      cap_tech: "Teknologi relevan",
+      cap_deliverables: "Deliverable",
+      capabilities: [
+        {
+          title: "IoT & Embedded Monitoring",
+          maturity: "core",
+          problems:
+            "Kondisi lapangan hanya diketahui lewat laporan manual atau inspeksi berkala.",
+          solutions:
+            "Sensor, mikrokontroler, dan gateway yang mengirim telemetri ke dashboard secara berkala.",
+          tech: "ESP32, Raspberry Pi, MQTT, LoRa, sensor analog",
+          deliverables:
+            "Firmware, skema akuisisi data, dashboard monitoring, dokumentasi kalibrasi",
+        },
+        {
+          title: "Industrial Automation",
+          maturity: "dev",
+          problems:
+            "Logika kontrol mesin berisiko diuji langsung pada lini produksi.",
+          solutions:
+            "Simulasi PLC dan interlock sebelum implementasi fisik.",
+          tech: "Omron PLC, Sysmac Studio, Factory I/O, ladder logic",
+          deliverables:
+            "Program PLC, simulasi alur, dokumen interlock dan timer",
+        },
+        {
+          title: "Robotics & Prototyping",
+          maturity: "dev",
+          problems:
+            "Konsep mekatronika butuh bukti prototipe sebelum ada komitmen.",
+          solutions:
+            "Pembangunan prototipe bertahap: mekanik, kontrol, lalu integrasi sensor.",
+          tech: "SolidWorks, mikrokontroler, motor driver, computer vision",
+          deliverables:
+            "Prototipe, BOM, gambar teknik, catatan uji",
+        },
+        {
+          title: "AIoT & Edge Intelligence",
+          maturity: "dev",
+          problems:
+            "Data sensor bervolume besar tidak efisien dikirim mentah ke cloud.",
+          solutions:
+            "Inference di edge device — hanya insight yang dikirim ke infrastruktur.",
+          tech: "Edge AI, OpenCV, model ringan, ESP32/RPi",
+          deliverables:
+            "Model edge, pipeline data, dashboard insight",
+        },
+        {
+          title: "Engineering Dashboards",
+          maturity: "core",
+          problems:
+            "Metrik mesin dan status sensor tersebar di spreadsheet serta laporan manual.",
+          solutions:
+            "Aplikasi web monitoring real-time untuk metrik, status, dan alarm.",
+          tech: "Next.js, PocketBase, Supabase, WebSocket",
+          deliverables:
+            "Dashboard web, API data, alarm dan notifikasi",
+        },
+        {
+          title: "Hardware–Software Integration",
+          maturity: "core",
+          problems:
+            "Perangkat keras dan perangkat lunak sering dibangun terpisah lalu sulit menyatu.",
+          solutions:
+            "Desain sistem end-to-end: sensor → firmware → cloud → antarmuka.",
+          tech: "Embedded C/C++, Python, REST/MQTT, dasar PCB",
+          deliverables:
+            "Sistem terintegrasi, dokumentasi arsitektur, panduan operasional",
+        },
+      ],
       cta_heading: "Punya Kebutuhan Sistem Khusus?",
-      cta_sub: "Mulai dari pembuatan instrumen sensor khusus, integrasi PLC Omron pabrik, hingga dashboard visualisasi data web.",
+      cta_sub: "Mulai dari instrumen sensor khusus, integrasi PLC pabrik, hingga dashboard monitoring real-time.",
       cta_button: "Diskusikan Proyek",
     },
     projects: {
@@ -193,10 +300,10 @@ export const dictionaries = {
       title: "Portofolio Proyek Rekayasa",
       subtitle: "Koleksi proyek perangkat keras, otomasi industri, dan aplikasi sistem cerdas yang telah diselesaikan maupun dalam tahap pengembangan.",
       filter_all: "Semua",
-      status_completed: "Selesai",
-      status_dev: "Pengembangan",
-      status_paper: "Kompetisi & Paper",
-      status_active: "Aktif",
+      status_completed: "Teruji",
+      status_dev: "Dalam pengembangan",
+      status_paper: "Riset & paper",
+      status_active: "Dalam pengembangan",
       view_detail: "Detail Proyek",
       search_placeholder: "Cari proyek / teknologi...",
       empty: "Tidak ada proyek yang sesuai dengan filter atau kata kunci pencarian.",
@@ -217,6 +324,7 @@ export const dictionaries = {
       spec_links: "Tautan",
       arch_title: "Diagram Arsitektur",
       case_title: "Studi Kasus",
+      media_todo: "Placeholder dokumentasi visual — foto/screenshot proyek menyusul.",
     },
     blog: {
       badge: "RUANG PUBLIKASI & PAPERS",
@@ -265,6 +373,18 @@ export const dictionaries = {
       fullscreen: "Layar penuh",
       open_tab: "Buka di tab baru",
       note: "Game berjalan di domain eksternal. Bila layar kosong, periksa kebijakan iframe di sisi proyek game.",
+      areas_title: "Area eksperimen",
+      areas_note: "Kerja eksperimental — dibedakan dari produk engineering yang selesai.",
+      areas: [
+        { title: "Embedded electronics", desc: "Rangkaian, firmware, dan antarmuka sensor." },
+        { title: "Sensor development", desc: "Karakterisasi, kalibrasi, dan validasi instrumen." },
+        { title: "Computer vision", desc: "Deteksi objek dan pengolahan citra real-time." },
+        { title: "Autonomous navigation", desc: "Navigasi dan kendali kendaraan otonom." },
+        { title: "Robotics experiments", desc: "Uji mekanik, aktuasi, dan kontrol robot." },
+        { title: "AIoT prototypes", desc: "Inference edge dan telemetri cerdas." },
+        { title: "Local-first infrastructure", desc: "Sistem yang bekerja tanpa ketergantungan cloud." },
+        { title: "Nusantara Culinary Alchemist", desc: "Game masak interaktif — playable build di atas." },
+      ],
     },
     contact: {
       badge: "JARINGAN & KOMUNIKASI",
@@ -281,6 +401,13 @@ export const dictionaries = {
       form_email: "Alamat Email *",
       form_email_placeholder: "budi@perusahaan.co.id",
       form_subject: "Subjek / Topik Proyek",
+      form_type: "Jenis Inquiry",
+      inquiry_types: {
+        project: "Proyek / Kolaborasi",
+        consult: "Konsultasi Teknis",
+        research: "Riset / Kolaborasi Akademik",
+        other: "Lainnya",
+      },
       form_subject_placeholder: "e.g. Proyek IoT Monitoring / Otomasi PLC / Dashboard Web",
       form_message: "Detail Pesan atau Rencana Kolaborasi *",
       form_message_placeholder: "Jelaskan kebutuhan teknis, timeline, atau lingkup pekerjaan yang ingin dikerjasamakan...",
@@ -349,7 +476,7 @@ export const dictionaries = {
       stats_projects: "Engineering Projects",
       stats_focus: "Freelance / Collaboration",
       stats_focus_desc: "Open",
-      stats_status: "D4 Mechatronics & Robotics",
+      stats_status: "D4 Mechatronics Engineering Technology",
       stats_status_desc: "ATMI",
       skills_subtitle: "Technical Competencies",
       skills_title: "Engineering Skills & Technology",
@@ -367,12 +494,12 @@ export const dictionaries = {
       hire_cta: "Collaborate Now",
     },
     home: {
-      eyebrow: "INDEPENDENT ENGINEERING / 2026",
-      headline: "I build IoT systems from sensor to dashboard.",
+      eyebrow: "INDEPENDENT ENGINEERING STUDIO / INDONESIA",
+      headline: "Engineering intelligence. Building independence.",
       subheadline:
-        "Embedded, cloud, and web interfaces in a single workflow.",
+        "I design and integrate intelligent systems connecting the physical world with digital infrastructure — from embedded systems and AIoT to automation and autonomous technology.",
       cta_whatsapp: "Discuss a project",
-      cta_projects: "View work",
+      cta_projects: "Explore projects",
       services_eyebrow: "SEC. 01 — SERVICES",
       services_title: "What I do",
       services_subtitle:
@@ -397,17 +524,67 @@ export const dictionaries = {
       works_eyebrow: "SEC. 02 — SELECTED WORKS",
       works_title: "Selected projects",
       works_subtitle:
-        "Every project carries an ID, status, and short spec sheet. Data from PocketBase with static fallback.",
+        "Projects that show how I build systems from sensor to dashboard.",
       works_view_all: "All projects",
       works_detail: "Project detail",
       works_empty: "No projects available yet.",
-      lab_eyebrow: "SEC. 03 — LAB",
+      philosophy_eyebrow: "SEC. 03 — ENGINEERING PHILOSOPHY",
+      philosophy_title: "Technology should empower, not complicate.",
+      philosophy_principles: [
+        {
+          title: "Understand",
+          description:
+            "Understand the problem, environment, and human requirements before building a solution.",
+        },
+        {
+          title: "Integrate",
+          description:
+            "Connect hardware, software, data, communication, and interfaces into one coherent system.",
+        },
+        {
+          title: "Automate",
+          description:
+            "Use intelligent systems to reduce repetitive work, improve consistency, and increase efficiency.",
+        },
+        {
+          title: "Empower",
+          description:
+            "Create technology that people can understand, operate, maintain, and improve.",
+        },
+      ],
+      lab_eyebrow: "SEC. 04 — LAB",
       lab_title: "Nusantara Culinary Alchemist",
       lab_subtitle:
         "An interactive cooking game from web experiments — playable build, still in development.",
       lab_status: "STATUS: IN DEVELOPMENT",
       lab_cta: "Play",
-      about_eyebrow: "SEC. 04 — ABOUT",
+      work_eyebrow: "SEC. 05 — HOW I WORK",
+      work_title: "From problem to working system",
+      work_subtitle:
+        "My workflow for client projects: four steps, from discovery to validation.",
+      work_steps: [
+        {
+          title: "Discovery",
+          description:
+            "Understanding the problem, requirements, and operating constraints before writing a single line of code.",
+        },
+        {
+          title: "Architecture",
+          description:
+            "Designing hardware, software, sensing, and data flow as one coherent system.",
+        },
+        {
+          title: "Prototyping & Integration",
+          description:
+            "Building and testing each component, then connecting them into a working solution.",
+        },
+        {
+          title: "Validation",
+          description:
+            "Testing performance, documenting results and limitations, then defining next steps.",
+        },
+      ],
+      about_eyebrow: "SEC. 06 — ABOUT",
       about_title: "About me",
       about_link: "Learn more",
       cases_eyebrow: "Featured Work",
@@ -454,7 +631,7 @@ export const dictionaries = {
       higher_education: "HIGHER EDUCATION",
       higher_period: "August 2024 - Present",
       atmi_title: "Politeknik Industri ATMI",
-      atmi_major: "D4 Mechatronics, Robotics & Automation Engineering",
+      atmi_major: "D4 Mechatronics Engineering Technology",
       atmi_desc: "Focused on factory automation, Omron PLC control, object-oriented system programming (OOP), SolidWorks CAD analysis, and ATMI-standard industrial robotics.",
       vocational_education: "VOCATIONAL EDUCATION",
       vocational_period: "Graduated 2024",
@@ -488,30 +665,85 @@ export const dictionaries = {
       cta_button: "View Projects Catalog",
     },
     skills: {
-      badge: "TECHNICAL COMPETENCY TAXONOMY",
-      title: "Engineering Skills & Disciplines",
-      subtitle: "An interdisciplinary mechatronics blend connecting electronic and mechanical hardware with modern software engineering.",
-      categories: {
-        embedded: "Embedded Systems & IoT",
-        embedded_desc: "Microcontroller architecture design, sensor data acquisition, and telemetry.",
-        software: "Software & Web Engineering",
-        software_desc: "System programming, backend APIs, and interactive web dashboard interfaces.",
-        automation: "Automation & Industrial Systems",
-        automation_desc: "Industrial logic control, virtual plant simulation, and manufacturing metrics.",
-        design: "CAD Design & AI Visualization",
-        design_desc: "3D mechanical modeling, finite element stress analysis, and product visualization.",
-      },
-      levels: {
-        advanced: "Advanced",
-        specialist: "Specialist",
-        competent: "Competent",
-        exploration: "Exploration",
-        intermediate: "Intermediate",
-        innovative: "Innovative",
-        understanding: "Foundational",
-      },
+      badge: "STUDIO CAPABILITIES",
+      title: "From physical systems to digital intelligence",
+      subtitle:
+        "XYZUS capabilities are measured by engineering outcomes you can use — not just a list of technologies.",
+      maturity_core: "Core capability",
+      maturity_dev: "Developing",
+      maturity_collab: "Available for collaboration",
+      cap_problems: "Problems addressed",
+      cap_solutions: "Solution approach",
+      cap_tech: "Relevant technologies",
+      cap_deliverables: "Deliverables",
+      capabilities: [
+        {
+          title: "IoT & Embedded Monitoring",
+          maturity: "core",
+          problems:
+            "Field conditions are only known through manual reports or periodic inspection.",
+          solutions:
+            "Sensors, microcontrollers, and gateways that stream telemetry to a dashboard on a schedule.",
+          tech: "ESP32, Raspberry Pi, MQTT, LoRa, analog sensors",
+          deliverables:
+            "Firmware, data acquisition design, monitoring dashboard, calibration docs",
+        },
+        {
+          title: "Industrial Automation",
+          maturity: "dev",
+          problems:
+            "Machine control logic is risky to test directly on a production line.",
+          solutions:
+            "PLC and interlock simulation before physical implementation.",
+          tech: "Omron PLC, Sysmac Studio, Factory I/O, ladder logic",
+          deliverables:
+            "PLC program, flow simulation, interlock and timer documentation",
+        },
+        {
+          title: "Robotics & Prototyping",
+          maturity: "dev",
+          problems:
+            "Mechatronics concepts need working prototypes before any commitment.",
+          solutions:
+            "Staged prototype builds: mechanics, control, then sensor integration.",
+          tech: "SolidWorks, microcontrollers, motor drivers, computer vision",
+          deliverables: "Prototype, BOM, engineering drawings, test notes",
+        },
+        {
+          title: "AIoT & Edge Intelligence",
+          maturity: "dev",
+          problems:
+            "High-volume sensor data is inefficient to stream raw to the cloud.",
+          solutions:
+            "Inference at the edge — only insights are sent to infrastructure.",
+          tech: "Edge AI, OpenCV, lightweight models, ESP32/RPi",
+          deliverables: "Edge model, data pipeline, insight dashboard",
+        },
+        {
+          title: "Engineering Dashboards",
+          maturity: "core",
+          problems:
+            "Machine metrics and sensor status are scattered across spreadsheets and manual reports.",
+          solutions:
+            "Real-time web monitoring for metrics, status, and alarms.",
+          tech: "Next.js, PocketBase, Supabase, WebSocket",
+          deliverables:
+            "Web dashboard, data API, alarms and notifications",
+        },
+        {
+          title: "Hardware–Software Integration",
+          maturity: "core",
+          problems:
+            "Hardware and software are often built separately and hard to unify.",
+          solutions:
+            "End-to-end system design: sensor → firmware → cloud → interface.",
+          tech: "Embedded C/C++, Python, REST/MQTT, basic PCB",
+          deliverables:
+            "Integrated system, architecture documentation, operations guide",
+        },
+      ],
       cta_heading: "Have Custom System Requirements?",
-      cta_sub: "From specialized sensor instrument design, Omron PLC integration, to interactive data dashboards.",
+      cta_sub: "From custom sensor instruments and plant PLC integration to real-time monitoring dashboards.",
       cta_button: "Discuss Your Project",
     },
     projects: {
@@ -519,10 +751,10 @@ export const dictionaries = {
       title: "Engineering Projects Portfolio",
       subtitle: "A collection of hardware prototypes, industrial automation workflows, and intelligent software systems.",
       filter_all: "All",
-      status_completed: "Completed",
-      status_dev: "In Development",
-      status_paper: "Competition & Paper",
-      status_active: "Active",
+      status_completed: "Tested",
+      status_dev: "In development",
+      status_paper: "Research & development",
+      status_active: "In development",
       view_detail: "Project Details",
       search_placeholder: "Search projects / tech stack...",
       empty: "No projects match the selected filter or search query.",
@@ -543,6 +775,7 @@ export const dictionaries = {
       spec_links: "Links",
       arch_title: "Architecture Diagram",
       case_title: "Case Study",
+      media_todo: "Visual documentation placeholder — project photos/screenshots coming soon.",
     },
     blog: {
       badge: "PUBLICATIONS & PAPERS",
@@ -591,6 +824,18 @@ export const dictionaries = {
       fullscreen: "Fullscreen",
       open_tab: "Open in new tab",
       note: "The game runs on an external domain. If the screen stays blank, check the iframe policy on the game project.",
+      areas_title: "Experiment areas",
+      areas_note: "Experimental work — kept separate from finished engineering products.",
+      areas: [
+        { title: "Embedded electronics", desc: "Circuits, firmware, and sensor interfaces." },
+        { title: "Sensor development", desc: "Characterization, calibration, and instrument validation." },
+        { title: "Computer vision", desc: "Object detection and real-time image processing." },
+        { title: "Autonomous navigation", desc: "Navigation and control of autonomous vehicles." },
+        { title: "Robotics experiments", desc: "Mechanical, actuation, and robot control tests." },
+        { title: "AIoT prototypes", desc: "Edge inference and intelligent telemetry." },
+        { title: "Local-first infrastructure", desc: "Systems that work without cloud dependence." },
+        { title: "Nusantara Culinary Alchemist", desc: "Interactive cooking game — playable build above." },
+      ],
     },
     contact: {
       badge: "NETWORK & COMMUNICATION",
@@ -607,6 +852,13 @@ export const dictionaries = {
       form_email: "Email Address *",
       form_email_placeholder: "john@enterprise.com",
       form_subject: "Subject / Project Scope",
+      form_type: "Inquiry Type",
+      inquiry_types: {
+        project: "Project / Collaboration",
+        consult: "Technical Consulting",
+        research: "Research / Academic Collaboration",
+        other: "Other",
+      },
       form_subject_placeholder: "e.g. IoT Monitoring Project / PLC Automation / Web Dashboard",
       form_message: "Message Details or Collaboration Scope *",
       form_message_placeholder: "Describe technical specifications, timeline, or scope of work you would like to collaborate on...",

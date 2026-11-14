@@ -2,9 +2,9 @@ import React from "react";
 import { SkillsContent } from "./SkillsContent";
 
 export const metadata = {
-  title: "Keahlian & Kompetensi Teknis | Technical Skills",
+  title: "Kemampuan & Kapabilitas Engineering | Capabilities",
   description:
-    "Keahlian teknis Mahesa Tirtha Agung Permana dalam bidang Embedded Systems, IoT, Software Web, Otomasi PLC Omron, dan Desain CAD SolidWorks.",
+    "Kemampuan engineering XYZUS: IoT & embedded monitoring, industrial automation, robotics prototyping, AIoT edge, engineering dashboard, dan integrasi hardware-software.",
 };
 
 export default function SkillsPage() {

@@ -6,7 +6,7 @@ import { useLanguage } from "@/lib/i18n/context";
 import { CONTACT, whatsappUrl, defaultWhatsappMessage } from "@/lib/contact";
 import { Button } from "@/components/ui/Button";
 import { TechLabel } from "@/components/ui/TechLabel";
-import { Mail, Linkedin, Github, MapPin, MessageCircle, ArrowRight } from "lucide-react";
+import { Mail, Linkedin, Github, Instagram, MapPin, MessageCircle, ArrowRight } from "lucide-react";
 
 function formatWhatsapp(number: string): string {
   // +62 881-0246-32318 style display
@@ -40,6 +40,13 @@ export function ContactContent() {
       icon: Github,
       label: "GitHub",
       value: CONTACT.github.replace("https://github.com/", "@"),
+    },
+    {
+      href: CONTACT.instagram,
+      external: true,
+      icon: Instagram,
+      label: "Instagram",
+      value: CONTACT.instagram.replace(/.*instagram\.com\//, "@"),
     },
     {
       href: `mailto:${CONTACT.email}`,

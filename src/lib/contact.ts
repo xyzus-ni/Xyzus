@@ -9,6 +9,8 @@ export const CONTACT = {
   linkedin:
     process.env.NEXT_PUBLIC_LINKEDIN ||
     "https://www.linkedin.com/in/mahesa-tirtha-agung-permana",
+  instagram:
+    process.env.NEXT_PUBLIC_INSTAGRAM || "https://instagram.com/xyzus.ni",
 };
 
 /** URL wa.me dengan pesan terisi; fallback ke /contact bila nomor kosong. */

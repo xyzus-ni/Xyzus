@@ -138,7 +138,10 @@ export function HomeContent({ projects, profile }: HomeContentProps) {
         ) : (
           <>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {projects.map((project) => (
+              {projects.map((project) => {
+                const narrative =
+                  t.home.cases[project.slug as keyof typeof t.home.cases];
+                return (
                 <Link
                   key={project.slug}
                   href={`/projects/${project.slug}`}
@@ -170,6 +173,14 @@ export function HomeContent({ projects, profile }: HomeContentProps) {
                         ))}
                       </ul>
                     )}
+                    {narrative?.result && (
+                      <p className="mt-4 border-l-2 border-terracotta/60 pl-3 text-sm leading-relaxed text-graphite/70">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-teal-ink">
+                          {t.home.case_result} —{" "}
+                        </span>
+                        {narrative.result}
+                      </p>
+                    )}
                     <div className="mt-5 flex items-center gap-2 border-t border-stone/60 pt-4">
                       <span
                         aria-hidden="true"
@@ -181,7 +192,8 @@ export function HomeContent({ projects, profile }: HomeContentProps) {
                     </div>
                   </Card>
                 </Link>
-              ))}
+                );
+              })}
             </div>
             <div className="mt-8">
               <Button href="/projects" variant="secondary">
@@ -193,6 +205,23 @@ export function HomeContent({ projects, profile }: HomeContentProps) {
         )}
       </Section>
 
+      {/* ── 3b. FILOSOFI ENGINEERING ────────────────────────── */}
+      <Section eyebrow={t.home.philosophy_eyebrow} title={t.home.philosophy_title}>
+        <ol className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {t.home.philosophy_principles.map((p, i) => (
+            <li key={p.title} className="border-l-2 border-terracotta/60 pl-4">
+              <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-teal-ink">
+                0{i + 1}
+              </span>
+              <h3 className="mt-2 font-serif text-title-md text-graphite">{p.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-graphite/70">
+                {p.description}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
       {/* ── 4. LAB ──────────────────────────────────────────── */}
       <Section eyebrow={t.home.lab_eyebrow} title={t.home.lab_title} description={t.home.lab_subtitle}>
         <Card code="LAB-001" meta={t.home.lab_status} className="max-w-2xl">
@@ -202,10 +231,7 @@ export function HomeContent({ projects, profile }: HomeContentProps) {
                 <FlaskConical className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-sm leading-relaxed text-graphite/70">
-                  {t.home.lab_subtitle}
-                </p>
-                <TechLabel className="mt-2 block">
+                <TechLabel className="mt-1 block">
                   nusantara-alchemist.vercel.app
                 </TechLabel>
               </div>
@@ -218,7 +244,23 @@ export function HomeContent({ projects, profile }: HomeContentProps) {
         </Card>
       </Section>
 
-      {/* ── 5. TENTANG ───────────────────────────────────────── */}
+      {/* ── 5. CARA KERJA ───────────────────────────────────── */}
+      <Section eyebrow={t.home.work_eyebrow} title={t.home.work_title} description={t.home.work_subtitle}>
+        <ol className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {t.home.work_steps.map((step, i) => (
+            <li key={step.title}>
+              <Card code={`WRK-00${i + 1}`} className="h-full">
+                <h3 className="font-serif text-title-md text-graphite">{step.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-graphite/70">
+                  {step.description}
+                </p>
+              </Card>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      {/* ── 6. TENTANG ───────────────────────────────────────── */}
       <Section eyebrow={t.home.about_eyebrow} title={t.home.about_title}>
         <div className="max-w-3xl">
           <p className="text-lead leading-relaxed text-graphite/80">{profile.bio}</p>

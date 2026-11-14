@@ -17,6 +17,7 @@ export function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    inquiry_type: "project",
     subject: "",
     message: "",
     honeypot: "", // Bot trap
@@ -28,7 +29,9 @@ export function ContactForm() {
   // Time-trap: form yang dikirim <2 detik setelah render dianggap bot
   const mountedAt = useRef(Date.now());
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     if (status === "error") {
       setStatus("idle");
@@ -69,16 +72,24 @@ export function ContactForm() {
     setErrorMessage("");
 
     try {
+      const typeLabel =
+        t.contact.inquiry_types[
+          formData.inquiry_type as keyof typeof t.contact.inquiry_types
+        ] ?? t.contact.inquiry_types.project;
+      const subjectValue = [typeLabel, formData.subject.trim()]
+        .filter(Boolean)
+        .join(" — ");
+
       const res = await submitContactMessage({
         name: formData.name.trim(),
         email: formData.email.trim(),
-        subject: formData.subject.trim() || "Inquiry Proyek / Kolaborasi",
+        subject: subjectValue || "Inquiry Proyek / Kolaborasi",
         message: formData.message.trim(),
       });
 
       if (res.success) {
         setStatus("success");
-        setFormData({ name: "", email: "", subject: "", message: "", honeypot: "" });
+        setFormData({ name: "", email: "", inquiry_type: "project", subject: "", message: "", honeypot: "" });
         mountedAt.current = Date.now();
       } else {
         setStatus("error");
@@ -139,6 +150,25 @@ export function ContactForm() {
             className={inputClass}
           />
         </div>
+      </div>
+
+      <div>
+        <label htmlFor="contact_type" className={labelClass}>
+          {t.contact.form_type}
+        </label>
+        <select
+          id="contact_type"
+          name="inquiry_type"
+          value={formData.inquiry_type}
+          onChange={handleChange}
+          className={inputClass}
+        >
+          {Object.entries(t.contact.inquiry_types).map(([value, label]) => (
+            <option key={value} value={value}>
+              {label}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div>

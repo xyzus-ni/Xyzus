@@ -11,6 +11,7 @@ import { TechLabel } from "@/components/ui/TechLabel";
 import { useLanguage } from "@/lib/i18n/context";
 import { projectCode } from "@/lib/utils";
 import { projectStatusLabel } from "@/lib/status";
+import { getFileUrl } from "@/lib/pocketbase";
 import {
   ArrowLeft,
   ArrowRight,
@@ -93,6 +94,26 @@ export function ProjectDetailContent({ project }: ProjectDetailContentProps) {
           </div>
         )}
       </header>
+
+      {/* Media proyek: foto/screenshot bila ada, else placeholder TODO */}
+      {project.cover ? (
+        <figure className="py-10">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={getFileUrl("projects", project.id ?? "", project.cover)}
+            alt={project.title}
+            className="w-full rounded-md border border-stone object-cover"
+            loading="lazy"
+          />
+        </figure>
+      ) : (
+        <div className="my-10 flex aspect-video w-full flex-col items-center justify-center gap-3 rounded-md border border-dashed border-stone bg-grid bg-surface p-6 text-center">
+          <TechLabel>FIG. 01 — PROJECT MEDIA</TechLabel>
+          <p className="font-mono text-[11px] text-graphite/50">
+            TODO — {t.projects.media_todo}
+          </p>
+        </div>
+      )}
 
       {/* Studi kasus: masalah → solusi → hasil (bila ada narasi di kamus) */}
       {narrative && (
