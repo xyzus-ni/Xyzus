@@ -106,7 +106,7 @@ export function ProjectDetailContent({ project }: ProjectDetailContentProps) {
         <div className="py-10">
           <ProjectVideoHero
             src={project.video_url}
-            poster={project.video_url.replace(/\.mp4$/, "-poster.svg")}
+            poster={project.video_url.replace(/\.mp4$/, "-poster.jpg")}
             title={project.title}
           />
         </div>

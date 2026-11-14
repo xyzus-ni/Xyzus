@@ -31,5 +31,5 @@ export default async function HomePage() {
     }
   }
 
-  return <HomeContent projects={projects.slice(0, 3)} profile={profile} />;
+  return <HomeContent projects={projects.slice(0, 4)} profile={profile} />;
 }

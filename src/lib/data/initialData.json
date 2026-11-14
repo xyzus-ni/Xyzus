@@ -197,7 +197,7 @@
         "Simulation"
       ],
       "status": "selesai",
-      "featured": false,
+      "featured": true,
       "visible": true,
       "order": 9,
       "video_url": "/videos/industrial-automation.mp4"
