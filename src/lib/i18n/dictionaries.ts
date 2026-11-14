@@ -175,11 +175,6 @@ export const dictionaries = {
           solution: "Kalibrasi di ESP32 terhadap sampel tanah, dengan koreksi drift akibat suhu.",
           result: "Deviasi kadar air volumetrik turun dari ±8,4% menjadi ±1,8%.",
         },
-        "factory-io-conveyor-automation-simulation": {
-          problem: "Logika sortir konveyor berisiko diuji langsung di perangkat pabrik.",
-          solution: "Factory I/O dihubungkan ke PLC Omron untuk interlock, timer, dan divert barang.",
-          result: "Alur sortir dan emergency stop bisa diuji di simulasi sebelum dipasang di lini.",
-        },
       },
       contact_eyebrow: "Kontak",
       contact_title: "Ceritakan proyeknya",
@@ -660,11 +655,6 @@ export const dictionaries = {
           problem: "Analog soil moisture and pH sensors drift when used in the field.",
           solution: "ESP32 calibration against soil samples, with a correction for temperature drift.",
           result: "Volumetric water-content error dropped from ±8.4% to ±1.8%.",
-        },
-        "factory-io-conveyor-automation-simulation": {
-          problem: "Conveyor sort logic is risky to prove for the first time on plant hardware.",
-          solution: "Factory I/O tied to an Omron PLC for interlocks, timers, and product divert.",
-          result: "Sort flow and emergency stop were proven in simulation before line installation.",
         },
       },
       contact_eyebrow: "Contact",

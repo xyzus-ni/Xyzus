@@ -20,7 +20,6 @@ export type ProjectStage =
  */
 const STAGE_BY_SLUG: Record<string, ProjectStage> = {
   "soil-sensor-calibration-field-testing": "field_tested",
-  "factory-io-conveyor-automation-simulation": "simulation_validated",
   "industrial-control-logic": "simulation_validated",
   "autonomous-weed-harvester-catamaran-cirata": "research",
   "uav-yolo-palm-pest-early-detection": "in_development",

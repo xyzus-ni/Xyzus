@@ -18,7 +18,7 @@ const MATURITY_STYLE: Record<string, string> = {
 // Bukti proyek per kapabilitas — hanya proyek yang benar-benar mendemonstrasikan domain tsb.
 const PROOF_SLUGS: (string | null)[] = [
   "soil-sensor-calibration-field-testing", // IoT & Embedded Monitoring
-  "factory-io-conveyor-automation-simulation", // Industrial Automation
+  "industrial-control-logic", // Industrial Automation
   "uav-yolo-palm-pest-early-detection", // Robotics & Prototyping
   "color-blind-assistant-raspberry-pi", // AIoT & Edge Intelligence
   "web-based-oee-industrial-system", // Engineering Dashboards

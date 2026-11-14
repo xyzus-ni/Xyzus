@@ -80,23 +80,6 @@
       "order": 2
     },
     {
-      "title": "Simulasi Konveyor Otomasi Industri di Factory I/O",
-      "slug": "factory-io-conveyor-automation-simulation",
-      "summary": "Simulasi sistem sortir konveyor industri otomatis menggunakan Factory I/O yang diintegrasikan dengan logic PLC Omron untuk optimasi throughput pabrik.",
-      "description": "## Deskripsi Proyek\nPengembangan arsitektur sortir barang otomatis berkecepatan tinggi dengan mengkoneksikan virtual plant **Factory I/O** ke software kontrol PLC Omron melalui protokol OPC/Modbus TCP.\n\n### Komponen Sistem:\n- **Ladder Logic PLC**: Pengaturan interlock keselamatan, timer konveyor variabel, dan logika divert pusher pneumatik.\n- **Sensor Retroreflektif & Vision**: Deteksi dimensi dan kode barcode palet produk.\n- **Emergency Stop & Reset Logic**: Sesuai dengan standar keselamatan kerja mesin industri ISO 13849.",
-      "tech": [
-        "Factory I/O",
-        "PLC Omron",
-        "Ladder Logic",
-        "Industrial Automation",
-        "Simulation"
-      ],
-      "status": "selesai",
-      "featured": true,
-      "visible": true,
-      "order": 3
-    },
-    {
       "title": "Desain Rangka Tempat Tidur Modular CAD + Visualisasi AI",
       "slug": "modular-bed-frame-cad-ai-visualization",
       "summary": "Perancangan modular rangka tempat tidur ergonomis dengan analisis tegangan struktur dan visualisasi fotorealistis menggunakan generative AI.",
