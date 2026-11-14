@@ -81,10 +81,10 @@
       "order": 2
     },
     {
-      "title": "Desain Rangka Tempat Tidur Modular CAD + Visualisasi AI",
+      "title": "Desain Rangka Tempat Tidur Modular Berbahan Kayu — Fusion 360",
       "slug": "modular-bed-frame-cad-ai-visualization",
-      "summary": "Perancangan modular rangka tempat tidur ergonomis dengan analisis tegangan struktur dan visualisasi fotorealistis menggunakan generative AI.",
-      "description": "## Deskripsi Proyek\nProyek perancangan produk mekatronika-furniture berbasis SolidWorks untuk struktur modular knockdown. Menggunakan profil baja ringan dan sambungan presisi CNC.\n\n### Alur Kerja Rekayasa:\n- **Pemodelan 3D CAD**: SolidWorks untuk toleransi fabrikasi dan Bill of Materials (BOM).\n- **Analisis Elemen Hingga (FEA)**: Simulasi defleksi beban statis hingga 350 kg dengan faktor keamanan $SF > 2.2$.\n- **Visualisasi AI**: Rendering tekstur material fotorealistis dalam suasana interior kamar menggunakan generative diffusion model.",
+      "summary": "Desain rangka tempat tidur modular berbahan kayu, dimodelkan parametrik di Fusion 360 dengan sambungan knockdown yang mudah dirakit.",
+      "description": "## Deskripsi Proyek\nDesain produk rangka tempat tidur modular berbahan kayu, dimodelkan di **Fusion 360**. Pendekatan modular knockdown memungkinkan komponen diproduksi terpisah dan dirakit tanpa alat khusus.\n\n### Prinsip Desain\n- **Modular**: setiap komponen (frame, sandaran, kaki) berdiri sendiri dan saling terkunci — memudahkan fabrikasi, penggantian bagian, dan transportasi.\n- **Material kayu**: struktur utama menggunakan kayu; sambungan dirancang untuk perakitan presisi.\n- **Parametrik di Fusion 360**: model CAD digambar dengan parameter terukur sehingga dimensi dapat diubah tanpa menggambar ulang.\n\n### Hasil Desain\n- Model CAD 3D lengkap yang siap dibawa ke tahap prototipe dan fabrikasi.\n- Gambar hasil desain ditampilkan pada bagian media di halaman ini.\n\n### Status & Keterbatasan\n- Tahap saat ini: **desain CAD** — belum ada prototipe fisik atau pengujian beban. Klaim struktural hanya berlaku setelah prototipe dan pengujian.",
       "tech": [
         "SolidWorks",
         "CAD",
