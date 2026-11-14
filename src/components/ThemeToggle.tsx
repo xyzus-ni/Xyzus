@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Sun, Moon } from "lucide-react";
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -18,9 +18,9 @@ export function ThemeToggle() {
         document.documentElement.classList.remove("dark");
       }
     } else {
-      // Default dark mode bertema teknik
-      document.documentElement.classList.add("dark");
-      setTheme("dark");
+      // Default light — "Sovereign Minimalism" light-first
+      document.documentElement.classList.remove("dark");
+      setTheme("light");
     }
   }, []);
 
@@ -43,7 +43,7 @@ export function ThemeToggle() {
     <button
       onClick={toggleTheme}
       type="button"
-      className="p-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 hover:border-cyan-500/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+      className="rounded-md border border-stone bg-surface p-2 text-graphite transition-colors hover:border-teal-ink/50 hover:text-teal-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-ink"
       aria-label={theme === "dark" ? "Beralih ke mode terang" : "Beralih ke mode gelap"}
       title={theme === "dark" ? "Mode Terang" : "Mode Gelap"}
     >

@@ -1,9 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { submitContactMessage } from "@/lib/pocketbase";
 import { useLanguage } from "@/lib/i18n/context";
+import { Button } from "@/components/ui/Button";
 import { Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+
+const inputClass =
+  "w-full rounded-md border border-stone bg-surface px-3.5 py-2.5 text-sm text-graphite placeholder:text-graphite/40 transition-colors focus:border-teal-ink focus:outline-none focus:ring-1 focus:ring-teal-ink";
+
+const labelClass =
+  "mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-graphite/60";
 
 export function ContactForm() {
   const { t } = useLanguage();
@@ -18,20 +25,33 @@ export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Time-trap: form yang dikirim <2 detik setelah render dianggap bot
+  const mountedAt = useRef(Date.now());
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (status === "error") {
+      setStatus("idle");
+      setErrorMessage("");
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 1. Honeypot check: jika diisi, anggap spam bot dan abaikan diam-diam
+    // 1. Honeypot: field tersembunyi yang hanya diisi bot
     if (formData.honeypot) {
       setStatus("success");
       return;
     }
 
-    // 2. Client-side validation
+    // 2. Time-trap spam
+    if (Date.now() - mountedAt.current < 2000) {
+      setStatus("success"); // pura-pura sukses, buang submitan
+      return;
+    }
+
+    // 3. Validasi
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       setStatus("error");
       setErrorMessage(t.contact.validation_required);
@@ -58,13 +78,8 @@ export function ContactForm() {
 
       if (res.success) {
         setStatus("success");
-        setFormData({
-          name: "",
-          email: "",
-          subject: "",
-          message: "",
-          honeypot: "",
-        });
+        setFormData({ name: "", email: "", subject: "", message: "", honeypot: "" });
+        mountedAt.current = Date.now();
       } else {
         setStatus("error");
         setErrorMessage(res.error || t.contact.error_message);
@@ -77,8 +92,8 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {/* Honeypot field (hidden from humans) */}
-      <div className="hidden" aria-hidden="true">
+      {/* Honeypot field (hidden from humans, tetap bisa diisi bot) */}
+      <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
         <label htmlFor="hp_field">Do not fill this</label>
         <input
           type="text"
@@ -91,12 +106,9 @@ export function ContactForm() {
         />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
-          <label
-            htmlFor="contact_name"
-            className="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300 mb-1"
-          >
+          <label htmlFor="contact_name" className={labelClass}>
             {t.contact.form_name}
           </label>
           <input
@@ -104,18 +116,15 @@ export function ContactForm() {
             name="name"
             type="text"
             required
+            autoComplete="name"
             value={formData.name}
             onChange={handleChange}
             placeholder={t.contact.form_name_placeholder}
-            className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
+            className={inputClass}
           />
         </div>
-
         <div>
-          <label
-            htmlFor="contact_email"
-            className="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300 mb-1"
-          >
+          <label htmlFor="contact_email" className={labelClass}>
             {t.contact.form_email}
           </label>
           <input
@@ -123,37 +132,33 @@ export function ContactForm() {
             name="email"
             type="email"
             required
+            autoComplete="email"
             value={formData.email}
             onChange={handleChange}
             placeholder={t.contact.form_email_placeholder}
-            className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
+            className={inputClass}
           />
         </div>
       </div>
 
       <div>
-        <label
-          htmlFor="contact_subject"
-          className="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300 mb-1"
-        >
+        <label htmlFor="contact_subject" className={labelClass}>
           {t.contact.form_subject}
         </label>
         <input
           id="contact_subject"
           name="subject"
           type="text"
+          autoComplete="off"
           value={formData.subject}
           onChange={handleChange}
           placeholder={t.contact.form_subject_placeholder}
-          className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
+          className={inputClass}
         />
       </div>
 
       <div>
-        <label
-          htmlFor="contact_message"
-          className="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300 mb-1"
-        >
+        <label htmlFor="contact_message" className={labelClass}>
           {t.contact.form_message}
         </label>
         <textarea
@@ -164,41 +169,43 @@ export function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           placeholder={t.contact.form_message_placeholder}
-          className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors resize-y"
+          className={`${inputClass} resize-y`}
         />
       </div>
 
       {status === "error" && (
-        <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 text-red-700 dark:text-red-400 text-xs font-mono">
-          <AlertCircle className="w-4 h-4 shrink-0" />
+        <div
+          role="alert"
+          className="flex items-center gap-2 rounded-md border border-terracotta/60 bg-terracotta/10 p-3 text-xs text-terracotta-ink"
+        >
+          <AlertCircle className="h-4 w-4 shrink-0" />
           <span>{errorMessage}</span>
         </div>
       )}
 
       {status === "success" && (
-        <div className="flex items-center gap-2 p-3.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 text-xs font-mono">
-          <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-500" />
+        <div
+          role="status"
+          className="flex items-center gap-2 rounded-md border border-sage bg-sage/20 p-3.5 text-xs text-teal-ink"
+        >
+          <CheckCircle2 className="h-4 w-4 shrink-0 text-teal-ink" />
           <span>{t.contact.success_message}</span>
         </div>
       )}
 
-      <button
-        type="submit"
-        disabled={status === "submitting"}
-        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-medium text-sm hover:from-cyan-500 hover:to-blue-500 transition-all shadow-md shadow-cyan-500/20 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
-      >
+      <Button type="submit" size="lg" disabled={status === "submitting"} className="w-full sm:w-auto">
         {status === "submitting" ? (
           <>
-            <Loader2 className="w-4 h-4 animate-spin" />
+            <Loader2 className="h-4 w-4 animate-spin" />
             <span>{t.contact.sending}</span>
           </>
         ) : (
           <>
-            <Send className="w-4 h-4" />
+            <Send className="h-4 w-4" />
             <span>{t.contact.send_btn}</span>
           </>
         )}
-      </button>
+      </Button>
     </form>
   );
 }

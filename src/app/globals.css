@@ -6,19 +6,45 @@
 
 @layer base {
   :root {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8fafc;
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --border-color: #e2e8f0;
+    /* ── XYZUS "Sovereign Minimalism" design tokens (light-first) ── */
+    --ivory: 243 240 232;        /* #F3F0E8 — background utama */
+    --graphite: 37 43 41;        /* #252B29 — teks utama */
+    --stone: 220 217 208;        /* #DCD9D0 — surface & border */
+    --surface: 250 248 241;      /* warm off-white untuk kartu di atas ivory */
+    --sage: 165 178 160;         /* #A5B2A0 — dekoratif saja, BUKAN teks */
+    --teal: 82 127 128;          /* #527F80 — aksen UI, heading besar, ikon */
+    --teal-ink: 63 101 102;      /* #3F6566 — teal untuk teks kecil & link */
+    --terracotta: 193 138 97;    /* #C18A61 — dekoratif saja, BUKAN teks */
+    --terracotta-ink: 143 85 48; /* #8F5530 — terracotta bila harus jadi teks */
+    --signal: 43 181 184;        /* #2BB5B8 — hanya status aktif/live & data viz */
+
+    /* Legacy aliases (dipakai halaman lama & komponen existing) */
+    --bg-primary: #F3F0E8;
+    --bg-secondary: #FBF9F3;
+    --text-primary: #252B29;
+    --text-secondary: #4A5250;
+    --border-color: #DCD9D0;
   }
 
   .dark {
-    --bg-primary: #0b0f19;
-    --bg-secondary: #111827;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --border-color: #1e293b;
+    /* Pemetaan gelap untuk token baru — menjaga Header/Footer tetap terbaca
+       di mode gelap warisan sampai fase redesign halaman. */
+    --ivory: 26 30 28;
+    --graphite: 232 228 216;
+    --stone: 56 62 59;
+    --surface: 33 38 35;
+    --sage: 122 138 118;
+    --teal: 127 181 180;
+    --teal-ink: 158 203 202;
+    --terracotta: 193 138 97;
+    --terracotta-ink: 217 163 126;
+    --signal: 43 181 184;
+
+    --bg-primary: #1A1E1C;
+    --bg-secondary: #212623;
+    --text-primary: #E8E4D8;
+    --text-secondary: #A9A79B;
+    --border-color: #383E3B;
   }
 
   html {
@@ -33,9 +59,9 @@
     transition: background-color 0.2s ease, color 0.2s ease;
   }
 
-  /* Accessibility keyboard focus ring */
+  /* Accessibility keyboard focus ring — teal-ink agar kontras terjaga di kedua mode */
   :focus-visible {
-    outline: 2px solid #06b6d4;
+    outline: 2px solid rgb(var(--teal-ink));
     outline-offset: 2px;
   }
 
@@ -50,14 +76,30 @@
   }
 }
 
-/* Technical Blueprint Grid Pattern */
+/* Garis koordinat tipis — latar blueprint tenang.
+   Opsional: cukup tidak dipasang class ini untuk mematikannya. */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(var(--stone) / 0.55) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--stone) / 0.55) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.bg-grid-fine {
+  background-image:
+    linear-gradient(to right, rgb(var(--stone) / 0.4) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--stone) / 0.4) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Legacy: grid titik teknis (dipakai halaman lama) */
 .tech-grid-bg {
-  background-image: radial-gradient(rgba(6, 182, 212, 0.12) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(82, 127, 128, 0.14) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
 .dark .tech-grid-bg {
-  background-image: radial-gradient(rgba(6, 182, 212, 0.15) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(127, 181, 180, 0.16) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 

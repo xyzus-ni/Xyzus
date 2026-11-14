@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { HeadingItem } from "@/lib/utils";
+import { useLanguage } from "@/lib/i18n/context";
 import { List } from "lucide-react";
 
 interface TableOfContentsProps {
@@ -9,6 +10,7 @@ interface TableOfContentsProps {
 }
 
 export function TableOfContents({ headings }: TableOfContentsProps) {
+  const { t } = useLanguage();
   const [activeId, setActiveId] = useState<string>("");
 
   useEffect(() => {
@@ -37,7 +39,7 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
     <nav className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 backdrop-blur-sm">
       <div className="flex items-center gap-2 mb-3 text-xs font-mono font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
         <List className="w-4 h-4 text-cyan-500" />
-        <span>Daftar Isi Artikel</span>
+        <span>{t.blog.toc}</span>
       </div>
       <ul className="space-y-1.5 text-xs">
         {headings.map((item) => {

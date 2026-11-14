@@ -4,9 +4,16 @@ import React from "react";
 import Link from "next/link";
 import { ProjectItem } from "@/lib/types";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
+import { BlueprintDiagram } from "@/components/BlueprintDiagram";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { TechLabel } from "@/components/ui/TechLabel";
 import { useLanguage } from "@/lib/i18n/context";
+import { projectCode } from "@/lib/utils";
+import { projectStatusLabel } from "@/lib/status";
 import {
   ArrowLeft,
+  ArrowRight,
   Github,
   ExternalLink,
   Video,
@@ -19,91 +26,195 @@ interface ProjectDetailContentProps {
 export function ProjectDetailContent({ project }: ProjectDetailContentProps) {
   const { t, locale } = useLanguage();
 
-  return (
-    <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 space-y-10">
-      {/* Back button */}
-      <div>
-        <Link
-          href="/projects"
-          className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-slate-500 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>{t.projects.back_to_projects}</span>
-        </Link>
-      </div>
+  const narrative =
+    t.home.cases[project.slug as keyof typeof t.home.cases];
 
-      {/* Header Info */}
-      <div className="space-y-4">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="px-2.5 py-0.5 rounded-full text-xs font-mono uppercase tracking-wider font-semibold bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-400 border border-cyan-200 dark:border-cyan-800">
-            {project.status}
+  const hasLinks = !!(project.repo_url || project.demo_url || project.video_url);
+
+  return (
+    <article className="mx-auto w-full max-w-4xl px-5 py-12 sm:px-8 sm:py-16">
+      {/* Back */}
+      <Link
+        href="/projects"
+        className="mb-10 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.14em] text-teal-ink transition-colors hover:text-graphite"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        {t.projects.back_to_projects}
+      </Link>
+
+      {/* Header */}
+      <header className="border-b border-stone pb-10">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <TechLabel>{projectCode(project.order)}</TechLabel>
+          <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-graphite/60">
+            {projectStatusLabel(t, project.status)}
           </span>
           {locale === "en" && (
-            <span className="px-2 py-0.5 rounded text-[11px] font-mono text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800/80">
+            <span className="rounded-sm border border-terracotta/50 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-terracotta-ink">
               {t.projects.available_in_id_only}
             </span>
           )}
         </div>
 
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        <h1 className="mt-4 font-serif text-display-md text-graphite">
           {project.title}
         </h1>
-
-        <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+        <p className="mt-4 max-w-2xl text-lead text-graphite/70">
           {project.summary}
         </p>
 
-        {/* Tech Badges */}
-        <div className="flex flex-wrap gap-1.5 pt-2">
-          {project.tech?.map((item, idx) => (
-            <span
-              key={idx}
-              className="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200/80 dark:border-slate-700"
-            >
-              {item}
-            </span>
-          ))}
-        </div>
+        {project.tech?.length > 0 && (
+          <ul className="mt-6 flex flex-wrap gap-1.5">
+            {project.tech.map((item) => (
+              <li
+                key={item}
+                className="rounded-sm border border-stone bg-surface px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.08em] text-graphite/70"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        )}
 
-        {/* Action Links */}
-        <div className="flex flex-wrap items-center gap-3 pt-2">
-          {project.repo_url && (
-            <a
-              href={project.repo_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono font-semibold border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 hover:border-cyan-500 hover:text-cyan-600 transition-colors"
-            >
-              <Github className="w-4 h-4" />
-              <span>{t.projects.source_code}</span>
-            </a>
-          )}
-          {project.demo_url && (
-            <a
-              href={project.demo_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono font-semibold bg-cyan-600 text-white hover:bg-cyan-500 transition-colors"
-            >
-              <ExternalLink className="w-4 h-4" />
-              <span>{t.projects.open_demo}</span>
-            </a>
-          )}
-        </div>
-      </div>
-
-      {/* Video Demonstration Embed Slot */}
-      {project.video_url && (
-        <section className="space-y-3">
-          <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-slate-900 dark:text-white">
-            <Video className="w-4 h-4 text-cyan-500" />
-            <span>{t.projects.video_demo}</span>
+        {hasLinks && (
+          <div className="mt-7 flex flex-wrap gap-3">
+            {project.repo_url && (
+              <Button href={project.repo_url} external variant="secondary" size="sm">
+                <Github className="h-4 w-4" />
+                {t.projects.source_code}
+              </Button>
+            )}
+            {project.demo_url && (
+              <Button href={project.demo_url} external size="sm">
+                <ExternalLink className="h-4 w-4" />
+                {t.projects.open_demo}
+              </Button>
+            )}
           </div>
-          <div className="aspect-video w-full rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-md">
+        )}
+      </header>
+
+      {/* Studi kasus: masalah → solusi → hasil (bila ada narasi di kamus) */}
+      {narrative && (
+        <section className="py-10">
+          <TechLabel as="h2" className="mb-6 block">
+            {t.projects.case_title}
+          </TechLabel>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {(
+              [
+                [t.home.case_problem, narrative.problem],
+                [t.home.case_solution, narrative.solution],
+                [t.home.case_result, narrative.result],
+              ] as const
+            ).map(([label, body]) => (
+              <Card key={label}>
+                <TechLabel as="h3" className="mb-3 block">
+                  {label}
+                </TechLabel>
+                <p className="text-sm leading-relaxed text-graphite/75">{body}</p>
+              </Card>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Spesifikasi */}
+      <section className="py-10">
+        <TechLabel as="h2" className="mb-6 block">
+          {t.projects.spec_title}
+        </TechLabel>
+        <Card>
+          <dl className="divide-y divide-stone/60">
+            <div className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+              <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-graphite/50">
+                {t.projects.spec_id}
+              </dt>
+              <dd className="font-mono text-xs text-teal-ink">
+                {projectCode(project.order)}
+              </dd>
+            </div>
+            <div className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+              <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-graphite/50">
+                {t.projects.spec_status}
+              </dt>
+              <dd className="font-mono text-xs text-teal-ink">
+                {projectStatusLabel(t, project.status)}
+              </dd>
+            </div>
+            <div className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+              <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-graphite/50">
+                {t.projects.spec_stack}
+              </dt>
+              <dd className="text-right font-mono text-xs text-teal-ink">
+                {project.tech?.join(" · ") || "—"}
+              </dd>
+            </div>
+            {hasLinks && (
+              <div className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-graphite/50">
+                  {t.projects.spec_links}
+                </dt>
+                <dd className="flex flex-wrap justify-end gap-3 font-mono text-xs">
+                  {project.repo_url && (
+                    <a
+                      href={project.repo_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-teal-ink underline-offset-4 hover:underline"
+                    >
+                      repo ↗
+                    </a>
+                  )}
+                  {project.demo_url && (
+                    <a
+                      href={project.demo_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-teal-ink underline-offset-4 hover:underline"
+                    >
+                      demo ↗
+                    </a>
+                  )}
+                  {project.video_url && (
+                    <a
+                      href={project.video_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-teal-ink underline-offset-4 hover:underline"
+                    >
+                      video ↗
+                    </a>
+                  )}
+                </dd>
+              </div>
+            )}
+          </dl>
+        </Card>
+      </section>
+
+      {/* Diagram blueprint */}
+      <section className="py-10">
+        <TechLabel as="h2" className="mb-6 block">
+          {t.projects.arch_title}
+        </TechLabel>
+        <div className="rounded-md border border-stone bg-surface p-4 sm:p-6">
+          <BlueprintDiagram />
+        </div>
+      </section>
+
+      {/* Video demo */}
+      {project.video_url && (
+        <section className="py-10">
+          <div className="mb-4 flex items-center gap-2">
+            <Video className="h-4 w-4 text-teal-ink" />
+            <TechLabel as="h2">{t.projects.video_demo}</TechLabel>
+          </div>
+          <div className="aspect-video w-full overflow-hidden rounded-md border border-stone bg-graphite">
             <iframe
               src={project.video_url}
               title={project.title}
-              className="w-full h-full"
+              className="h-full w-full"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
@@ -111,25 +222,25 @@ export function ProjectDetailContent({ project }: ProjectDetailContentProps) {
         </section>
       )}
 
-      {/* Markdown Description */}
+      {/* Deskripsi markdown */}
       {project.description && (
-        <section className="pt-6 border-t border-slate-200 dark:border-slate-800">
+        <section className="border-t border-stone py-10">
           <MarkdownRenderer content={project.description} />
         </section>
       )}
 
-      {/* Bottom CTA to Contact */}
-      <div className="pt-10 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+      {/* CTA kontak */}
+      <div className="mt-6 flex flex-col items-start justify-between gap-4 border-t border-stone pt-8 sm:flex-row sm:items-center">
         <div>
-          <h3 className="font-bold text-slate-900 dark:text-white">{t.projects.cta_heading}</h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400">{t.projects.cta_sub}</p>
+          <h3 className="font-serif text-title-md text-graphite">
+            {t.projects.cta_heading}
+          </h3>
+          <p className="mt-1 text-sm text-graphite/60">{t.projects.cta_sub}</p>
         </div>
-        <Link
-          href="/contact"
-          className="px-5 py-2.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-medium text-xs font-mono transition-colors"
-        >
+        <Button href="/contact" size="sm">
           {t.projects.cta_button}
-        </Link>
+          <ArrowRight className="h-4 w-4" />
+        </Button>
       </div>
     </article>
   );

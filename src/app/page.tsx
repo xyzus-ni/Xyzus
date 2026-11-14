@@ -1,17 +1,24 @@
 import React from "react";
-import { getProjects, getPosts } from "@/lib/pocketbase";
+import { getProjects, getProfile } from "@/lib/pocketbase";
+import { ProjectItem } from "@/lib/types";
 import { HomeContent } from "./HomeContent";
 
-export const revalidate = 60; // ISR revalidation
+export const revalidate = 60;
 
 export default async function HomePage() {
-  const [featuredProjects, latestPostsRes] = await Promise.all([
+  const [featuredProjects, allProjects, profile] = await Promise.all([
     getProjects({ featuredOnly: true }),
-    getPosts({ page: 1, perPage: 3 }),
+    getProjects(),
+    getProfile(),
   ]);
 
-  const projects = featuredProjects.slice(0, 3);
-  const posts = latestPostsRes.items.slice(0, 3);
+  const projects: ProjectItem[] = [...featuredProjects];
+  for (const project of allProjects) {
+    if (projects.length >= 3) break;
+    if (!projects.some((item) => item.slug === project.slug)) {
+      projects.push(project);
+    }
+  }
 
-  return <HomeContent projects={projects} posts={posts} />;
+  return <HomeContent projects={projects.slice(0, 3)} profile={profile} />;
 }

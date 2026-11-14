@@ -17,11 +17,11 @@ export function LanguageToggle() {
     <button
       onClick={toggle}
       type="button"
-      className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 text-xs font-mono font-medium text-slate-700 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 hover:border-cyan-500/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+      className="flex items-center gap-1.5 rounded-md border border-stone bg-surface px-2.5 py-1.5 font-mono text-xs font-medium text-graphite transition-colors hover:border-teal-ink/50 hover:text-teal-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-ink"
       aria-label={`${nextLanguageLabel} (Aktif: ${locale.toUpperCase()})`}
       title={nextLanguageLabel}
     >
-      <Globe className="w-3.5 h-3.5 text-cyan-500" />
+      <Globe className="h-3.5 w-3.5 text-teal-ink" />
       <span className="uppercase font-semibold tracking-wider">
         {locale === "id" ? "ID" : "EN"}
       </span>

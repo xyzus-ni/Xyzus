@@ -1,11 +1,34 @@
 import type { Metadata, Viewport } from "next";
+import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/Navbar";
+import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { LanguageProvider } from "@/lib/i18n/context";
 
+// Tipografi "Sovereign Minimalism":
+// - Fraunces: serif display yang tenang untuk heading
+// - Inter: sans bersih untuk isi
+// - JetBrains Mono: label teknis (nomor, versi, status)
+const display = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const sans = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
 export const viewport: Viewport = {
-  themeColor: "#0b0f19",
+  themeColor: "#F3F0E8",
   width: "device-width",
   initialScale: 1,
 };
@@ -60,26 +83,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" className="dark" suppressHydrationWarning>
+    <html
+      lang="id"
+      className={`${display.variable} ${sans.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               try {
                 const theme = localStorage.getItem('site_theme');
-                if (theme === 'light') {
-                  document.documentElement.classList.remove('dark');
-                } else {
+                if (theme === 'dark') {
                   document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
                 }
               } catch (_) {}
             `,
           }}
         />
       </head>
-      <body className="font-sans antialiased bg-white dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+      <body className="font-sans antialiased bg-ivory text-graphite min-h-screen flex flex-col">
         <LanguageProvider>
-          <Navbar />
+          <Header />
           <main className="flex-1">
             {children}
           </main>

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Share2, Check, Copy, Linkedin, MessageCircle } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/context";
 
 interface ShareButtonsProps {
   title: string;
@@ -9,6 +10,7 @@ interface ShareButtonsProps {
 }
 
 export function ShareButtons({ title, url }: ShareButtonsProps) {
+  const { t } = useLanguage();
   const [copied, setCopied] = useState(false);
 
   const getShareUrl = () => {
@@ -44,24 +46,24 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
     <div className="flex flex-wrap items-center gap-2">
       <span className="flex items-center gap-1.5 text-xs font-mono font-medium text-slate-500 dark:text-slate-400 mr-1">
         <Share2 className="w-3.5 h-3.5 text-cyan-500" />
-        <span>Bagikan:</span>
+        <span>{t.blog.share}:</span>
       </span>
 
       <button
         onClick={handleCopy}
         type="button"
         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-cyan-500 hover:border-cyan-500/50 transition-colors"
-        title="Salin Tautan Artikel"
+        title={t.blog.copy_link}
       >
         {copied ? (
           <>
             <Check className="w-3.5 h-3.5 text-emerald-500" />
-            <span className="text-emerald-500 font-semibold">Tersalin!</span>
+            <span className="text-emerald-500 font-semibold">{t.blog.link_copied}</span>
           </>
         ) : (
           <>
             <Copy className="w-3.5 h-3.5" />
-            <span>Salin Link</span>
+            <span>{t.blog.copy_link}</span>
           </>
         )}
       </button>

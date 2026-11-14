@@ -3,137 +3,131 @@
 import React from "react";
 import { ContactForm } from "@/components/ContactForm";
 import { useLanguage } from "@/lib/i18n/context";
-import { Mail, Linkedin, Github, MapPin, CheckCircle, MessageCircle } from "lucide-react";
+import { CONTACT, whatsappUrl, defaultWhatsappMessage } from "@/lib/contact";
+import { Button } from "@/components/ui/Button";
+import { TechLabel } from "@/components/ui/TechLabel";
+import { Mail, Linkedin, Github, MapPin, MessageCircle, ArrowRight } from "lucide-react";
+
+function formatWhatsapp(number: string): string {
+  // +62 881-0246-32318 style display
+  if (number.startsWith("62") && number.length >= 10) {
+    return `+${number.slice(0, 2)} ${number.slice(2, 5)}-${number.slice(5, 8)}-${number.slice(8)}`;
+  }
+  return `+${number}`;
+}
 
 export function ContactContent() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
+
+  const channels = [
+    {
+      href: whatsappUrl(defaultWhatsappMessage(locale)),
+      external: true,
+      icon: MessageCircle,
+      label: "WhatsApp",
+      value: formatWhatsapp(CONTACT.whatsapp),
+    },
+    {
+      href: CONTACT.linkedin,
+      external: true,
+      icon: Linkedin,
+      label: "LinkedIn",
+      value: CONTACT.linkedin.replace("https://www.linkedin.com/in/", "@"),
+    },
+    {
+      href: CONTACT.github,
+      external: true,
+      icon: Github,
+      label: "GitHub",
+      value: CONTACT.github.replace("https://github.com/", "@"),
+    },
+    {
+      href: `mailto:${CONTACT.email}`,
+      external: false,
+      icon: Mail,
+      label: "Email",
+      value: CONTACT.email,
+    },
+  ];
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 space-y-12">
-      {/* HEADER */}
-      <div>
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-cyan-50 dark:bg-cyan-950/60 border border-cyan-200 dark:border-cyan-800/80 text-cyan-700 dark:text-cyan-300 mb-4">
-          <span>{t.contact.badge}</span>
-        </div>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-          {t.contact.title}
-        </h1>
-        <p className="mt-3 text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
-          {t.contact.subtitle}
-        </p>
-      </div>
+    <div className="mx-auto w-full max-w-shell px-5 py-14 sm:px-8 sm:py-20">
+      {/* Header */}
+      <header className="mb-12 max-w-2xl">
+        <TechLabel className="mb-4 block">{t.contact.badge}</TechLabel>
+        <h1 className="font-serif text-display-md text-graphite">{t.contact.title}</h1>
+        <p className="mt-4 text-lead text-graphite/70">{t.contact.subtitle}</p>
+      </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left Column: Direct Info */}
-        <div className="lg:col-span-5 space-y-6">
-          <div className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827]/80 space-y-4">
-            <h2 className="font-bold text-base text-slate-900 dark:text-white">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
+        {/* Kolom kiri: kanal langsung */}
+        <div className="space-y-6 lg:col-span-5">
+          <div className="rounded-md border border-stone bg-surface p-6">
+            <TechLabel as="h2" className="mb-5 block">
               {t.contact.direct_channels}
-            </h2>
+            </TechLabel>
+            <ul className="space-y-3">
+              {channels.map((ch) => (
+                <li key={ch.label}>
+                  <a
+                    href={ch.href}
+                    {...(ch.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    className="group flex items-center gap-3 rounded-md border border-stone bg-ivory p-3 transition-colors hover:border-teal-ink/50"
+                  >
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-stone bg-surface text-teal-ink">
+                      <ch.icon className="h-4 w-4" />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-xs font-semibold text-graphite">
+                        {ch.label}
+                      </span>
+                      <span className="block truncate font-mono text-[11px] text-graphite/60">
+                        {ch.value}
+                      </span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
 
-            <div className="space-y-4 text-sm">
-              <a
-                href="https://wa.me/62881024632318"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 p-3 rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 hover:border-emerald-500 transition-colors group"
-              >
-                <div className="w-9 h-9 rounded-lg bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                  <MessageCircle className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="font-semibold text-slate-900 dark:text-white text-xs">
-                    WhatsApp
-                  </div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 font-mono">
-                    +62 881-0246-32318
-                  </div>
-                </div>
-              </a>
-
-              <a
-                href="https://www.linkedin.com/in/mahesa-tirtha-agung-permana"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 p-3 rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 hover:border-cyan-500 transition-colors group"
-              >
-                <div className="w-9 h-9 rounded-lg bg-blue-50 dark:bg-blue-950/80 text-[#0a66c2] flex items-center justify-center shrink-0">
-                  <Linkedin className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="font-semibold text-slate-900 dark:text-white text-xs">
-                    LinkedIn
-                  </div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 font-mono">
-                    mahesa-tirtha-agung-permana
-                  </div>
-                </div>
-              </a>
-
-              <a
-                href="https://github.com/xyzus-ni"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 p-3 rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 hover:border-cyan-500 transition-colors group"
-              >
-                <div className="w-9 h-9 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center shrink-0">
-                  <Github className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="font-semibold text-slate-900 dark:text-white text-xs">
-                    GitHub
-                  </div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 font-mono">
-                    @xyzus-ni
-                  </div>
-                </div>
-              </a>
-
-              <a
-                href="mailto:mtirtha865@gmail.com"
-                className="flex items-center gap-3 p-3 rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 hover:border-cyan-500 transition-colors"
-              >
-                <div className="w-9 h-9 rounded-lg bg-cyan-50 dark:bg-cyan-950/80 text-cyan-600 dark:text-cyan-400 flex items-center justify-center shrink-0">
-                  <Mail className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="font-semibold text-slate-900 dark:text-white text-xs">
-                    Email
-                  </div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 font-mono">
-                    mtirtha865@gmail.com
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center gap-2 text-xs text-slate-500 font-mono">
-              <MapPin className="w-4 h-4 text-slate-400" />
+            <div className="mt-5 flex items-center gap-2 border-t border-stone pt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-graphite/50">
+              <MapPin className="h-3.5 w-3.5" />
               <span>{t.contact.location}</span>
             </div>
           </div>
 
-          {/* Availability Card */}
-          <div className="p-6 rounded-2xl border border-emerald-300 dark:border-emerald-800/60 bg-emerald-50/50 dark:bg-emerald-950/20 space-y-2">
-            <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
-              <CheckCircle className="w-4 h-4 text-emerald-500" />
-              <span>{t.contact.availability_title}</span>
+          {/* Ketersediaan */}
+          <div className="rounded-md border border-stone bg-surface p-6">
+            <div className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-signal" />
+              <TechLabel as="h2">{t.contact.availability_title}</TechLabel>
             </div>
-            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            <p className="mt-3 text-sm leading-relaxed text-graphite/70">
               {t.contact.availability_desc}
             </p>
           </div>
+
+          {/* WhatsApp CTA */}
+          <div className="rounded-md border border-stone bg-surface p-6">
+            <p className="text-sm text-graphite/70">{t.contact.whatsapp_hint}</p>
+            <Button
+              href={whatsappUrl(defaultWhatsappMessage(locale))}
+              external
+              className="mt-4 w-full sm:w-auto"
+            >
+              <MessageCircle className="h-4 w-4" />
+              {t.contact.whatsapp_cta}
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
 
-        {/* Right Column: Contact Form */}
-        <div className="lg:col-span-7 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827]/80">
-          <h2 className="font-bold text-lg text-slate-900 dark:text-white mb-1">
-            {t.contact.form_title}
-          </h2>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mb-6 font-mono">
+        {/* Kolom kanan: form */}
+        <div className="rounded-md border border-stone bg-surface p-6 sm:p-8 lg:col-span-7">
+          <TechLabel className="mb-2 block">{t.contact.form_title}</TechLabel>
+          <p className="mb-6 font-mono text-[11px] text-graphite/50">
             {t.contact.form_subtitle}
           </p>
-
           <ContactForm />
         </div>
       </div>

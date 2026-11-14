@@ -1,3 +1,8 @@
+/** ID tampilan proyek, mis. PRJ-001 — diturunkan dari field order. */
+export function projectCode(order: number): string {
+  return `PRJ-${String(order).padStart(3, "0")}`;
+}
+
 export function slugify(text: string): string {
   return text
     .toString()

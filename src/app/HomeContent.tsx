@@ -2,255 +2,248 @@
 
 import React from "react";
 import Link from "next/link";
-import { ProjectItem, PostItem } from "@/lib/types";
-import { ProjectCard } from "@/components/ProjectCard";
-import { PostCard } from "@/components/PostCard";
+import { ProjectItem, ProfileData, ProjectStatus } from "@/lib/types";
+import { projectCode } from "@/lib/utils";
+import { projectStatusLabel } from "@/lib/status";
+import { whatsappUrl, defaultWhatsappMessage } from "@/lib/contact";
 import { useLanguage } from "@/lib/i18n/context";
-import {
-  ArrowRight,
-  Cpu,
-  Layers,
-  Wrench,
-  Boxes,
-  Sparkles,
-  CheckCircle,
-  Briefcase,
-  Terminal,
-} from "lucide-react";
+import { Section } from "@/components/ui/Section";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { TechLabel } from "@/components/ui/TechLabel";
+import { ArrowRight, ArrowUpRight, FlaskConical, Radio, Cpu, LayoutDashboard, Bot } from "lucide-react";
 
 interface HomeContentProps {
   projects: ProjectItem[];
-  posts: PostItem[];
+  profile: ProfileData;
 }
 
-export function HomeContent({ projects, posts }: HomeContentProps) {
-  const { t } = useLanguage();
+const SERVICE_ICONS = [Radio, LayoutDashboard, Bot] as const;
+
+const STATUS_DOT: Record<ProjectStatus, string> = {
+  selesai: "bg-sage",
+  "pengembangan": "bg-terracotta",
+  "kompetisi/paper": "bg-stone",
+  aktif: "bg-signal",
+};
+
+
+
+export function HomeContent({ projects, profile }: HomeContentProps) {
+  const { t, locale } = useLanguage();
+
+  const whatsappHref = whatsappUrl(defaultWhatsappMessage(locale));
+
+  const statusLabel = (status: ProjectStatus) =>
+    projectStatusLabel(t, status);
 
   return (
-    <div className="flex flex-col gap-20 pb-20">
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden pt-12 md:pt-20 pb-16 tech-grid-bg border-b border-slate-200/80 dark:border-slate-800/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl">
-            {/* Live Status Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-cyan-50 dark:bg-cyan-950/60 border border-cyan-200 dark:border-cyan-800/80 text-cyan-700 dark:text-cyan-300 mb-6 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
-              <span>{t.hero.status_badge}</span>
-            </div>
+    <div className="flex flex-col">
+      {/* ── 1. HERO ─────────────────────────────────────────── */}
+      <section className="relative overflow-hidden border-b border-stone bg-grid">
+        <div className="mx-auto w-full max-w-shell px-5 pb-16 pt-14 sm:px-8 sm:pb-24 sm:pt-24">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-8">
+              <TechLabel className="mb-6 block">
+                {t.home.eyebrow}
+              </TechLabel>
 
-            {/* Main Greeting & Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1]">
-              {t.hero.name_prefix} <br />
-              <span className="bg-gradient-to-r from-cyan-600 via-sky-500 to-blue-600 dark:from-cyan-400 dark:via-sky-300 dark:to-blue-400 bg-clip-text text-transparent">
-                {t.hero.name_suffix}
-              </span>
-            </h1>
+              <h1 className="font-serif text-display-xl text-graphite">
+                {t.home.headline}
+              </h1>
 
-            {/* Headline Subtitle */}
-            <p className="mt-4 text-lg sm:text-xl font-medium text-slate-700 dark:text-slate-300">
-              {t.hero.headline}
-            </p>
+              <p className="mt-6 max-w-xl text-lead text-graphite/70">
+                {t.home.subheadline}
+              </p>
 
-            {/* Value Proposition */}
-            <p className="mt-3 text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-              {t.hero.subheadline}
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link
-                href="/projects"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-medium text-sm hover:from-cyan-500 hover:to-blue-500 transition-all shadow-md shadow-cyan-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
-              >
-                <span>{t.hero.cta_projects}</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/80 text-slate-800 dark:text-slate-200 font-medium text-sm hover:border-cyan-500 hover:text-cyan-600 dark:hover:text-cyan-400 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
-              >
-                <span>{t.hero.cta_contact}</span>
-              </Link>
-            </div>
-
-            {/* Quick Metrics Cards */}
-            <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-3 pt-6 border-t border-slate-200/60 dark:border-slate-800/60">
-              <div className="p-3.5 rounded-lg border border-slate-200/80 dark:border-slate-800/80 bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm">
-                <div className="text-2xl font-mono font-bold text-cyan-600 dark:text-cyan-400">8</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">{t.hero.stats_projects}</div>
-              </div>
-              <div className="p-3.5 rounded-lg border border-slate-200/80 dark:border-slate-800/80 bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm">
-                <div className="text-2xl font-mono font-bold text-emerald-600 dark:text-emerald-400">{t.hero.stats_focus_desc}</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">{t.hero.stats_focus}</div>
-              </div>
-              <div className="p-3.5 rounded-lg border border-slate-200/80 dark:border-slate-800/80 bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm col-span-2 sm:col-span-1">
-                <div className="text-2xl font-mono font-bold text-slate-900 dark:text-white">{t.hero.stats_status_desc}</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">{t.hero.stats_status}</div>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <Button href={whatsappHref} external size="lg">
+                  {t.home.cta_whatsapp}
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+                <Button href="#works" variant="secondary" size="lg">
+                  {t.home.cta_projects}
+                </Button>
               </div>
             </div>
+
+            {/* Spec plate — label teknis ala dokumentasi lab */}
+            <aside className="lg:col-span-4">
+              <Card code="SYS-001" meta="v1.0 · STATUS: ACTIVE" className="h-full">
+                <dl className="space-y-4 font-mono text-xs">
+                  <div className="flex items-baseline justify-between gap-3 border-b border-stone/60 pb-3">
+                    <dt className="uppercase tracking-[0.14em] text-graphite/50">
+                      Stack
+                    </dt>
+                    <dd className="text-right text-teal-ink">
+                      Embedded · Cloud · Web
+                    </dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-3 border-b border-stone/60 pb-3">
+                    <dt className="uppercase tracking-[0.14em] text-graphite/50">
+                      Output
+                    </dt>
+                    <dd className="text-right text-teal-ink">
+                      Sensor → Dashboard
+                    </dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-3">
+                    <dt className="uppercase tracking-[0.14em] text-graphite/50">
+                      Mode
+                    </dt>
+                    <dd className="flex items-center gap-2 text-teal-ink">
+                      <span className="h-1.5 w-1.5 rounded-full bg-signal" />
+                      Open for projects
+                    </dd>
+                  </div>
+                </dl>
+              </Card>
+            </aside>
           </div>
         </div>
       </section>
 
-      {/* SKILLS HIGHLIGHT */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
-          <div>
-            <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 flex items-center gap-1.5 mb-1">
-              <Terminal className="w-3.5 h-3.5" />
-              <span>{t.hero.skills_subtitle}</span>
-            </h2>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              {t.hero.skills_title}
-            </h3>
-          </div>
-          <Link
-            href="/skills"
-            className="text-xs font-mono font-semibold text-cyan-600 dark:text-cyan-400 hover:underline flex items-center gap-1"
-          >
-            <span>{t.hero.skills_view_all}</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+      {/* ── 2. LAYANAN ──────────────────────────────────────── */}
+      <Section eyebrow={t.home.services_eyebrow} title={t.home.services_title} description={t.home.services_subtitle}>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {t.home.services.map((service, index) => {
+            const Icon = SERVICE_ICONS[index] ?? Cpu;
+            return (
+              <Card key={service.title} code={`SVC-00${index + 1}`}>
+                <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-md border border-stone bg-ivory text-teal-ink">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <h3 className="font-serif text-title-md text-graphite">
+                  {service.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-graphite/70">
+                  {service.description}
+                </p>
+              </Card>
+            );
+          })}
         </div>
+      </Section>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827]/70">
-            <div className="w-10 h-10 rounded-lg bg-cyan-50 dark:bg-cyan-950/80 text-cyan-600 dark:text-cyan-400 flex items-center justify-center mb-3">
-              <Cpu className="w-5 h-5" />
-            </div>
-            <h4 className="font-bold text-slate-900 dark:text-white text-base">{t.skills.categories.embedded}</h4>
-            <p className="mt-1 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              {t.skills.categories.embedded_desc}
-            </p>
-          </div>
-
-          <div className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827]/70">
-            <div className="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-3">
-              <Layers className="w-5 h-5" />
-            </div>
-            <h4 className="font-bold text-slate-900 dark:text-white text-base">{t.skills.categories.software}</h4>
-            <p className="mt-1 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              {t.skills.categories.software_desc}
-            </p>
-          </div>
-
-          <div className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827]/70">
-            <div className="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-3">
-              <Wrench className="w-5 h-5" />
-            </div>
-            <h4 className="font-bold text-slate-900 dark:text-white text-base">{t.skills.categories.automation}</h4>
-            <p className="mt-1 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              {t.skills.categories.automation_desc}
-            </p>
-          </div>
-
-          <div className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827]/70">
-            <div className="w-10 h-10 rounded-lg bg-purple-50 dark:bg-purple-950/80 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-3">
-              <Boxes className="w-5 h-5" />
-            </div>
-            <h4 className="font-bold text-slate-900 dark:text-white text-base">{t.skills.categories.design}</h4>
-            <p className="mt-1 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              {t.skills.categories.design_desc}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* FEATURED PROJECTS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
-          <div>
-            <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 flex items-center gap-1.5 mb-1">
-              <Briefcase className="w-3.5 h-3.5" />
-              <span>{t.hero.projects_subtitle}</span>
-            </h2>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              {t.hero.projects_title}
-            </h3>
-          </div>
-          <Link
-            href="/projects"
-            className="text-xs font-mono font-semibold text-cyan-600 dark:text-cyan-400 hover:underline flex items-center gap-1"
-          >
-            <span>{t.hero.projects_view_all}</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {projects.map((proj) => (
-            <ProjectCard key={proj.slug} project={proj} />
-          ))}
-        </div>
-      </section>
-
-      {/* LATEST BLOG POSTS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
-          <div>
-            <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 flex items-center gap-1.5 mb-1">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>{t.hero.blog_subtitle}</span>
-            </h2>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              {t.hero.blog_title}
-            </h3>
-          </div>
-          <Link
-            href="/blog"
-            className="text-xs font-mono font-semibold text-cyan-600 dark:text-cyan-400 hover:underline flex items-center gap-1"
-          >
-            <span>{t.hero.blog_view_all}</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-        </div>
-
-        {posts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {posts.map((post) => (
-              <PostCard key={post.slug} post={post} />
-            ))}
-          </div>
+      {/* ── 3. SELECTED WORKS ───────────────────────────────── */}
+      <Section
+        id="works"
+        eyebrow={t.home.works_eyebrow}
+        title={t.home.works_title}
+        description={t.home.works_subtitle}
+        grid
+      >
+        {projects.length === 0 ? (
+          <p className="font-mono text-sm text-graphite/60">{t.home.works_empty}</p>
         ) : (
-          <div className="text-center py-12 rounded-xl border border-dashed border-slate-300 dark:border-slate-800 text-slate-500 font-mono text-sm">
-            {t.hero.blog_empty}
-          </div>
+          <>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {projects.map((project) => (
+                <Link
+                  key={project.slug}
+                  href={`/projects/${project.slug}`}
+                  className="group block rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-ink"
+                >
+                  <Card
+                    code={projectCode(project.order)}
+                    meta={statusLabel(project.status)}
+                    className="h-full transition-colors group-hover:border-teal-ink/50"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="font-serif text-title-md leading-snug text-graphite transition-colors group-hover:text-teal-ink">
+                        {project.title}
+                      </h3>
+                      <ArrowUpRight className="mt-1 h-4 w-4 shrink-0 text-graphite/30 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-teal-ink" />
+                    </div>
+                    <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-graphite/70">
+                      {project.summary}
+                    </p>
+                    {project.tech?.length > 0 && (
+                      <ul className="mt-4 flex flex-wrap gap-1.5">
+                        {project.tech.slice(0, 4).map((tech) => (
+                          <li
+                            key={tech}
+                            className="rounded-sm border border-stone bg-ivory px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] text-graphite/60"
+                          >
+                            {tech}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    <div className="mt-5 flex items-center gap-2 border-t border-stone/60 pt-4">
+                      <span
+                        aria-hidden="true"
+                        className={`h-1.5 w-1.5 rounded-full ${STATUS_DOT[project.status] ?? "bg-stone"}`}
+                      />
+                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-graphite/60">
+                        {t.home.works_detail} →
+                      </span>
+                    </div>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+            <div className="mt-8">
+              <Button href="/projects" variant="secondary">
+                {t.home.works_view_all}
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </div>
+          </>
         )}
-      </section>
+      </Section>
 
-      {/* HIRE ME / COLLABORATION BANNER */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="relative rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-slate-900 via-[#0b172a] to-cyan-950/40 p-8 sm:p-12 text-white overflow-hidden shadow-xl shadow-cyan-500/5">
-          <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none translate-x-10 translate-y-10">
-            <Cpu className="w-96 h-96 text-cyan-400" />
+      {/* ── 4. LAB ──────────────────────────────────────────── */}
+      <Section eyebrow={t.home.lab_eyebrow} title={t.home.lab_title} description={t.home.lab_subtitle}>
+        <Card code="LAB-001" meta={t.home.lab_status} className="max-w-2xl">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-start gap-4">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-stone bg-ivory text-teal-ink">
+                <FlaskConical className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-sm leading-relaxed text-graphite/70">
+                  {t.home.lab_subtitle}
+                </p>
+                <TechLabel className="mt-2 block">
+                  nusantara-alchemist.vercel.app
+                </TechLabel>
+              </div>
+            </div>
+            <Button href="/lab" className="shrink-0">
+              {t.home.lab_cta}
+              <ArrowRight className="h-4 w-4" />
+            </Button>
           </div>
+        </Card>
+      </Section>
 
-          <div className="max-w-2xl relative z-10 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-cyan-500/10 border border-cyan-400/30 text-cyan-300">
-              <CheckCircle className="w-3.5 h-3.5 text-cyan-400" />
-              <span>{t.hero.hire_badge}</span>
-            </div>
-
-            <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              {t.hero.hire_title}
-            </h3>
-
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              {t.hero.hire_desc}
-            </p>
-
-            <div className="pt-2">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm transition-colors shadow-lg shadow-cyan-500/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              >
-                <span>{t.hero.hire_cta}</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
+      {/* ── 5. TENTANG ───────────────────────────────────────── */}
+      <Section eyebrow={t.home.about_eyebrow} title={t.home.about_title}>
+        <div className="max-w-3xl">
+          <p className="text-lead leading-relaxed text-graphite/80">{profile.bio}</p>
+          <div className="mt-6">
+            <Button href="/about" variant="ghost" size="sm">
+              {t.home.about_link}
+              <ArrowRight className="h-4 w-4" />
+            </Button>
           </div>
         </div>
-      </section>
+      </Section>
+
+      {/* ── 6. KONTAK ────────────────────────────────────────── */}
+      <Section eyebrow={t.home.contact_eyebrow} title={t.home.contact_title} description={t.home.contact_subtitle}>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+          <Button href={whatsappHref} external size="lg">
+            {t.home.cta_whatsapp}
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+          <Button href="/contact" variant="secondary" size="lg">
+            {t.contact.form_title}
+          </Button>
+        </div>
+        <p className="mt-5 font-mono text-xs text-graphite/50">{t.home.whatsapp_note}</p>
+      </Section>
     </div>
   );
 }

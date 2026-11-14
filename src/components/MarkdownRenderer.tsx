@@ -8,12 +8,14 @@ import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import rehypeHighlight from "rehype-highlight";
 import { Check, Copy } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/context";
 
 interface MarkdownRendererProps {
   content: string;
 }
 
 export function MarkdownRenderer({ content }: MarkdownRendererProps) {
+  const { t } = useLanguage();
   return (
     <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:scroll-mt-24 prose-headings:font-bold prose-headings:tracking-tight prose-a:text-cyan-600 dark:prose-a:text-cyan-400 prose-img:rounded-xl prose-img:border prose-img:border-slate-200 dark:prose-img:border-slate-800 prose-table:border-collapse prose-th:bg-slate-100 dark:prose-th:bg-slate-800/80 prose-th:p-3 prose-td:p-3 prose-td:border-b prose-td:border-slate-200 dark:prose-td:border-slate-800">
       <ReactMarkdown
@@ -42,7 +44,7 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={src}
-                  alt={alt || "Gambar teknis"}
+                  alt={alt || t.blog.image_alt}
                   className="rounded-xl border border-slate-200 dark:border-slate-800 mx-auto max-h-[500px] object-contain shadow-sm"
                   loading="lazy"
                   {...props}
@@ -74,6 +76,7 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
 }
 
 function CodeBlock({ children, ...props }: any) {
+  const { t } = useLanguage();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -92,22 +95,22 @@ function CodeBlock({ children, ...props }: any) {
   return (
     <div className="relative group my-5 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 shadow-md">
       <div className="flex items-center justify-between px-4 py-1.5 bg-slate-800/80 border-b border-slate-700/60 text-xs font-mono text-slate-400">
-        <span>Code Snippet</span>
+        <span>{t.blog.code_snippet}</span>
         <button
           onClick={handleCopy}
           type="button"
           className="flex items-center gap-1 hover:text-white transition-colors focus-visible:outline-none"
-          title="Salin Kode"
+          title={t.blog.copy_code}
         >
           {copied ? (
             <>
               <Check className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="text-[11px] text-emerald-400 font-semibold">Tersalin!</span>
+              <span className="text-[11px] text-emerald-400 font-semibold">{t.blog.copied}</span>
             </>
           ) : (
             <>
               <Copy className="w-3.5 h-3.5" />
-              <span className="text-[11px]">Salin</span>
+              <span className="text-[11px]">{t.blog.copy}</span>
             </>
           )}
         </button>
