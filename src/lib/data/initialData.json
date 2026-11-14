@@ -49,7 +49,13 @@
       "slug": "color-blind-assistant-raspberry-pi",
       "summary": "Sistem cerdas berbasis Raspberry Pi dan kamera yang mendeteksi warna objek secara real-time dan memberikan umpan balik suara bagi penyandang buta warna.",
       "description": "## Deskripsi Proyek\nProyek ini dirancang sebagai alat bantu komputasi tepi (edge assistive device) portabel bagi individu dengan defisiensi penglihatan warna (color vision deficiency).\n\n### Fitur Utama:\n- **Pengolahan Citra Real-Time**: Menggunakan model segmentasi warna pada ruang warna HSV dan CIELAB.\n- **Sintesis Suara Audio**: Konversi nama warna dalam Bahasa Indonesia secara instan via TTS terkompresi.\n- **Desain Portabel**: Ditenagai oleh Raspberry Pi dengan catu daya baterai Li-ion teregulasi.\n\n### Arsitektur Sistem:\nKamera USB menangkap frame pada 30 FPS, memusatkan titik fokus pada reticle tengah layar, menghitung rata-rata nilai spektral warna, kemudian memancarkan umpan balik suara melalui earphone berkabel/nirkabel.",
-      "tech": ["Raspberry Pi", "Python", "OpenCV", "Computer Vision", "Audio Synthesis"],
+      "tech": [
+        "Raspberry Pi",
+        "Python",
+        "OpenCV",
+        "Computer Vision",
+        "Audio Synthesis"
+      ],
       "status": "selesai",
       "featured": true,
       "visible": true,
@@ -61,7 +67,13 @@
       "slug": "soil-sensor-calibration-field-testing",
       "summary": "Riset dan pengujian kalibrasi multi-sensor kelembaban dan pH tanah untuk optimasi presisi pemantauan agrikultur modern di lapangan.",
       "description": "## Deskripsi Proyek\nEksperimen komparasi dan kalibrasi sensor kapasitif kelembaban tanah (*capacitive soil moisture sensor*) dan probe pH tanah analog terhadap sampel tanah standar laboratorium.\n\n### Metodologi:\n1. Pengambilan 15 titik sampel tanah pertanian dengan variasi densitas dan kadar air.\n2. Pengukuran tegangan analog ADC pada mikrokontroler ESP32 dengan oversampling 12-bit.\n3. Formulasi regresi polinomial derajat dua untuk mengoreksi drift akibat temperatur tanah.\n\nHasil kalibrasi meningkatkan akurasi pembacaan kadar air volumetrik (VWC) dari deviasi awal ±8.4% menjadi ±1.8%.",
-      "tech": ["IoT", "ESP32", "Soil Sensors", "Data Calibration", "Field Testing"],
+      "tech": [
+        "IoT",
+        "ESP32",
+        "Soil Sensors",
+        "Data Calibration",
+        "Field Testing"
+      ],
       "status": "selesai",
       "featured": true,
       "visible": true,
@@ -72,7 +84,13 @@
       "slug": "factory-io-conveyor-automation-simulation",
       "summary": "Simulasi sistem sortir konveyor industri otomatis menggunakan Factory I/O yang diintegrasikan dengan logic PLC Omron untuk optimasi throughput pabrik.",
       "description": "## Deskripsi Proyek\nPengembangan arsitektur sortir barang otomatis berkecepatan tinggi dengan mengkoneksikan virtual plant **Factory I/O** ke software kontrol PLC Omron melalui protokol OPC/Modbus TCP.\n\n### Komponen Sistem:\n- **Ladder Logic PLC**: Pengaturan interlock keselamatan, timer konveyor variabel, dan logika divert pusher pneumatik.\n- **Sensor Retroreflektif & Vision**: Deteksi dimensi dan kode barcode palet produk.\n- **Emergency Stop & Reset Logic**: Sesuai dengan standar keselamatan kerja mesin industri ISO 13849.",
-      "tech": ["Factory I/O", "PLC Omron", "Ladder Logic", "Industrial Automation", "Simulation"],
+      "tech": [
+        "Factory I/O",
+        "PLC Omron",
+        "Ladder Logic",
+        "Industrial Automation",
+        "Simulation"
+      ],
       "status": "selesai",
       "featured": true,
       "visible": true,
@@ -84,7 +102,13 @@
       "slug": "modular-bed-frame-cad-ai-visualization",
       "summary": "Perancangan modular rangka tempat tidur ergonomis dengan analisis tegangan struktur dan visualisasi fotorealistis menggunakan generative AI.",
       "description": "## Deskripsi Proyek\nProyek perancangan produk mekatronika-furniture berbasis SolidWorks untuk struktur modular knockdown. Menggunakan profil baja ringan dan sambungan presisi CNC.\n\n### Alur Kerja Rekayasa:\n- **Pemodelan 3D CAD**: SolidWorks untuk toleransi fabrikasi dan Bill of Materials (BOM).\n- **Analisis Elemen Hingga (FEA)**: Simulasi defleksi beban statis hingga 350 kg dengan faktor keamanan $SF > 2.2$.\n- **Visualisasi AI**: Rendering tekstur material fotorealistis dalam suasana interior kamar menggunakan generative diffusion model.",
-      "tech": ["SolidWorks", "CAD", "Generative AI", "Structural Engineering", "3D Rendering"],
+      "tech": [
+        "SolidWorks",
+        "CAD",
+        "Generative AI",
+        "Structural Engineering",
+        "3D Rendering"
+      ],
       "status": "selesai",
       "featured": false,
       "visible": true,
@@ -95,7 +119,13 @@
       "slug": "uav-yolo-palm-pest-early-detection",
       "summary": "Platform pemantauan perkebunan sawit terintegrasi memanfaatkan drone otonom, deteksi citra YOLO untuk gejala visual, dan sensor biokimia untuk peringatan dini.",
       "description": "## Deskripsi Proyek (Dalam Pengembangan)\nRiset integrasi sistem UAV otonom dengan kamera multispektral dan deteksi objek deep learning (YOLOv8) untuk mengidentifikasi gejala dini serangan ulat api dan jamur *Ganoderma boninense* pada kelapa sawit.\n\n### Arsitektur Terintegrasi:\n- **UAV Flight Controller**: Misi terbang waypoint otomatis dengan ArduPilot.\n- **Deteksi Citra AI**: Klasifikasi indeks vegetasi NDVI dan bounding-box nekrosis daun kelapa sawit.\n- **Sensor Biokimia Tepi**: Node sensor gas VOC untuk verifikasi pembusukan pangkal batang.",
-      "tech": ["UAV Drone", "YOLOv8", "Computer Vision", "Biochemical Sensors", "Edge AI"],
+      "tech": [
+        "UAV Drone",
+        "YOLOv8",
+        "Computer Vision",
+        "Biochemical Sensors",
+        "Edge AI"
+      ],
       "status": "pengembangan",
       "featured": false,
       "visible": true,
@@ -106,7 +136,13 @@
       "slug": "autonomous-weed-harvester-catamaran-cirata",
       "summary": "Rancang bangun kapal katamaran bertenaga surya-elektrik dengan konveyor pemanen otomatis dan telemetri IoT untuk revitalisasi perairan Waduk Cirata.",
       "description": "## Deskripsi Proyek (Kompetisi & Publikasi Paper)\nInovasi wahana permukaan tanpa awak (*Autonomous Surface Vessel* - ASV) berbentuk katamaran ganda yang mengusung mekanisme konveyor penyerok biomassa gulma air eceng gondok.\n\n### Keunggulan Teknologi:\n- **Propulsi Dual-Motor Pod**: Bertenaga motor brushless DC yang disuplai oleh modul fotovoltaik surya dan baterai LiFePO4.\n- **Navigasi Waypoint GPS & IMU**: Menjalankan rute pembersihan perairan secara otomatis.\n- **Telemetri IoT LoRa/4G**: Transmisi metrik berat biomassa tertampung, koordinat GPS, dan kapasitas baterai ke dashboard cloud.",
-      "tech": ["Autonomous Surface Vessel", "Mechatronics", "Katamaran Elektrik", "IoT Telemetry", "GPS/Navigasi"],
+      "tech": [
+        "Autonomous Surface Vessel",
+        "Mechatronics",
+        "Katamaran Elektrik",
+        "IoT Telemetry",
+        "GPS/Navigasi"
+      ],
       "status": "kompetisi/paper",
       "featured": false,
       "visible": true,
@@ -117,7 +153,14 @@
       "slug": "web-based-oee-industrial-system",
       "summary": "Aplikasi web penghitung Overall Equipment Effectiveness (Availability, Performance, Quality) mesin industri secara real-time dengan visualisasi metrik performa.",
       "description": "## Deskripsi Proyek (Tugas Kuliah PBO ATMI)\nAplikasi monitoring efektivitas mesin produksi menggunakan paradigma Pemrograman Berorientasi Objek (PBO) dengan framework Python Flask.\n\n### Rumus Perhitungan OEE:\n$$OEE = Availability \\times Performance \\times Quality$$\n- Menghitung breakdown stop, minor stoppage, dan cacat produksi per shift.\n- Dashboard visual interaktif dengan visualisasi diagram Pareto untuk analisis downtime dominan.",
-      "tech": ["Python", "Flask", "OOP", "OEE Metrics", "Tailwind CSS", "SQLite"],
+      "tech": [
+        "Python",
+        "Flask",
+        "OOP",
+        "OEE Metrics",
+        "Tailwind CSS",
+        "SQLite"
+      ],
       "status": "selesai",
       "featured": false,
       "visible": true,
@@ -129,11 +172,35 @@
       "slug": "crewai-telegram-multi-agent-assistant",
       "summary": "Ekosistem bot Telegram cerdas berbasis orkestrasi multi-agen AI (CrewAI) untuk otomasi riset data teknis, penjadwalan, dan peringatan sensor otomatis.",
       "description": "## Deskripsi Proyek (Dalam Pengembangan)\nSistem otomasi produktivitas rekayasa yang mengorkestrasi agen-agen AI spesialis:\n1. **Researcher Agent**: Meringkas datasheet komponen elektronik dan standar IEC.\n2. **Telemetry Monitor Agent**: Memeriksa log MQTT dari broker sensor IoT jika terdeteksi anomali.\n3. **Executive Notifier**: Mengirimkan ringkasan laporan status sistem langsung ke grup chat Telegram pengguna.",
-      "tech": ["CrewAI", "Python", "Telegram Bot API", "Multi-Agent System", "LLM Orchestration"],
+      "tech": [
+        "CrewAI",
+        "Python",
+        "Telegram Bot API",
+        "Multi-Agent System",
+        "LLM Orchestration"
+      ],
       "status": "pengembangan",
       "featured": false,
       "visible": true,
       "order": 8
+    },
+    {
+      "title": "Industrial Control Logic",
+      "slug": "industrial-control-logic",
+      "summary": "Simulasi sistem klasifikasi material otomatis — conveyor, sensor, dan logic kontrol bekerja sebagai satu sistem terintegrasi.",
+      "description": "## System Overview\nSimulasi kontrol industri untuk sistem klasifikasi material otomatis. Conveyor, sensor, dan logic kontrol saling terhubung sebagai satu sistem — dari pendeteksian objek sampai pengelompokan berdasarkan kategori.\n\n## Control Architecture\nLogic kontrol menerima sinyal input dari sensor, memprosesnya sesuai aturan start/stop dan klasifikasi, lalu mengirim perintah ke aktuator serta antarmuka data. Arsitektur memisahkan lapisan input, pemrosesan logic, dan output.\n\n## Start/Stop Logic\nLogic start/stop mengatur kapan conveyor beroperasi: sistem berjalan pada kondisi enable yang terpenuhi dan berhenti pada kondisi stop yang terdefinisi. Interlock dasar mencegah perintah yang saling bertentangan terjadi bersamaan.\n\n## Conveyor & Sensor Integration\nConveyor menggerakkan material melewati titik pembacaan sensor. Sensor mendeteksi keberadaan dan posisi objek, lalu mengirim sinyal ke logic kontrol untuk diproses.\n\n## Color-Based Classification\nMaterial diklasifikasikan berdasarkan warna yang terbaca sensor. Logic kontrol memetakan warna ke kategori dan mengarahkan material ke jalur atau aktuator yang sesuai.\n\n## Counter & Data Transfer\nSetiap kategori material dihitung real-time oleh counter. Data jumlah dan status kategori ditransfer ke antarmuka monitoring agar kondisi sistem dapat dipantau selama simulasi berjalan.",
+      "tech": [
+        "Industrial Automation",
+        "PLC Logic",
+        "Sensor Integration",
+        "Material Classification",
+        "Simulation"
+      ],
+      "status": "selesai",
+      "featured": false,
+      "visible": true,
+      "order": 9,
+      "video_url": "/videos/industrial-automation.mp4"
     }
   ],
   "posts": [
@@ -143,7 +210,14 @@
       "excerpt": "Analisis teknis dan evaluasi performa perancangan wahana katamaran otonom bertenaga elektrik ramah lingkungan untuk mitigasi ledakan gulma eceng gondok di perairan waduk PLTA Cirata.",
       "abstract": "Pertumbuhan eceng gondok (*Eichhornia crassipes*) yang tidak terkendali di perairan Waduk Cirata mengancam kelancaran suplai air PLTA dan ekosistem perairan. Makalah ini membahas desain mekatronika dan evaluasi efisiensi propulsi kapal katamaran elektrik otonom yang dilengkapi mekanisme konveyor pemanen biomassa. Berdasarkan pemodelan hidrodinamika dan pengujian skala prototipe di lapangan, wahana ini menunjukkan efisiensi energi 82% lebih hemat dibandingkan kapal pemanen diesel konvensional serta mampu beroperasi secara mandiri dengan integrasi telemetri IoT LoRa.",
       "category": "Paper & Laporan",
-      "tags": ["IoT", "Mekatronika", "Otonom", "Waduk Cirata", "Katamaran", "Energi Terbarukan"],
+      "tags": [
+        "IoT",
+        "Mekatronika",
+        "Otonom",
+        "Waduk Cirata",
+        "Katamaran",
+        "Energi Terbarukan"
+      ],
       "lang": "id",
       "status": "published",
       "published_at": "2026-11-12T00:00:00.000Z",
@@ -157,7 +231,13 @@
       "excerpt": "Catatan pengujian performa inferensi YOLOv8n pada platform komputasi tepi Raspberry Pi 5 untuk deteksi hama dan anomali tanaman secara mandiri tanpa ketergantungan koneksi internet.",
       "abstract": "Komputasi tepi (Edge Computing) menawarkan solusi handal untuk area perkebunan terpencil dengan koneksi internet terbatas. Catatan teknis ini mendokumentasikan optimasi runtime model deteksi objek YOLOv8 Nano menggunakan eksekusi NCNN dan ONNX Runtime pada Raspberry Pi 5 dengan pendinginan aktif.",
       "category": "Catatan Teknis",
-      "tags": ["Edge AI", "YOLOv8", "Raspberry Pi", "IoT", "Pertanian"],
+      "tags": [
+        "Edge AI",
+        "YOLOv8",
+        "Raspberry Pi",
+        "IoT",
+        "Pertanian"
+      ],
       "lang": "id",
       "status": "draft",
       "reading_time": 4,

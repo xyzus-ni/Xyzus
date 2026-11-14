@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ProjectItem } from "@/lib/types";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 import { BlueprintDiagram } from "@/components/BlueprintDiagram";
+import { ProjectVideoHero } from "@/components/ProjectVideoHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { TechLabel } from "@/components/ui/TechLabel";
@@ -30,7 +31,12 @@ export function ProjectDetailContent({ project }: ProjectDetailContentProps) {
   const narrative =
     t.home.cases[project.slug as keyof typeof t.home.cases];
 
-  const hasLinks = !!(project.repo_url || project.demo_url || project.video_url);
+  const isLocalVideo = !!project.video_url?.startsWith("/");
+  const hasLinks = !!(
+    project.repo_url ||
+    project.demo_url ||
+    (project.video_url && !isLocalVideo)
+  );
 
   return (
     <article className="mx-auto w-full max-w-4xl px-5 py-12 sm:px-8 sm:py-16">
@@ -94,6 +100,17 @@ export function ProjectDetailContent({ project }: ProjectDetailContentProps) {
           </div>
         )}
       </header>
+
+      {/* Hero video: file lokal /videos/* dirender sebagai pemutar HTML5 sinematik */}
+      {isLocalVideo && project.video_url && (
+        <div className="py-10">
+          <ProjectVideoHero
+            src={project.video_url}
+            poster={project.video_url.replace(/\.mp4$/, "-poster.svg")}
+            title={project.title}
+          />
+        </div>
+      )}
 
       {/* Media proyek: hanya dirender bila aset cover tersedia */}
       {project.cover && (
@@ -190,7 +207,7 @@ export function ProjectDetailContent({ project }: ProjectDetailContentProps) {
                       demo ↗
                     </a>
                   )}
-                  {project.video_url && (
+                  {project.video_url && !isLocalVideo && (
                     <a
                       href={project.video_url}
                       target="_blank"
@@ -217,8 +234,8 @@ export function ProjectDetailContent({ project }: ProjectDetailContentProps) {
         </div>
       </section>
 
-      {/* Video demo */}
-      {project.video_url && (
+      {/* Video demo (embed eksternal; video lokal sudah tampil sebagai hero) */}
+      {project.video_url && !isLocalVideo && (
         <section className="py-10">
           <div className="mb-4 flex items-center gap-2">
             <Video className="h-4 w-4 text-teal-ink" />

@@ -349,6 +349,11 @@ export const dictionaries = {
       arch_title: "Diagram Arsitektur",
       case_title: "Studi Kasus",
       media_todo: "Placeholder dokumentasi visual — foto/screenshot proyek menyusul.",
+      video_hero_label: "SIMULATION RECORD / INDUSTRIAL AUTOMATION",
+      video_play: "Putar video",
+      video_pause: "Jeda video",
+      video_mute: "Bisukan video",
+      video_unmute: "Nyalakan suara",
     },
     blog: {
       badge: "RUANG PUBLIKASI & PAPERS",
@@ -828,6 +833,11 @@ export const dictionaries = {
       arch_title: "Architecture Diagram",
       case_title: "Case Study",
       media_todo: "Visual documentation placeholder — project photos/screenshots coming soon.",
+      video_hero_label: "SIMULATION RECORD / INDUSTRIAL AUTOMATION",
+      video_play: "Play video",
+      video_pause: "Pause video",
+      video_mute: "Mute video",
+      video_unmute: "Unmute video",
     },
     blog: {
       badge: "PUBLICATIONS & PAPERS",
