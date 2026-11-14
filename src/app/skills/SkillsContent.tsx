@@ -15,6 +15,16 @@ const MATURITY_STYLE: Record<string, string> = {
   collab: "border-stone text-graphite/70",
 };
 
+// Bukti proyek per kapabilitas — hanya proyek yang benar-benar mendemonstrasikan domain tsb.
+const PROOF_SLUGS: (string | null)[] = [
+  "soil-sensor-calibration-field-testing", // IoT & Embedded Monitoring
+  "factory-io-conveyor-automation-simulation", // Industrial Automation
+  "uav-yolo-palm-pest-early-detection", // Robotics & Prototyping
+  "color-blind-assistant-raspberry-pi", // AIoT & Edge Intelligence
+  "web-based-oee-industrial-system", // Engineering Dashboards
+  "autonomous-weed-harvester-catamaran-cirata", // Hardware–Software Integration
+];
+
 export function SkillsContent() {
   const { t } = useLanguage();
 
@@ -78,6 +88,14 @@ export function SkillsContent() {
                   </dd>
                 </div>
               </dl>
+              {PROOF_SLUGS[i] && (
+                <Link
+                  href={`/projects/${PROOF_SLUGS[i]}`}
+                  className="mt-5 inline-flex items-center gap-1 font-mono text-xs font-medium text-teal-ink hover:underline"
+                >
+                  {t.home.cap_proof} →
+                </Link>
+              )}
             </Card>
           ))}
         </div>

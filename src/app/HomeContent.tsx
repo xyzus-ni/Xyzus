@@ -275,6 +275,9 @@ export function HomeContent({ projects, profile }: HomeContentProps) {
                 <p className="mt-3 text-sm leading-relaxed text-graphite/70">
                   {step.description}
                 </p>
+                <p className="mt-3 border-t border-stone/60 pt-3 font-mono text-[11px] leading-relaxed text-teal-ink">
+                  {t.home.work_handoffs[i]}
+                </p>
               </Card>
             </li>
           ))}

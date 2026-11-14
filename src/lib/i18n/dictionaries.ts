@@ -122,6 +122,13 @@ export const dictionaries = {
       work_title: "Dari masalah jadi sistem yang jalan",
       work_subtitle:
         "Alur kerja saya untuk proyek klien: empat langkah, dari discovery sampai validasi.",
+      cap_proof: "Bukti proyek",
+      work_handoffs: [
+        "Anda menerima: dokumen kebutuhan & batasan yang disepakati.",
+        "Anda menerima: diagram arsitektur hardware/software.",
+        "Anda menerima: prototipe yang berfungsi + catatan integrasi.",
+        "Anda menerima: laporan hasil uji, keterbatasan, dan rencana lanjutan.",
+      ],
       work_steps: [
         {
           title: "Discovery",
@@ -426,6 +433,10 @@ export const dictionaries = {
         other: "Lainnya",
       },
       form_subject_placeholder: "e.g. Proyek IoT Monitoring / Otomasi PLC / Dashboard Web",
+      form_org: "Organisasi (opsional)",
+      form_org_placeholder: "PT / startup / kampus / institusi",
+      form_budget: "Estimasi budget (opsional)",
+      budget_ranges: ["", "< Rp 5 juta", "Rp 5–15 juta", "Rp 15–50 juta", "> Rp 50 juta"],
       form_message: "Detail Pesan atau Rencana Kolaborasi *",
       form_message_placeholder: "Jelaskan kebutuhan teknis, timeline, atau lingkup pekerjaan yang ingin dikerjasamakan...",
       send_btn: "Kirim Pesan Sekarang",
@@ -592,6 +603,13 @@ export const dictionaries = {
       work_title: "From problem to working system",
       work_subtitle:
         "My workflow for client projects: four steps, from discovery to validation.",
+      cap_proof: "Project proof",
+      work_handoffs: [
+        "You receive: agreed requirements & constraints document.",
+        "You receive: hardware/software architecture diagram.",
+        "You receive: working prototype + integration notes.",
+        "You receive: test report, limitations, and next-step plan.",
+      ],
       work_steps: [
         {
           title: "Discovery",
@@ -894,6 +912,10 @@ export const dictionaries = {
         other: "Other",
       },
       form_subject_placeholder: "e.g. IoT Monitoring Project / PLC Automation / Web Dashboard",
+      form_org: "Organization (optional)",
+      form_org_placeholder: "Company / startup / campus / institution",
+      form_budget: "Estimated budget (optional)",
+      budget_ranges: ["", "< IDR 5 million", "IDR 5–15 million", "IDR 15–50 million", "> IDR 50 million"],
       form_message: "Message Details or Collaboration Scope *",
       form_message_placeholder: "Describe technical specifications, timeline, or scope of work you would like to collaborate on...",
       send_btn: "Send Message Now",

@@ -19,6 +19,8 @@ export function ContactForm() {
     email: "",
     inquiry_type: "project",
     subject: "",
+    organization: "",
+    budget: "",
     message: "",
     honeypot: "", // Bot trap
   });
@@ -84,12 +86,18 @@ export function ContactForm() {
         name: formData.name.trim(),
         email: formData.email.trim(),
         subject: subjectValue || "Inquiry Proyek / Kolaborasi",
-        message: formData.message.trim(),
+        message: [
+          formData.organization.trim() ? `Organisasi: ${formData.organization.trim()}` : "",
+          formData.budget ? `Budget: ${formData.budget}` : "",
+          formData.message.trim(),
+        ]
+          .filter(Boolean)
+          .join("\n\n"),
       });
 
       if (res.success) {
         setStatus("success");
-        setFormData({ name: "", email: "", inquiry_type: "project", subject: "", message: "", honeypot: "" });
+        setFormData({ name: "", email: "", inquiry_type: "project", subject: "", organization: "", budget: "", message: "", honeypot: "" });
         mountedAt.current = Date.now();
       } else {
         setStatus("error");
@@ -185,6 +193,42 @@ export function ContactForm() {
           placeholder={t.contact.form_subject_placeholder}
           className={inputClass}
         />
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div>
+          <label htmlFor="contact_org" className={labelClass}>
+            {t.contact.form_org}
+          </label>
+          <input
+            id="contact_org"
+            name="organization"
+            type="text"
+            autoComplete="organization"
+            value={formData.organization}
+            onChange={handleChange}
+            placeholder={t.contact.form_org_placeholder}
+            className={inputClass}
+          />
+        </div>
+        <div>
+          <label htmlFor="contact_budget" className={labelClass}>
+            {t.contact.form_budget}
+          </label>
+          <select
+            id="contact_budget"
+            name="budget"
+            value={formData.budget}
+            onChange={handleChange}
+            className={inputClass}
+          >
+            {t.contact.budget_ranges.map((range) => (
+              <option key={range} value={range}>
+                {range || "—"}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       <div>
