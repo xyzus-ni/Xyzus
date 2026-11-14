@@ -20,6 +20,7 @@ import {
   Github,
   ExternalLink,
   Video,
+  FileText,
 } from "lucide-react";
 
 interface ProjectDetailContentProps {
@@ -124,6 +125,31 @@ export function ProjectDetailContent({ project }: ProjectDetailContentProps) {
             loading="lazy"
           />
         </figure>
+      )}
+
+      {/* Dokumen pendukung (gallery: PDF, datasheet, dll) */}
+      {project.gallery && project.gallery.length > 0 && (
+        <section className="py-10">
+          <TechLabel as="h2" className="mb-4 block">
+            {t.projects.docs_title}
+          </TechLabel>
+          <ul className="space-y-2">
+            {project.gallery.map((file) => (
+              <li key={file}>
+                <a
+                  href={getFileUrl("projects", project.id ?? "", file)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-md border border-stone bg-surface px-4 py-2.5 font-mono text-xs text-teal-ink transition-colors hover:border-teal-ink/50"
+                >
+                  <FileText className="h-4 w-4 shrink-0" />
+                  {file.replace(/^[a-z0-9]+_/i, "").replace(/\.[a-z0-9]+$/i, "")}
+                  <span className="text-graphite/40">↗</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
 
       {/* Studi kasus: masalah → solusi → hasil (bila ada narasi di kamus) */}
