@@ -6,45 +6,45 @@
 
 @layer base {
   :root {
-    /* ── XYZUS "Sovereign Minimalism" design tokens (light-first) ── */
-    --ivory: 243 240 232;        /* #F3F0E8 — background utama */
-    --graphite: 37 43 41;        /* #252B29 — teks utama */
-    --stone: 220 217 208;        /* #DCD9D0 — surface & border */
-    --surface: 250 248 241;      /* warm off-white untuk kartu di atas ivory */
+    /* ── XYZUS design tokens v2.1 — Sovereign × Human-Centered Minimalism ── */
+    --ivory: 245 245 240;        /* #F5F5F0 — background utama */
+    --graphite: 23 26 25;        /* #171A19 — teks utama & dark surfaces */
+    --stone: 235 236 231;        /* #EBECE7 — surface sekunder & border */
+    --surface: 250 250 247;      /* kartu di atas ivory */
     --sage: 165 178 160;         /* #A5B2A0 — dekoratif saja, BUKAN teks */
-    --teal: 82 127 128;          /* #527F80 — aksen UI, heading besar, ikon */
-    --teal-ink: 63 101 102;      /* #3F6566 — teal untuk teks kecil & link */
-    --terracotta: 193 138 97;    /* #C18A61 — dekoratif saja, BUKAN teks */
-    --terracotta-ink: 143 85 48; /* #8F5530 — terracotta bila harus jadi teks */
+    --teal: 66 107 120;          /* #426B78 — aksen teknis, diagram, indikator */
+    --teal-ink: 38 62 73;        /* #263E49 — teal untuk teks kecil & link */
+    --terracotta: 196 122 76;    /* #C47A4C — industrial orange, dekoratif saja */
+    --terracotta-ink: 138 75 40; /* teks terracotta (kontras AA di ivory) */
     --signal: 43 181 184;        /* #2BB5B8 — hanya status aktif/live & data viz */
 
     /* Legacy aliases (dipakai halaman lama & komponen existing) */
-    --bg-primary: #F3F0E8;
-    --bg-secondary: #FBF9F3;
-    --text-primary: #252B29;
-    --text-secondary: #4A5250;
-    --border-color: #DCD9D0;
+    --bg-primary: #F5F5F0;
+    --bg-secondary: #EBECE7;
+    --text-primary: #171A19;
+    --text-secondary: #737873;
+    --border-color: #EBECE7;
   }
 
   .dark {
     /* Pemetaan gelap untuk token baru — menjaga Header/Footer tetap terbaca
        di mode gelap warisan sampai fase redesign halaman. */
-    --ivory: 26 30 28;
-    --graphite: 232 228 216;
-    --stone: 56 62 59;
-    --surface: 33 38 35;
+    --ivory: 23 27 27;
+    --graphite: 240 242 238;
+    --stone: 42 48 47;
+    --surface: 30 35 34;
     --sage: 122 138 118;
-    --teal: 127 181 180;
-    --teal-ink: 158 203 202;
-    --terracotta: 193 138 97;
+    --teal: 120 160 170;
+    --teal-ink: 150 190 198;
+    --terracotta: 196 122 76;
     --terracotta-ink: 217 163 126;
     --signal: 43 181 184;
 
-    --bg-primary: #1A1E1C;
-    --bg-secondary: #212623;
-    --text-primary: #E8E4D8;
-    --text-secondary: #A9A79B;
-    --border-color: #383E3B;
+    --bg-primary: #171B1B;
+    --bg-secondary: #1E2322;
+    --text-primary: #F0F2EE;
+    --text-secondary: #9AA29E;
+    --border-color: #2A3030;
   }
 
   html {

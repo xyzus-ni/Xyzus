@@ -1,15 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { LanguageProvider } from "@/lib/i18n/context";
 
-// Tipografi "Sovereign Minimalism":
-// - Fraunces: serif display yang tenang untuk heading
+// Tipografi v2.1:
+// - Space Grotesk: heading (geometric, technical-editorial)
 // - Inter: sans bersih untuk isi
 // - JetBrains Mono: label teknis (nomor, versi, status)
-const display = Fraunces({
+const display = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
@@ -28,7 +28,7 @@ const mono = JetBrains_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#F3F0E8",
+  themeColor: "#F5F5F0",
   width: "device-width",
   initialScale: 1,
 };
