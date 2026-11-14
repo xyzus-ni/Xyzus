@@ -147,7 +147,8 @@
       "featured": false,
       "visible": true,
       "order": 7,
-      "repo_url": "https://github.com/xyzus-ni"
+      "repo_url": "https://github.com/xyzus-ni",
+      "video_url": "https://www.youtube.com/embed/j9q3mtzwiQY"
     },
     {
       "title": "Asisten AI Multi-Agent via Telegram (CrewAI)",
