@@ -69,7 +69,7 @@ export function HomeContent({ projects, profile }: HomeContentProps) {
 
             {/* Spec plate — label teknis ala dokumentasi lab */}
             <aside className="lg:col-span-4">
-              <Card code="SYS-001" meta="v1.0 · STATUS: ACTIVE" className="h-full">
+              <Card code="SYS-001" meta={t.home.hero_system} className="h-full">
                 <dl className="space-y-4 font-mono text-xs">
                   <div className="flex items-baseline justify-between gap-3 border-b border-stone/60 pb-3">
                     <dt className="uppercase tracking-[0.14em] text-graphite/50">
@@ -93,7 +93,7 @@ export function HomeContent({ projects, profile }: HomeContentProps) {
                     </dt>
                     <dd className="flex items-center gap-2 text-teal-ink">
                       <span className="h-1.5 w-1.5 rounded-full bg-signal" />
-                      Open for projects
+                      {t.home.hero_availability}
                     </dd>
                   </div>
                 </dl>
@@ -122,6 +122,27 @@ export function HomeContent({ projects, profile }: HomeContentProps) {
               </Card>
             );
           })}
+        </div>
+      </Section>
+
+      {/* ── 2b. KEPEMILIKAN PENUH (handover promises) ────────── */}
+      <Section eyebrow={t.home.handover_eyebrow} title={t.home.handover_title} description={t.home.handover_subtitle}>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {t.home.handover_items.map((item, i) => (
+            <Card key={item.title} code={`HND-00${i + 1}`} className="h-full">
+              <h3 className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-teal-ink">
+                {item.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-graphite/70">
+                {item.description}
+              </p>
+            </Card>
+          ))}
+          <Card code="HND-006" className="flex h-full flex-col justify-center border-dashed">
+            <p className="font-mono text-xs leading-relaxed text-graphite/60">
+              {t.home.hero_availability}
+            </p>
+          </Card>
         </div>
       </Section>
 

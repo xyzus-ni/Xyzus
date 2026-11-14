@@ -41,12 +41,14 @@ export const dictionaries = {
       hire_cta: "Ajak Kolaborasi Sekarang",
     },
     home: {
-      eyebrow: "INDEPENDENT ENGINEERING STUDIO / INDONESIA",
-      headline: "Engineering intelligence. Building independence.",
+      eyebrow: "XYZUS / INDEPENDENT ENGINEERING STUDIO",
+      headline: "Sistem cerdas untuk dunia fisik.",
       subheadline:
-        "Saya merancang dan mengintegrasikan sistem cerdas yang menghubungkan dunia fisik dengan infrastruktur digital — dari embedded systems dan AIoT hingga otomasi dan autonomous technology.",
-      cta_whatsapp: "Diskusikan proyek",
-      cta_projects: "Jelajahi proyek",
+        "Saya merancang sistem yang menghubungkan sensor, edge computing, dan dashboard — dari perangkat di lapangan sampai antarmuka data yang bisa dipakai klien.",
+      cta_whatsapp: "Diskusikan Proyek",
+      cta_projects: "Lihat Proyek Terpilih",
+      hero_system: "SYSTEM: ACTIVE",
+      hero_availability: "AVAILABILITY: OPEN FOR PROJECTS",
       services_eyebrow: "SEC. 01 — LAYANAN",
       services_title: "Apa yang saya kerjakan",
       services_subtitle:
@@ -67,6 +69,17 @@ export const dictionaries = {
           description:
             "Prototipe robot, integrasi PLC, dan otomasi proses yang diuji dari meja kerja sampai lapangan.",
         },
+      ],
+      handover_eyebrow: "KEPEMILIKAN PENUH",
+      handover_title: "Anda memiliki hasilnya, bukan menyewa ketergantungannya.",
+      handover_subtitle:
+        "Setiap proyek diserahkan sebagai milik klien — bukan layanan yang mengunci Anda pada vendor.",
+      handover_items: [
+        { title: "Source code & firmware", description: "Seluruh kode dan firmware diserahkan, bukan hanya binary jadi." },
+        { title: "Skematik & wiring", description: "Dokumentasi rangkaian dan koneksi untuk perawatan mandiri." },
+        { title: "Arsitektur terdokumentasi", description: "Diagram dan catatan keputusan desain yang bisa dibaca engineer lain." },
+        { title: "Protokol terbuka", description: "HTTP/MQTT/standar terbuka — tanpa vendor lock-in." },
+        { title: "Catatan serah terima", description: "Panduan operasional dan pelatihan singkat untuk tim Anda." },
       ],
       works_eyebrow: "SEC. 02 — SELECTED WORKS",
       works_title: "Proyek terpilih",
@@ -498,12 +511,14 @@ export const dictionaries = {
       hire_cta: "Collaborate Now",
     },
     home: {
-      eyebrow: "INDEPENDENT ENGINEERING STUDIO / INDONESIA",
-      headline: "Engineering intelligence. Building independence.",
+      eyebrow: "XYZUS / INDEPENDENT ENGINEERING STUDIO",
+      headline: "Intelligent systems for the physical world.",
       subheadline:
-        "I design and integrate intelligent systems connecting the physical world with digital infrastructure — from embedded systems and AIoT to automation and autonomous technology.",
-      cta_whatsapp: "Discuss a project",
-      cta_projects: "Explore projects",
+        "I design systems connecting sensors, edge computing, and dashboards — from field devices to data interfaces clients can actually use.",
+      cta_whatsapp: "Discuss a Project",
+      cta_projects: "See Selected Works",
+      hero_system: "SYSTEM: ACTIVE",
+      hero_availability: "AVAILABILITY: OPEN FOR PROJECTS",
       services_eyebrow: "SEC. 01 — SERVICES",
       services_title: "What I do",
       services_subtitle:
@@ -524,6 +539,17 @@ export const dictionaries = {
           description:
             "Robot prototypes, PLC integration, and process automation tested from bench to field.",
         },
+      ],
+      handover_eyebrow: "FULL OWNERSHIP",
+      handover_title: "You own the result — not a dependency on me.",
+      handover_subtitle:
+        "Every project is handed over as client property, not a service that locks you in.",
+      handover_items: [
+        { title: "Source code & firmware", description: "All code and firmware delivered, not just a finished binary." },
+        { title: "Schematics & wiring", description: "Circuit and connection docs for self-maintenance." },
+        { title: "Documented architecture", description: "Diagrams and design-decision notes another engineer can read." },
+        { title: "Open protocols", description: "HTTP/MQTT/open standards — no vendor lock-in." },
+        { title: "Handover notes", description: "Operations guide and short training for your team." },
       ],
       works_eyebrow: "SEC. 02 — SELECTED WORKS",
       works_title: "Selected projects",
