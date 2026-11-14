@@ -2,16 +2,27 @@
  * Diagram arsitektur blueprint sederhana (SVG inline).
  * Alur generik sensor-to-dashboard; label bisa dioverride lewat props.
  */
+const DEFAULT_SUBS: [string, string, string, string] = [
+  "INPUT",
+  "PROCESS",
+  "STORE",
+  "OUTPUT",
+];
+
 export function BlueprintDiagram({
   labels = ["SENSOR", "MCU / EDGE", "CLOUD / DB", "DASHBOARD"],
+  subs = DEFAULT_SUBS,
+  caption = "FIG. 02 — SYSTEM ARCHITECTURE / SENSOR-TO-DASHBOARD",
 }: {
   labels?: [string, string, string, string];
+  subs?: [string, string, string, string];
+  caption?: string;
 }) {
   const nodes = [
-    { x: 24, label: labels[0], sub: "INPUT" },
-    { x: 196, label: labels[1], sub: "PROCESS" },
-    { x: 368, label: labels[2], sub: "STORE" },
-    { x: 540, label: labels[3], sub: "OUTPUT" },
+    { x: 24, label: labels[0], sub: subs[0] },
+    { x: 196, label: labels[1], sub: subs[1] },
+    { x: 368, label: labels[2], sub: subs[2] },
+    { x: 540, label: labels[3], sub: subs[3] },
   ];
 
   return (
@@ -94,7 +105,7 @@ export function BlueprintDiagram({
         fill="rgb(var(--teal-ink))"
         letterSpacing="2"
       >
-        FIG. 02 — SYSTEM ARCHITECTURE / SENSOR-TO-DASHBOARD
+        {caption}
       </text>
     </svg>
   );

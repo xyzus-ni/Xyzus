@@ -27,6 +27,51 @@ interface ProjectDetailContentProps {
   project: ProjectItem;
 }
 
+type ArchSpec = {
+  labels: [string, string, string, string];
+  subs: [string, string, string, string];
+  caption: string;
+};
+
+// Label arsitektur per proyek — disesuaikan dengan stack nyata masing-masing.
+const ARCH_DIAGRAMS: Record<string, ArchSpec> = {
+  "color-blind-assistant-raspberry-pi": {
+    labels: ["VIDEO", "RPI EDGE", "KLASIFIKASI", "AUDIO"],
+    subs: ["INPUT", "PROCESS", "ANALYSIS", "OUTPUT"],
+    caption: "FIG. 02 — SYSTEM ARCHITECTURE / VISION-TO-SPEECH",
+  },
+  "soil-sensor-calibration-field-testing": {
+    labels: ["SOIL PROBE", "ESP32", "LORAWAN", "DASHBOARD"],
+    subs: ["INPUT", "EDGE", "TELEMETRY", "OUTPUT"],
+    caption: "FIG. 02 — SYSTEM ARCHITECTURE / FIELD-TO-DASHBOARD",
+  },
+  "modular-bed-frame-cad-ai-visualization": {
+    labels: ["REFERENSI", "FUSION 360", "ASSEMBLY", "FABRIKASI"],
+    subs: ["INPUT", "MODEL", "ASSEMBLY", "OUTPUT"],
+    caption: "FIG. 02 — DESIGN PIPELINE / PARAMETRIC MODELING",
+  },
+  "uav-yolo-palm-pest-early-detection": {
+    labels: ["DRONE", "YOLOV8", "SENSOR NODE", "DASHBOARD"],
+    subs: ["INPUT", "EDGE AI", "TELEMETRY", "OUTPUT"],
+    caption: "FIG. 02 — SYSTEM ARCHITECTURE / AERIAL-SENSING",
+  },
+  "autonomous-weed-harvester-catamaran-cirata": {
+    labels: ["NAV SENSOR", "KONTROL", "MOTOR POD", "TELEMETRI"],
+    subs: ["INPUT", "PROCESS", "ACTUATOR", "OUTPUT"],
+    caption: "FIG. 02 — SYSTEM ARCHITECTURE / AUTONOMOUS VESSEL",
+  },
+  "web-based-oee-industrial-system": {
+    labels: ["DATA INPUT", "FLASK APP", "SQLITE", "DASHBOARD"],
+    subs: ["INPUT", "PROCESS", "STORE", "OUTPUT"],
+    caption: "FIG. 02 — SYSTEM ARCHITECTURE / DATA-TO-DASHBOARD",
+  },
+  "crewai-telegram-multi-agent-assistant": {
+    labels: ["USER", "AGENTS", "LLM TOOLS", "TELEGRAM"],
+    subs: ["INPUT", "ORCHESTRATE", "PROCESS", "OUTPUT"],
+    caption: "FIG. 02 — SYSTEM ARCHITECTURE / AGENT-TO-CHAT",
+  },
+};
+
 export function ProjectDetailContent({ project }: ProjectDetailContentProps) {
   const { t, locale } = useLanguage();
 
@@ -260,7 +305,7 @@ export function ProjectDetailContent({ project }: ProjectDetailContentProps) {
           {project.slug === "industrial-control-logic" ? (
             <ControlLogicFlow />
           ) : (
-            <BlueprintDiagram />
+            <BlueprintDiagram {...(ARCH_DIAGRAMS[project.slug] ?? {})} />
           )}
         </div>
       </section>
