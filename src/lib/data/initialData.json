@@ -60,7 +60,8 @@
       "featured": true,
       "visible": true,
       "order": 1,
-      "repo_url": "https://github.com/xyzus-ni"
+      "repo_url": "https://github.com/xyzus-ni",
+      "video_url": "https://www.youtube.com/embed/74MLv7vHKEY"
     },
     {
       "title": "Kalibrasi Multi-Sensor Tanah & Pengujian Lapangan",
