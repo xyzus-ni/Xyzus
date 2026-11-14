@@ -126,7 +126,7 @@ export function ControlLogicFlow() {
         LOGIKA: START → JALAN → BACA WARNA → SORTIR → HITUNG → TAMPILKAN → SELESAI
       </text>
       <text x="520" y="520" fontFamily="monospace" fontSize={10} fill="#737873" letterSpacing={2}>
-        Sumber: OB1 — Main Program Sweep (Omron)
+        Sumber: OB1 — Main Program Sweep (Siemens)
       </text>
     </svg>
   );
