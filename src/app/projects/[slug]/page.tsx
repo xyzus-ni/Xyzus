@@ -20,9 +20,17 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
   const project = await getProjectBySlug(params.slug);
   if (!project) return { title: "Proyek Tidak Ditemukan" };
 
+  const url = `/projects/${project.slug}`;
   return {
-    title: `${project.title} | Proyek Rekayasa`,
+    title: `${project.title} | XYZUS Projects`,
     description: project.summary,
+    alternates: { canonical: url },
+    openGraph: {
+      title: project.title,
+      description: project.summary,
+      type: "article",
+      url,
+    },
   };
 }
 

@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/Button";
 import { TechLabel } from "@/components/ui/TechLabel";
 import { useLanguage } from "@/lib/i18n/context";
 import { projectCode } from "@/lib/utils";
-import { projectStatusLabel } from "@/lib/status";
+import { projectStageLabel } from "@/lib/status";
 import { getFileUrl } from "@/lib/pocketbase";
 import {
   ArrowLeft,
@@ -48,7 +48,7 @@ export function ProjectDetailContent({ project }: ProjectDetailContentProps) {
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <TechLabel>{projectCode(project.order)}</TechLabel>
           <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-graphite/60">
-            {projectStatusLabel(t, project.status)}
+            {projectStageLabel(t, project)}
           </span>
           {locale === "en" && (
             <span className="rounded-sm border border-terracotta/50 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-terracotta-ink">
@@ -95,8 +95,8 @@ export function ProjectDetailContent({ project }: ProjectDetailContentProps) {
         )}
       </header>
 
-      {/* Media proyek: foto/screenshot bila ada, else placeholder TODO */}
-      {project.cover ? (
+      {/* Media proyek: hanya dirender bila aset cover tersedia */}
+      {project.cover && (
         <figure className="py-10">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -106,13 +106,6 @@ export function ProjectDetailContent({ project }: ProjectDetailContentProps) {
             loading="lazy"
           />
         </figure>
-      ) : (
-        <div className="my-10 flex aspect-video w-full flex-col items-center justify-center gap-3 rounded-md border border-dashed border-stone bg-grid bg-surface p-6 text-center">
-          <TechLabel>FIG. 01 — PROJECT MEDIA</TechLabel>
-          <p className="font-mono text-[11px] text-graphite/50">
-            TODO — {t.projects.media_todo}
-          </p>
-        </div>
       )}
 
       {/* Studi kasus: masalah → solusi → hasil (bila ada narasi di kamus) */}
@@ -160,7 +153,7 @@ export function ProjectDetailContent({ project }: ProjectDetailContentProps) {
                 {t.projects.spec_status}
               </dt>
               <dd className="font-mono text-xs text-teal-ink">
-                {projectStatusLabel(t, project.status)}
+                {projectStageLabel(t, project)}
               </dd>
             </div>
             <div className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">

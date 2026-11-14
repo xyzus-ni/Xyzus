@@ -5,6 +5,17 @@ import { HomeContent } from "./HomeContent";
 
 export const revalidate = 60;
 
+export const metadata = {
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "XYZUS — Independent Engineering Studio",
+    description:
+      "Engineering intelligence. Building independence. Sistem cerdas untuk dunia fisik — embedded, IoT, otomasi, dashboard.",
+    url: "/",
+    type: "website",
+  },
+};
+
 export default async function HomePage() {
   const [featuredProjects, allProjects, profile] = await Promise.all([
     getProjects({ featuredOnly: true }),

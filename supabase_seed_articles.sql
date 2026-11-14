@@ -3,7 +3,7 @@
 
 -- Fix tanggal Paper Cirata ke 2026
 UPDATE public.posts
-SET published_at = '2026-10-15T00:00:00Z', updated_at = now()
+SET published_at = '2026-11-12T00:00:00Z', updated_at = now()
 WHERE slug = 'rancang-bangun-kapal-katamaran-elektrik-cirata';
 
 -- Artikel 1: Catatan Kalibrasi Sensor Tanah

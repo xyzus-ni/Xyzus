@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ProjectItem } from "@/lib/types";
 import { useLanguage } from "@/lib/i18n/context";
 import { ExternalLink, Github, Video, ArrowRight } from "lucide-react";
+import { projectStage, projectStageLabel } from "@/lib/status";
 
 interface ProjectCardProps {
   project: ProjectItem;
@@ -13,37 +14,30 @@ interface ProjectCardProps {
 export function ProjectCard({ project }: ProjectCardProps) {
   const { t, locale } = useLanguage();
 
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case "selesai":
-        return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/80">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-            {t.projects.status_completed}
-          </span>
-        );
-      case "pengembangan":
-        return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800/80">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-            {t.projects.status_dev}
-          </span>
-        );
-      case "kompetisi/paper":
-        return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-400 border border-cyan-200 dark:border-cyan-800/80">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
-            {t.projects.status_paper}
-          </span>
-        );
-      default:
-        return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
-            {status}
-          </span>
-        );
-    }
+  const stage = projectStage(project);
+  const stageStyles: Record<string, string> = {
+    field_tested: "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/80",
+    simulation_validated: "bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-800/80",
+    prototype: "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700",
+    in_development: "bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800/80",
+    research: "bg-violet-50 dark:bg-violet-950/60 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-800/80",
   };
+  const stageDots: Record<string, string> = {
+    field_tested: "bg-emerald-500",
+    simulation_validated: "bg-teal-500",
+    prototype: "bg-slate-400",
+    in_development: "bg-amber-500 animate-pulse",
+    research: "bg-violet-500",
+  };
+
+  const getStatusBadge = () => (
+    <span
+      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-medium border ${stageStyles[stage]}`}
+    >
+      <span className={`w-1.5 h-1.5 rounded-full ${stageDots[stage]}`} />
+      {projectStageLabel(t, project)}
+    </span>
+  );
 
   return (
     <div className="flex flex-col h-full rounded-xl border border-slate-200/90 dark:border-slate-800/90 bg-white dark:bg-[#111827]/80 hover:border-cyan-500/50 dark:hover:border-cyan-500/50 transition-all duration-200 shadow-sm hover:shadow-md hover:shadow-cyan-500/5 group overflow-hidden">
@@ -51,7 +45,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <div>
           {/* Header & Status */}
           <div className="flex items-center justify-between gap-2 mb-3">
-            {getStatusBadge(project.status)}
+            {getStatusBadge()}
             <div className="flex items-center gap-1 text-slate-400">
               {project.video_url && (
                 <span title={t.projects.video_demo}>

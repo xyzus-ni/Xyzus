@@ -3,7 +3,7 @@ import { getPosts } from "@/lib/pocketbase";
 export async function GET() {
   const postsRes = await getPosts({ perPage: 50 });
   const posts = postsRes.items;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://mahesatirtha.dev";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.xyzus.my.id";
 
   const feedItems = posts
     .map((post) => {

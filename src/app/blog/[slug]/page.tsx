@@ -20,16 +20,19 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   const post = await getPostBySlug(params.slug);
   if (!post) return { title: "Karya Tulis Tidak Ditemukan" };
 
-  const title = `${post.title} | Karya Tulis Mahesa`;
+  const title = `${post.title} | XYZUS Journal`;
   const description = post.excerpt || post.abstract || post.title;
+  const url = `/blog/${post.slug}`;
 
   return {
     title,
     description,
+    alternates: { canonical: url },
     openGraph: {
       title,
       description,
       type: "article",
+      url,
       publishedTime: post.published_at,
       authors: ["Mahesa Tirtha Agung Permana"],
       tags: post.tags,

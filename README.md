@@ -191,6 +191,6 @@ npm run build
 ## 👤 Kontak Pemilik
 
 - **Nama**: Mahesa Tirtha Agung Permana
-- **Afiliasi**: Politeknik Industri ATMI (D4 Teknik Mekatronika, Robotika & Otomasi)
+- **Afiliasi**: Politeknik Industri ATMI (D4 Teknologi Rekayasa Mekatronika)
 - **LinkedIn**: [https://www.linkedin.com/in/mahesa-tirtha-agung-permana](https://www.linkedin.com/in/mahesa-tirtha-agung-permana)
 - **GitHub**: [https://github.com/xyzus-ni](https://github.com/xyzus-ni)

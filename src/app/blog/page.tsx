@@ -8,6 +8,13 @@ export const metadata = {
   title: "Karya Tulis & Publikasi Ilmiah | Publications",
   description:
     "Kumpulan makalah ilmiah, catatan teknis, laporan rekayasa mekatronika dan IoT, serta publikasi riset oleh Mahesa Tirtha Agung Permana.",
+  alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Journal | Karya Tulis",
+    description: "Catatan teknis dan publikasi engineering XYZUS.",
+    url: "/blog",
+    type: "website",
+  },
 };
 
 export default async function BlogPage() {

@@ -15,7 +15,7 @@ INSERT INTO public.profile (name, headline, bio, location, social_links)
 VALUES (
     'Mahesa Tirtha Agung Permana',
     'Mechatronics & IoT Engineer, membangun sistem cerdas end-to-end (sensor → cloud → dashboard)',
-    'Mahasiswa D4 Teknik Mekatronika, Robotika & Otomasi di Politeknik Industri ATMI. Berpengalaman dalam pengembangan sistem embedded, IoT, otomatisasi industri, dan web dashboard.',
+    'Mahasiswa D4 Teknologi Rekayasa Mekatronika di Politeknik Industri ATMI. Berpengalaman dalam pengembangan sistem embedded, IoT, otomatisasi industri, dan web dashboard.',
     'Bekasi, Jawa Barat, Indonesia',
     '{"linkedin": "https://www.linkedin.com/in/mahesa-tirtha-agung-permana", "github": "https://github.com/xyzus-ni", "email": "mtirtha865@gmail.com"}'::jsonb
 );

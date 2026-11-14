@@ -95,6 +95,9 @@ export function BlogClientList({ initialPosts, categories }: BlogClientListProps
           />
         </div>
 
+        {/* Category & Tag Filters — hanya tampil bila ada ≥3 posting */}
+        {initialPosts.length >= 3 && (
+        <>
         {/* Category Filter Pills */}
         <div className="flex flex-wrap items-center gap-1.5 pt-1">
           <button
@@ -157,6 +160,8 @@ export function BlogClientList({ initialPosts, categories }: BlogClientListProps
               </button>
             ))}
           </div>
+        )}
+        </>
         )}
       </div>
 

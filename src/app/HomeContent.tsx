@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { ProjectItem, ProfileData, ProjectStatus } from "@/lib/types";
 import { projectCode } from "@/lib/utils";
-import { projectStatusLabel } from "@/lib/status";
+import { projectStageLabel } from "@/lib/status";
 import { whatsappUrl, defaultWhatsappMessage } from "@/lib/contact";
 import { useLanguage } from "@/lib/i18n/context";
 import { Section } from "@/components/ui/Section";
@@ -34,8 +34,8 @@ export function HomeContent({ projects, profile }: HomeContentProps) {
 
   const whatsappHref = whatsappUrl(defaultWhatsappMessage(locale));
 
-  const statusLabel = (status: ProjectStatus) =>
-    projectStatusLabel(t, status);
+  const statusLabel = (project: ProjectItem) =>
+    projectStageLabel(t, project);
 
   return (
     <div className="flex flex-col">
@@ -149,7 +149,7 @@ export function HomeContent({ projects, profile }: HomeContentProps) {
                 >
                   <Card
                     code={projectCode(project.order)}
-                    meta={statusLabel(project.status)}
+                    meta={statusLabel(project)}
                     className="h-full transition-colors group-hover:border-teal-ink/50"
                   >
                     <div className="flex items-start justify-between gap-3">

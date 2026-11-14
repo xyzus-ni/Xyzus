@@ -4,24 +4,42 @@ import React, { useState, useMemo } from "react";
 import { ProjectItem } from "@/lib/types";
 import { ProjectCard } from "@/components/ProjectCard";
 import { useLanguage } from "@/lib/i18n/context";
+import { projectStage, type ProjectStage } from "@/lib/status";
 import { Search } from "lucide-react";
 
 interface ProjectsClientListProps {
   initialProjects: ProjectItem[];
 }
 
+const STAGES: ProjectStage[] = [
+  "field_tested",
+  "simulation_validated",
+  "prototype",
+  "in_development",
+  "research",
+];
+
+const STAGE_LABEL_KEYS: Record<ProjectStage, string> = {
+  field_tested: "status_field_tested",
+  simulation_validated: "status_simulation",
+  prototype: "status_prototype",
+  in_development: "status_dev",
+  research: "status_research",
+};
+
 export function ProjectsClientList({ initialProjects }: ProjectsClientListProps) {
   const { t } = useLanguage();
-  const [selectedStatus, setSelectedStatus] = useState<string>("all");
+  const [selectedStage, setSelectedStage] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const stageLabel = (stage: ProjectStage) =>
+    t.projects[STAGE_LABEL_KEYS[stage] as keyof typeof t.projects] as string;
 
   const filteredProjects = useMemo(() => {
     return initialProjects.filter((project) => {
-      // 1. Status Filter
-      if (selectedStatus !== "all" && project.status !== selectedStatus) {
+      if (selectedStage !== "all" && projectStage(project) !== selectedStage) {
         return false;
       }
-      // 2. Search Filter
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
         const matchesTitle = project.title.toLowerCase().includes(q);
@@ -33,69 +51,50 @@ export function ProjectsClientList({ initialProjects }: ProjectsClientListProps)
       }
       return true;
     });
-  }, [initialProjects, selectedStatus, searchQuery]);
+  }, [initialProjects, selectedStage, searchQuery]);
 
   return (
     <div className="space-y-8">
       {/* Search and Filters */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40">
-        {/* Status Tabs */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 rounded-xl border border-stone bg-surface">
+        {/* Stage Tabs */}
         <div className="flex flex-wrap items-center gap-1.5">
           <button
-            onClick={() => setSelectedStatus("all")}
+            onClick={() => setSelectedStage("all")}
             type="button"
             className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-colors ${
-              selectedStatus === "all"
-                ? "bg-cyan-600 text-white font-semibold shadow-sm"
-                : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800"
+              selectedStage === "all"
+                ? "bg-teal-ink text-ivory font-semibold"
+                : "text-graphite/70 hover:bg-stone/50"
             }`}
           >
             {t.projects.filter_all} ({initialProjects.length})
           </button>
-          <button
-            onClick={() => setSelectedStatus("selesai")}
-            type="button"
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-colors ${
-              selectedStatus === "selesai"
-                ? "bg-emerald-600 text-white font-semibold shadow-sm"
-                : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800"
-            }`}
-          >
-            {t.projects.status_completed}
-          </button>
-          <button
-            onClick={() => setSelectedStatus("pengembangan")}
-            type="button"
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-colors ${
-              selectedStatus === "pengembangan"
-                ? "bg-amber-600 text-white font-semibold shadow-sm"
-                : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800"
-            }`}
-          >
-            {t.projects.status_dev}
-          </button>
-          <button
-            onClick={() => setSelectedStatus("kompetisi/paper")}
-            type="button"
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-colors ${
-              selectedStatus === "kompetisi/paper"
-                ? "bg-cyan-500 text-slate-950 font-semibold shadow-sm"
-                : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800"
-            }`}
-          >
-            {t.projects.status_paper}
-          </button>
+          {STAGES.map((stage) => (
+            <button
+              key={stage}
+              onClick={() => setSelectedStage(stage)}
+              type="button"
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-colors ${
+                selectedStage === stage
+                  ? "bg-teal-ink text-ivory font-semibold"
+                  : "text-graphite/70 hover:bg-stone/50"
+              }`}
+            >
+              {stageLabel(stage)}
+            </button>
+          ))}
         </div>
 
         {/* Search input */}
         <div className="relative sm:w-64">
-          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-graphite/40 pointer-events-none" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={t.projects.search_placeholder}
-            className="w-full pl-9 pr-3.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 text-xs focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+            className="w-full pl-9 pr-3.5 py-1.5 rounded-lg border border-stone bg-surface text-graphite placeholder-graphite/40 text-xs focus:border-teal-ink focus:ring-1 focus:ring-teal-ink"
           />
         </div>
       </div>
@@ -108,15 +107,15 @@ export function ProjectsClientList({ initialProjects }: ProjectsClientListProps)
           ))}
         </div>
       ) : (
-        <div className="p-12 text-center rounded-xl border border-dashed border-slate-300 dark:border-slate-800 text-slate-500 dark:text-slate-400 font-mono text-sm space-y-2">
+        <div className="p-12 text-center rounded-xl border border-dashed border-stone text-graphite/60 font-mono text-sm space-y-2">
           <p>{t.projects.empty}</p>
           <button
             onClick={() => {
-              setSelectedStatus("all");
+              setSelectedStage("all");
               setSearchQuery("");
             }}
             type="button"
-            className="text-xs text-cyan-600 dark:text-cyan-400 hover:underline"
+            className="text-xs text-teal-ink hover:underline"
           >
             {t.projects.reset_filter}
           </button>

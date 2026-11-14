@@ -34,12 +34,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.xyzus.my.id"),
   title: {
-    default: "Mahesa Tirtha Agung Permana | Mechatronics & IoT Engineer",
-    template: "%s | Mahesa Tirtha A. P.",
+    default: "XYZUS — Independent Engineering Studio",
+    template: "%s | XYZUS",
   },
   description:
-    "Portofolio rekayasa dan blog publikasi ilmiah Mahesa Tirtha Agung Permana — Mechatronics & IoT Engineer (sensor → cloud → dashboard), robotika, dan otomasi industri terpadu.",
+    "XYZUS adalah studio rekayasa independen yang merancang dan mengintegrasikan sistem cerdas — embedded, IoT/AIoT, otomasi, dan dashboard — untuk dunia fisik.",
   keywords: [
     "Mahesa Tirtha Agung Permana",
     "Mechatronics Engineer",
@@ -61,15 +62,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "id_ID",
     url: "https://www.xyzus.my.id",
-    siteName: "Mahesa Tirtha Agung Permana Portfolio & Publications",
-    title: "Mahesa Tirtha Agung Permana | Mechatronics & IoT Engineer",
+    siteName: "XYZUS — Independent Engineering Studio",
+    title: "XYZUS — Independent Engineering Studio",
     description:
-      "Membangun sistem cerdas end-to-end (sensor → cloud → dashboard) dan solusi otomasi industri.",
+      "Engineering intelligence. Building independence. Sistem cerdas untuk dunia fisik.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mahesa Tirtha Agung Permana | Mechatronics & IoT Engineer",
-    description: "Sistem cerdas end-to-end, IoT, otomasi industri, dan karya tulis ilmiah.",
+    title: "XYZUS — Independent Engineering Studio",
+    description: "Engineering intelligence. Building independence.",
   },
   robots: {
     index: true,
@@ -105,6 +106,44 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased bg-ivory text-graphite min-h-screen flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "ProfessionalService",
+                  "@id": "https://www.xyzus.my.id/#studio",
+                  name: "XYZUS",
+                  alternateName: "XYZUS Independent Engineering Studio",
+                  description:
+                    "Independent engineering studio focused on connecting physical systems, embedded intelligence, and digital infrastructure.",
+                  url: "https://www.xyzus.my.id",
+                  email: "xyzus.work@gmail.com",
+                  founder: { "@type": "Person", name: "Mahesa Tirtha Agung Permana" },
+                  address: { "@type": "PostalAddress", addressLocality: "Bekasi", addressCountry: "ID" },
+                  sameAs: [
+                    "https://github.com/xyzus-ni",
+                    "https://www.linkedin.com/in/mahesa-tirtha-agung-permana",
+                    "https://instagram.com/xyzus.ni",
+                  ],
+                },
+                {
+                  "@type": "Person",
+                  "@id": "https://www.xyzus.my.id/#founder",
+                  name: "Mahesa Tirtha Agung Permana",
+                  jobTitle: "Founder / Engineering Lead",
+                  url: "https://www.xyzus.my.id/about",
+                  sameAs: [
+                    "https://github.com/xyzus-ni",
+                    "https://www.linkedin.com/in/mahesa-tirtha-agung-permana",
+                  ],
+                },
+              ],
+            }),
+          }}
+        />
         <LanguageProvider>
           <Header />
           <main className="flex-1">

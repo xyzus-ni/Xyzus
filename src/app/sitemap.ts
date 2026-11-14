@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { getPosts, getProjects } from "@/lib/pocketbase";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://mahesatirtha.dev";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.xyzus.my.id";
 
   const [postsRes, projects] = await Promise.all([
     getPosts({ perPage: 100 }),
