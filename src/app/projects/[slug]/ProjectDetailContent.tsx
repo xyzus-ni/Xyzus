@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ProjectItem } from "@/lib/types";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 import { BlueprintDiagram } from "@/components/BlueprintDiagram";
+import { ControlLogicFlow } from "@/components/ControlLogicFlow";
 import { ProjectVideoHero } from "@/components/ProjectVideoHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -230,7 +231,11 @@ export function ProjectDetailContent({ project }: ProjectDetailContentProps) {
           {t.projects.arch_title}
         </TechLabel>
         <div className="rounded-md border border-stone bg-surface p-4 sm:p-6">
-          <BlueprintDiagram />
+          {project.slug === "industrial-control-logic" ? (
+            <ControlLogicFlow />
+          ) : (
+            <BlueprintDiagram />
+          )}
         </div>
       </section>
 
