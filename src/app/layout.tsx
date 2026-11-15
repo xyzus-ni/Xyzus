@@ -48,6 +48,7 @@ export const metadata: Metadata = {
     "Politeknik Industri ATMI",
     "Robotics",
     "Industrial Automation",
+    "Siemens PLC",
     "Omron PLC",
     "Raspberry Pi",
     "Embedded Systems",

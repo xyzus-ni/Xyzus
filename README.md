@@ -7,9 +7,9 @@ Website portofolio rekayasa mekatronika & IoT pribadi yang dilengkapi fitur **Pu
 ## 🌟 Fitur Utama
 
 1. **Portofolio Rekayasa Interdisipliner**:
-   - Menampilkan 8 proyek rekayasa dari data terbaru LinkedIn (Raspberry Pi, ESP32, PLC Omron, Factory I/O, SolidWorks CAD, AI, UAV sawit, dan katamaran elektrik).
-   - Filter interaktif berdasarkan status (*Selesai*, *Pengembangan*, *Kompetisi & Paper*) dan pencarian teknologi.
-   - Slot video demonstrasi sistem (misal: simulasi sortir konveyor Factory I/O) dan visualisasi CAD 3D.
+   - Menampilkan proyek rekayasa dari PocketBase (saat ini 8 proyek: asisten tunanetra Raspberry Pi, node sensor tanah OPBVS-001/LoRaWAN, desain rangka tempat tidur modular Fusion 360, deteksi hama sawit UAV+YOLOv8, katamaran ASV otomatis Cirata, sistem monitoring OEE berbasis Flask, asisten multi-agen CrewAI, dan logika kontrol klasifikasi material PLC Siemens).
+   - Filter interaktif berdasarkan tahap proyek (*Field-Tested*, *Simulation-Validated*, *Prototype*, *In Development*, *Research*) dan kategori.
+   - Slot video demonstrasi (HTML5 video lokal atau embed YouTube) dan dokumentasi teknis opsional per proyek (diagram arsitektur, skema wiring, daftar komponen/BOM, metode pengujian, keterbatasan).
 2. **Publikasi Karya Tulis Ilmiah & Blog**:
    - Render Markdown lengkap dengan tabel data teknis, blok kutipan (*blockquote*), syntax highlighting kode program, dan rendering formula matematika KaTeX ($\LaTeX$) untuk persamaan hidrodinamika, daya, dan kalkulasi OEE.
    - Daftar Isi (*Table of Contents*) otomatis terindeks dari heading artikel.
@@ -78,9 +78,8 @@ npm run seed
 
 Skrip ini akan otomatis:
 - Memverifikasi skema dan aturan API untuk koleksi `posts`, `categories`, `projects`, `profile`, dan `messages`.
-- Membuat akun admin default: `admin@mahesa.local` (kata sandi: `AdminMahesa123!Secure`).
 - Mengisi data profil LinkedIn Mahesa.
-- Mengisi 8 data proyek rekayasa.
+- Mengisi data proyek rekayasa.
 - Mengisi 6 kategori karya tulis.
 - Mengisi 2 artikel contoh (1 naskah ilmiah katamaran Cirata berstatus `published` dan 1 catatan teknis Edge AI berstatus `draft`).
 
@@ -119,9 +118,7 @@ docker compose exec web npm run seed
 
 ### 1. Masuk ke Dasbor Admin
 1. Buka tautan `/admin` atau klik tombol **CMS** di navbar kanan atas.
-2. Masukkan kredensial admin:
-   - **Email**: `admin@mahesa.local`
-   - **Password**: `AdminMahesa123!Secure`
+2. Masukkan kredensial admin PocketBase Anda (lihat `PB_ADMIN_EMAIL` / `PB_ADMIN_PASSWORD` di `.env.local`; akun dibuat otomatis oleh `npm run seed` bila belum ada).
    *(Catatan: Anda dapat mengubah email dan password melalui panel admin PocketBase di `http://localhost:8090/_/`)*
 
 ### 2. Menulis dan Menerbitkan Artikel Baru
@@ -136,6 +133,29 @@ docker compose exec web npm run seed
 6. Unggah dokumen PDF jika naskah memiliki lampiran riset lengkap.
 7. Pilih status **Diterbitkan (Publik)** untuk menayangkan ke publik, atau **Draf Pribadi** untuk menyimpan sementara.
 8. Klik **Simpan Publikasi**.
+
+---
+
+## 🗂️ Menambah / Mengelola Proyek via PocketBase
+
+Semua konten proyek dikelola lewat panel PocketBase (`http://localhost:8090/_/` → koleksi **projects**), bukan dengan mengedit file:
+
+| Field | Tipe | Keterangan |
+| :--- | :--- | :--- |
+| `title`, `slug`, `summary` | text | Judul, URL slug (unik), ringkasan |
+| `description` | text (markdown) | Deskripsi lengkap, dirender sebagai Markdown |
+| `tech` | json (array string) | Tag teknologi, mis. `["ESP32","LoRaWAN"]` |
+| `cover`, `gallery` | file | Gambar sampul & galeri (maks 5 MB/file) |
+| `video_url` | text | URL YouTube embed, atau path lokal `/videos/...` untuk hero video |
+| `repo_url`, `demo_url` | text | Tombol "Lihat repo" / "Lihat demo" |
+| `architecture_image`, `wiring_image` | file | Diagram arsitektur & skema wiring (opsional) |
+| `components` | json (array string) | Daftar komponen / BOM (opsional) |
+| `test_method`, `limitations` | text (markdown) | Metode pengujian & keterbatasan (opsional) |
+| `status`, `featured`, `visible`, `order` | — | Status, tampil di beranda, visibilitas publik, urutan |
+
+Semua field dokumentasi bersifat **opsional** — bagian yang kosong tidak ditampilkan di halaman detail. Perubahan tampil setelah ISR revalidate (~1–2 menit).
+
+> **Migrasi skema**: field dokumentasi ditambahkan lewat `pb/pb_migrations/1794701148_updated_projects.js`. PocketBase menjalankannya otomatis saat start. Untuk PocketBase produksi, salin file migrasi yang sama ke `pb_migrations/` instance tersebut (atau `pocketbase migrate up`).
 
 ---
 
@@ -173,18 +193,42 @@ npm run build
 
 ---
 
-## 🌐 Panduan Deployment ke VPS / Server Produksi
+## 🚀 Panduan Deployment ke Vercel + PocketBase Produksi
 
-1. Siapkan VPS Debian/Ubuntu dengan Docker & Nginx/Caddy terpasang.
-2. Arahkan domain ke alamat IP publik VPS Anda.
-3. Kloning repositori dan sesuaikan file `.env.production`:
-   ```bash
-   NEXT_PUBLIC_POCKETBASE_URL=https://api.domainanda.com
-   POCKETBASE_URL=http://pocketbase:8090
-   NEXT_PUBLIC_SITE_URL=https://domainanda.com
+Situs live: **https://www.xyzus.my.id** — frontend di Vercel, backend PocketBase di `https://xyzus.pockethost.io`.
+
+### 1. Frontend (Vercel)
+
+1. Import repo `xyzus-ni/Xyzus` di Vercel (framework Next.js terdeteksi otomatis; `output: standalone` sudah dikonfigurasi).
+2. Atur Environment Variables di Project Settings:
    ```
-4. Jalankan `docker compose up -d --build`.
-5. Atur reverse proxy SSL (Let's Encrypt / Certbot) mengarah ke port `3000` untuk web dan port `8090` untuk PocketBase API.
+   NEXT_PUBLIC_SITE_URL=https://www.xyzus.my.id
+   NEXT_PUBLIC_POCKETBASE_URL=https://xyzus.pockethost.io
+   POCKETBASE_URL=https://xyzus.pockethost.io
+   ```
+   `NEXT_PUBLIC_*` dibundel ke client; `POCKETBASE_URL` dipakai server-side (ISR/SSG).
+3. Deploy. Pastikan apex `xyzus.my.id` redirect ke `www` (Atur di Vercel Domains atau DNS).
+
+### 2. Backend PocketBase Produksi
+
+1. Di `https://xyzus.pockethost.io`, buat koleksi sesuai skema (jalankan `pb/pb_migrations/*` via `pocketbase migrate up` pada instance tersebut, atau buat manual via UI `_`).
+2. Terapkan API rules yang sama dengan koleksi lokal (lihat `pb/pb_migrations/1730000000_init_schema.js`).
+3. Ulangi data proyek lewat panel admin atau `npm run seed` dengan `POCKETBASE_URL` mengarah ke produksi dan `PB_ADMIN_*` produksi.
+4. Untuk field dokumentasi proyek, pastikan migrasi `1794701148_updated_projects.js` sudah diterapkan.
+
+### 3. Alternatif: VPS + Docker Compose
+
+```bash
+docker compose up -d --build
+```
+
+Lalu atur reverse proxy SSL (Caddy/NGINX + Let's Encrypt) ke port `3000` (web) dan `8090` (PocketBase). Detail env produksi:
+
+```bash
+NEXT_PUBLIC_POCKETBASE_URL=https://api.domainanda.com
+POCKETBASE_URL=http://pocketbase:8090
+NEXT_PUBLIC_SITE_URL=https://domainanda.com
+```
 
 ---
 

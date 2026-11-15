@@ -12,6 +12,11 @@ export interface ProjectItem {
   video_url?: string;
   repo_url?: string;
   demo_url?: string;
+  architecture_image?: string;
+  wiring_image?: string;
+  components?: string[];
+  test_method?: string;
+  limitations?: string;
   status: ProjectStatus;
   featured: boolean;
   visible: boolean;

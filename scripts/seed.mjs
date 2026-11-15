@@ -15,8 +15,15 @@ const {
 } = rawData;
 
 const PB_URL = process.env.POCKETBASE_URL || "http://127.0.0.1:8090";
-const ADMIN_EMAIL = process.env.PB_ADMIN_EMAIL || "admin@mahesa.local";
-const ADMIN_PASSWORD = process.env.PB_ADMIN_PASSWORD || "AdminMahesa123!Secure";
+const ADMIN_EMAIL = process.env.PB_ADMIN_EMAIL;
+const ADMIN_PASSWORD = process.env.PB_ADMIN_PASSWORD;
+
+if (!ADMIN_EMAIL || !ADMIN_PASSWORD) {
+  console.error(
+    "❌ PB_ADMIN_EMAIL dan PB_ADMIN_PASSWORD wajib diisi di .env.local (lihat .env.example)."
+  );
+  process.exit(1);
+}
 
 async function main() {
   console.log("🚀 Memulai proses sinkronisasi & seeding data PocketBase ke:", PB_URL);

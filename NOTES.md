@@ -12,7 +12,8 @@ Dokumen ini mencatat analisis awal, keputusan desain visual, arsitektur teknis, 
 2. **Penerapan Aturan Cadangan (Rule 4)**:
    - Sesuai instruksi: dibuat desain modern, bersih, presisi, dan profesional bertema **Teknik/Industri & Mekatronika/IoT** (kontras tinggi, aksen warna tunggal).
 3. **Design Language & Identitas Visual**:
-   - **Tema & Nuansa**: *Industrial Intelligence & Precision Engineering*. Merefleksikan latar belakang Mahesa sebagai Mechatronics & IoT Engineer (D4 Mekatronika ATMI & SMK AMI Deltamas).
+   - **Tema & Nuansa**: *Industrial Intelligence & Precision Engineering*. Merefleksikan latar belakang Mahesa sebagai Mechatronics & IoT Engineer (D4 Teknologi Rekayasa Mekatronika ATMI & SMK AMI Deltamas).
+   - **Update v2.1**: identitas visual kini light-first — background `#F5F5F0`, teks `#171A19`, aksen teal `#426B78` & terracotta `#C47A4C`, heading Space Grotesk. Dokumen ini bagian palet lama tetap berlaku sebagai histori.
    - **Palet Warna**:
      - Mode Gelap (*Default*): Latar belakang Slate/Zinc pekat (`#0b0f19` / `#0f172a`), border teknis (`#1e293b`), kartu (`#111827`).
      - Mode Terang: Latar blueprint teknis/slate putih bersih (`#f8fafc` / `#ffffff`), border (`#e2e8f0`).
@@ -106,10 +107,8 @@ Dokumen ini mencatat analisis awal, keputusan desain visual, arsitektur teknis, 
 1. **Port Layanan**:
    - PocketBase berjalan pada port `8090` (`http://127.0.0.1:8090`).
    - Aplikasi Web Next.js berjalan pada port `3000` (`http://localhost:3000`).
-2. **Kredensial Admin Default**:
-   - Email: `admin@mahesa.local`
-   - Kata Sandi: `AdminMahesa123!Secure`
-   *(Pengguna dapat mengubah kata sandi kapan saja lewat dashboard PocketBase)*.
+2. **Kredensial Admin**:
+   - Diambil dari env `PB_ADMIN_EMAIL` / `PB_ADMIN_PASSWORD` (`.env.local`, tidak di-commit). Akun dibuat otomatis oleh `npm run seed` bila belum ada; ganti password lewat `http://localhost:8090/_/`.
 3. **Data Resilience & Offline Fallback**:
    - Jika server PocketBase belum aktif pada tahap awal *build* statis Next.js, sistem secara cerdas membaca data cadangan type-safe di `initialData.json`, sehingga proses build (`npm run build`) tidak akan pernah gagal (*zero failure*).
 4. **Proteksi Draf Tulisan**:
@@ -121,8 +120,10 @@ Dokumen ini mencatat analisis awal, keputusan desain visual, arsitektur teknis, 
 
 1. **Penggantian Password Admin**:
    - Disarankan masuk ke `http://127.0.0.1:8090/_/` dan mengganti email/password default dengan email pribadi Mahesa sebelum dipublikasikan ke internet.
-2. **Tautan Video YouTube Nyata**:
-   - Pada proyek *Simulasi Konveyor di Factory I/O*, saat ini diisi slot video embed contoh (`dQw4w9WgXcQ`). Mahesa dapat mengunggah video rekaman simulasi Factory I/O miliknya ke YouTube dan memperbarui tautan tersebut lewat panel admin.
+2. **Media Proyek**:
+   - Proyek tanpa `cover` tidak menampilkan blok media (bukan placeholder). Upload cover/gallery via panel PocketBase koleksi `projects`.
+   - `video_url` mendukung URL YouTube (embed) atau path lokal `/videos/...` (hero video HTML5 dengan autoplay-when-visible, reduced-motion aware).
+   - Field dokumentasi opsional per proyek: `architecture_image`, `wiring_image`, `components` (JSON array), `test_method`, `limitations` — semua markdown/file, bagian kosong disembunyikan. Migrasi: `pb/pb_migrations/1794701148_updated_projects.js`.
 3. **Unggah File CV Asli**:
    - Tersedia field `cv` di koleksi `profile`. Mahesa dapat mengunggah berkas PDF resume/CV terbaru melalui panel PocketBase.
 

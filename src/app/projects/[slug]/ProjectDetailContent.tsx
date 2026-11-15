@@ -197,6 +197,77 @@ export function ProjectDetailContent({ project }: ProjectDetailContentProps) {
         </section>
       )}
 
+      {/* Dokumentasi teknis opsional: gambar arsitektur/wiring, BOM, metode uji, keterbatasan.
+          Semua field bersifat opsional — bagian kosong tidak dirender.
+          TODO(content): test_method masih kosong untuk semua proyek — butuh data dari owner. */}
+      {(project.architecture_image ||
+        project.wiring_image ||
+        (project.components && project.components.length > 0) ||
+        project.test_method ||
+        project.limitations) && (
+        <section className="border-t border-stone py-10">
+          <TechLabel as="h2" className="mb-6 block">
+            {t.projects.tech_docs_title}
+          </TechLabel>
+          <div className="space-y-8">
+            {project.architecture_image && (
+              <figure>
+                <TechLabel as="h3" className="mb-3 block">
+                  {t.projects.arch_image_label}
+                </TechLabel>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={getFileUrl("projects", project.id ?? "", project.architecture_image)}
+                  alt={`${project.title} — diagram arsitektur`}
+                  className="w-full rounded-md border border-stone bg-surface"
+                />
+              </figure>
+            )}
+            {project.wiring_image && (
+              <figure>
+                <TechLabel as="h3" className="mb-3 block">
+                  {t.projects.wiring_image_label}
+                </TechLabel>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={getFileUrl("projects", project.id ?? "", project.wiring_image)}
+                  alt={`${project.title} — skema wiring`}
+                  className="w-full rounded-md border border-stone bg-surface"
+                />
+              </figure>
+            )}
+            {project.components && project.components.length > 0 && (
+              <div>
+                <TechLabel as="h3" className="mb-3 block">
+                  {t.projects.components_label}
+                </TechLabel>
+                <ul className="list-disc space-y-1 pl-5 font-mono text-sm text-graphite">
+                  {project.components.map((c) => (
+                    <li key={c}>{c}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {project.test_method && (
+              <div>
+                <TechLabel as="h3" className="mb-3 block">
+                  {t.projects.test_method_label}
+                </TechLabel>
+                <MarkdownRenderer content={project.test_method} />
+              </div>
+            )}
+            {project.limitations && (
+              <div>
+                <TechLabel as="h3" className="mb-3 block">
+                  {t.projects.limitations_label}
+                </TechLabel>
+                <MarkdownRenderer content={project.limitations} />
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* Studi kasus: masalah → solusi → hasil (bila ada narasi di kamus) */}
       {narrative && (
         <section className="py-10">

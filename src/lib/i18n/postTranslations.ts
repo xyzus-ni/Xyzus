@@ -137,12 +137,12 @@ The tested autonomous catamaran prototype successfully harvested aquatic biomass
     references: "1. Campbell, G. S., & Gardner, W. H. (1971). Soil moisture measurement.\n2. Omron Industrial Automation Technical Guide.",
     content: `## 1. Background\n\nAnalog capacitive sensors measure the dielectric permittivity of soil. Because soil texture and mineral salinity vary significantly, uncalibrated raw ADC readings produce errors up to ±28%.\n\n## 2. Polynomial Compensation Formula\n\nVolumetric water content (VWC) $\\theta_v$ is calculated using a third-order polynomial equation:\n\n$$\\theta_v = a_3 \\cdot V_{adc}^3 + a_2 \\cdot V_{adc}^2 + a_1 \\cdot V_{adc} + a_0$$\n\nWhere coefficients $a_i$ are determined through gravimetric oven-drying benchmarks.`,
   },
-  "otomasi-konveyor-factory-io-plc-omron": {
-    title: "Industrial Sorting Conveyor Automation with Factory I/O and Omron PLC",
+  "otomasi-konveyor-factory-io-plc-siemens": {
+    title: "Industrial Sorting Conveyor Automation with Factory I/O and Siemens PLC",
     excerpt: "Implementation of ladder logic interlocking safety and OEE throughput calculation on digital twin conveyor lines.",
     abstract: "Virtual plant simulation provides a zero-risk testing environment for complex ladder logic. This article details photoelectric sensor integration, pneumatic sorter diverters, and overall equipment effectiveness (OEE) metrics.",
-    references: "1. Omron Sysmac Studio User Manual.\n2. Factory I/O Simulation Suite Documentation.",
-    content: `## 1. System Overview\n\nUsing Factory I/O connected via OPC-UA to Omron Sysmac Studio, a multi-lane sorting conveyor was programmed with interlocking safety routines, emergency stop latching, and automatic part re-routing.\n\n## 2. OEE Calculation\n\nOverall Equipment Effectiveness (OEE) is tracked in real-time:\n\n$$\\text{OEE} = \\text{Availability} \\times \\text{Performance} \\times \\text{Quality}$$`,
+    references: "1. Siemens STEP 7 / TIA Portal Documentation.\n2. Factory I/O Simulation Suite Documentation.",
+    content: `## 1. System Overview\n\nUsing Factory I/O connected via OPC-UA to a Siemens PLC (STEP 7 / TIA Portal), a multi-lane sorting conveyor was programmed with interlocking safety routines, emergency stop latching, and automatic part re-routing.\n\n## 2. OEE Calculation\n\nOverall Equipment Effectiveness (OEE) is tracked in real-time:\n\n$$\\text{OEE} = \\text{Availability} \\times \\text{Performance} \\times \\text{Quality}$$`,
   },
 };
 
