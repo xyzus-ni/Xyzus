@@ -98,17 +98,42 @@ export function AboutContent() {
           </div>
         </div>
 
-        <div className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827]/80">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono text-emerald-600 dark:text-emerald-400 mb-2 gap-1">
-            <span className="font-semibold uppercase">{t.about.senat_badge}</span>
-            <span>{t.about.senat_period}</span>
+        <div className="space-y-4">
+          <div className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827]/80">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono text-emerald-600 dark:text-emerald-400 mb-2 gap-1">
+              <span className="font-semibold uppercase">{t.about.himpunan_badge}</span>
+              <span>{t.about.himpunan_period}</span>
+            </div>
+            <h3 className="font-bold text-lg text-slate-900 dark:text-white">
+              {t.about.himpunan_role}
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
+              {t.about.himpunan_desc}
+            </p>
+            {t.about.himpunan_highlight && (
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed border-l-2 border-emerald-500/50 pl-3">
+                {t.about.himpunan_highlight}
+              </p>
+            )}
           </div>
-          <h3 className="font-bold text-lg text-slate-900 dark:text-white">
-            {t.about.senat_role}
-          </h3>
-          <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
-            {t.about.senat_desc}
-          </p>
+
+          <div className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827]/80">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono text-emerald-600 dark:text-emerald-400 mb-2 gap-1">
+              <span className="font-semibold uppercase">{t.about.senat_badge}</span>
+              <span>{t.about.senat_period}</span>
+            </div>
+            <h3 className="font-bold text-lg text-slate-900 dark:text-white">
+              {t.about.senat_role}
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
+              {t.about.senat_desc}
+            </p>
+            {t.about.senat_highlight && (
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed border-l-2 border-emerald-500/50 pl-3">
+                {t.about.senat_highlight}
+              </p>
+            )}
+          </div>
         </div>
       </section>
 

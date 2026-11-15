@@ -49,7 +49,6 @@ export const metadata: Metadata = {
     "Robotics",
     "Industrial Automation",
     "Siemens PLC",
-    "Omron PLC",
     "Raspberry Pi",
     "Embedded Systems",
     "Karya Tulis Ilmiah",
